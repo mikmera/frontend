@@ -1,7 +1,7 @@
 'use client'
 
 import { CssBaseline } from '@mui/material'
-import { RootLayout } from './components/layout/RootLayout'
+import './global.css'
 
 export default function AppRootLayout({
   children,
@@ -13,7 +13,7 @@ export default function AppRootLayout({
       <head />
       <body>
         <CssBaseline />
-        <RootLayout>{children}</RootLayout>
+        {children}
       </body>
     </html>
   )

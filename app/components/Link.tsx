@@ -1,14 +1,12 @@
-import { LinkProps } from 'next/link'
+import { LinkProps as NextLinkProps } from 'next/link'
 import React, { PropsWithChildren } from 'react'
-import MUILink from '@mui/material/Link'
+import { LinkProps as MUILinkProps, Link as MUILink } from '@mui/material'
 import NextLink from 'next/link'
 
-export const Link: React.FC<PropsWithChildren<LinkProps>> = ({
-  children,
-  ...props
-}) => {
+export type LinkProps = PropsWithChildren<NextLinkProps & MUILinkProps>
+
+export const Link: React.FC<LinkProps> = ({ children, ...props }) => {
   return (
-    // @ts-expect-error type merged incorrectly
     <MUILink component={NextLink} {...props}>
       {children}
     </MUILink>

@@ -1,3 +1,5 @@
+import { RootLayout } from './components/layout/RootLayout'
+
 export default function Home() {
-  return <div>Hello</div>
+  return <RootLayout>Hello</RootLayout>
 }
