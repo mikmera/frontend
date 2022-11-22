@@ -1,3 +1,6 @@
+'use client'
+
+import { CssBaseline } from '@mui/material'
 import './globals.css'
 
 export default function RootLayout({
@@ -12,7 +15,10 @@ export default function RootLayout({
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
       <head />
-      <body>{children}</body>
+      <body>
+        <CssBaseline />
+        {children}
+      </body>
     </html>
   )
 }
