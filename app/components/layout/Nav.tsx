@@ -6,6 +6,7 @@ import React from 'react'
 import Logo from '../../assets/logo.svg'
 import { Link } from '~/components/Link'
 import { NavLink } from './NavLink'
+import { DarkModeSwitch } from '../DarkModeSwitch'
 
 export const Nav: React.FC = () => {
   return (
@@ -26,6 +27,8 @@ export const Nav: React.FC = () => {
             <NavLink href="/party">파티</NavLink>
             <NavLink href="/calc">계산기</NavLink>
             <NavLink href="/login">로그인</NavLink>
+            <Box sx={{ ml: 2 }} />
+            <DarkModeSwitch />
           </Stack>
         </Stack>
       </Container>
