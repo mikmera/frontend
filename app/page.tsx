@@ -1,7 +1,3 @@
-import { NextPage } from 'next'
-
-const Home: NextPage = () => {
+export default function Home() {
   return <div>Hello</div>
 }
-
-export default Home
