@@ -10,7 +10,6 @@ const lightBg = 'linear-gradient(180deg, #66FFED 0%, #FFEEB2 100%)'
 
 const AnimatedButtonBase = motion(ButtonBase)
 const AnimatedBox = motion(Box)
-const AnimatedImage = motion(Image)
 
 export const DarkModeSwitch: React.FC = () => {
   const [isDark, setIsDark] = React.useState(false) // temp
@@ -71,10 +70,10 @@ export const DarkModeSwitch: React.FC = () => {
           }}
         >
           <motion.div animate={{ opacity: isDark ? 1 : 0 }}>
-            <AnimatedImage src={Dark} alt="dark mode" height={18} />
+            <Image src={Dark} alt="dark mode" height={18} />
           </motion.div>
           <motion.div animate={{ opacity: isDark ? 0 : 1 }}>
-            <AnimatedImage src={Light} alt="light mode" height={18} />
+            <Image src={Light} alt="light mode" height={18} />
           </motion.div>
         </Box>
       </AnimatedBox>
