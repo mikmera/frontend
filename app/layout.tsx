@@ -1,9 +1,9 @@
 'use client'
 
 import { CssBaseline } from '@mui/material'
-import './globals.css'
+import { RootLayout } from './components/layout/RootLayout'
 
-export default function RootLayout({
+export default function AppRootLayout({
   children,
 }: {
   children: React.ReactNode
@@ -13,7 +13,7 @@ export default function RootLayout({
       <head />
       <body>
         <CssBaseline />
-        {children}
+        <RootLayout>{children}</RootLayout>
       </body>
     </html>
   )
