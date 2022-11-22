@@ -13,7 +13,7 @@ export const Nav: React.FC = () => {
     >
       <Container>
         <Link href="/">
-          <Image src={Logo} alt="Logo" height={32} />
+          <Image priority src={Logo} alt="Logo" height={32} />
         </Link>
       </Container>
     </AppBar>
