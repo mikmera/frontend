@@ -28,21 +28,16 @@ const links = [
 
 export const NavLinksMobile: React.FC = () => {
   return (
-    <Grid container sx={{ p: 2 }} spacing={2}>
+    <List>
       {links.map((x, i) => (
-        <Grid key={i} xs={6} md={4} item>
+        <ListItem key={i}>
           <NavLink href={x.href}>{x.label}</NavLink>
-        </Grid>
+        </ListItem>
       ))}
-      <Grid
-        item
-        xs={6}
-        md={4}
-        sx={{ justifyContent: 'center', display: 'flex' }}
-      >
+      <ListItem sx={{ justifyContent: 'center' }}>
         <DarkModeSwitch />
-      </Grid>
-    </Grid>
+      </ListItem>
+    </List>
   )
 }
 

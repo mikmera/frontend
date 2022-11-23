@@ -9,7 +9,7 @@ export type SidebarProps = {
 
 export const Sidebar: React.FC<SidebarProps> = ({ open, onClose }) => {
   return (
-    <Drawer onClick={onClose} open={open} onClose={onClose} anchor="top">
+    <Drawer onClick={onClose} open={open} onClose={onClose} anchor="right">
       <NavLinksMobile />
     </Drawer>
   )
