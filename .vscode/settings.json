@@ -1,4 +1,0 @@
-{
-  "typescript.tsdk": "node_modules/.store/typescript-patch-b9b216bc0d/node_modules/typescript/lib",
-  "typescript.enablePromptUseWorkspaceTsdk": true
-}
