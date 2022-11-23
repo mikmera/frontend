@@ -9,20 +9,16 @@ const links = [
     href: '/',
   },
   {
-    label: '메인',
-    href: '/',
+    label: '샘플',
+    href: '/sample',
   },
   {
-    label: '메인',
-    href: '/',
+    label: '파티',
+    href: '/party',
   },
   {
-    label: '메인',
-    href: '/',
-  },
-  {
-    label: '메인',
-    href: '/',
+    label: '계산기',
+    href: '/calc',
   },
 ]
 
