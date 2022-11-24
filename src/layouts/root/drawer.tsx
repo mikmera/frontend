@@ -1,17 +1,23 @@
-import { Drawer, List, ListItemButton, ListItemText } from '@mui/material'
+import {
+  Drawer,
+  List,
+  ListItemButton,
+  ListItemText,
+  Toolbar,
+  useTheme,
+} from '@mui/material'
+import { LayoutGroup, motion } from 'framer-motion'
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { NavLink, navLinks } from './constants'
+import ActiveImage from '~/assets/images/파링이보다 귀여운 파치리스.png'
 
 export type RootDrawerProps = {
   open: boolean
   onClose: () => void
 }
 
-const NavLinkItem: React.FC<{ item: NavLink; onClick: () => void }> = ({
-  item,
-  onClick,
-}) => {
+const NavLinkItem: React.FC<{ item: NavLink }> = ({ item }) => {
   const loc = useLocation()
 
   const pathname = React.useMemo(
@@ -22,13 +28,16 @@ const NavLinkItem: React.FC<{ item: NavLink; onClick: () => void }> = ({
   const active = React.useMemo(() => item.match.test(pathname), [pathname])
 
   return (
-    <ListItemButton
-      onClick={onClick}
-      selected={active}
-      component={Link}
-      to={item.to}
-    >
+    <ListItemButton selected={active} component={Link} to={item.to}>
       <ListItemText primary={item.label} />
+      {active && (
+        <motion.img
+          src={ActiveImage}
+          height={32}
+          alt="active"
+          layoutId="mobile-drawer-link-active"
+        />
+      )}
     </ListItemButton>
   )
 }
@@ -36,13 +45,16 @@ const NavLinkItem: React.FC<{ item: NavLink; onClick: () => void }> = ({
 export const RootDrawer: React.FC<RootDrawerProps> = ({ onClose, open }) => {
   return (
     <Drawer anchor="right" open={open} onClose={onClose}>
-      <List sx={{ minWidth: 256 }}>
-        {/* Nav Links */}
+      <Toolbar />
+      <LayoutGroup>
+        <List sx={{ minWidth: 256 }}>
+          {/* Nav Links */}
 
-        {navLinks.map((x, i) => (
-          <NavLinkItem onClick={onClose} item={x} key={i} />
-        ))}
-      </List>
+          {navLinks.map((x, i) => (
+            <NavLinkItem item={x} key={i} />
+          ))}
+        </List>
+      </LayoutGroup>
     </Drawer>
   )
 }
