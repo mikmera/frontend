@@ -34,6 +34,7 @@ const NavLinkItem: React.FC<{ item: NavLink }> = ({ item }) => {
         <motion.img
           src={ActiveImage}
           height={32}
+          width={32}
           alt="active"
           layoutId="mobile-drawer-link-active"
         />

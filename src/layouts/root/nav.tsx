@@ -15,7 +15,7 @@ import { NavLink, navLinks } from './constants'
 import { RootDrawer } from './drawer'
 import Menu from '@mui/icons-material/Menu'
 import ActiveImage from '~/assets/images/파링이보다 귀여운 파치리스.png'
-import { AnimateSharedLayout, LayoutGroup, motion } from 'framer-motion'
+import { LayoutGroup, motion } from 'framer-motion'
 
 const StyledRouterLink = styled(RouterLink)(() => ({
   display: 'flex',
@@ -42,6 +42,7 @@ const NavLinkItem: React.FC<{ item: NavLink }> = ({ item }) => {
         <motion.img
           src={ActiveImage}
           height={32}
+          width={32}
           alt="active"
           layoutId="nav-link-active"
           style={{
@@ -82,14 +83,20 @@ export const Nav: React.FC = () => {
       >
         <Toolbar>
           {/* Logo */}
-          <img src={Logo} alt="logo" draggable={false} />
+          <img
+            src={Logo}
+            height={32}
+            width={164}
+            alt="logo"
+            draggable={false}
+          />
 
           {/* Space */}
           <Box sx={{ flexGrow: 1 }} />
 
           {/* Links / Drawer button */}
           {isMobile ? (
-            <IconButton onClick={toggleDrawer}>
+            <IconButton aria-label="Menu" onClick={toggleDrawer}>
               <Menu />
             </IconButton>
           ) : (
