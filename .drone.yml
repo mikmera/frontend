@@ -6,16 +6,13 @@ platform:
   arch: amd64
 steps:
   - name: preview
-    image: docker.io/kameshsampath/drone-vercel-deploy
-    pull: if-not-exists
-    settings:
-      log_level: debug
-      # valid values are production, development, preview
-      vercel_env: development
-      vercel_token:
+    image: node
+    commands:
+      - 'npx vercel --token $VERCEL_TOKEN'
+    environment:
+      VERCEL_TOKEN:
         from_secret: vercel_token
-      vercel_org_id:
+      VERCEL_ORG_ID:
         from_secret: vercel_org_id
-      vercel_project_id:
+      VERCEL_PROJECT_ID:
         from_secret: vercel_project_id
-      vercel_project_create: true
