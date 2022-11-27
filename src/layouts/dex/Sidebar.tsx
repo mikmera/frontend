@@ -1,4 +1,5 @@
 import {
+  Alert,
   Avatar,
   Box,
   CircularProgress,
@@ -15,14 +16,16 @@ import {
   Typography,
 } from '@mui/material'
 import React from 'react'
-import { DexContextData, useMainContext } from './context'
+import { DexContextData, useDexContext } from './context'
 import { Virtuoso } from 'react-virtuoso'
 import { Usage } from '~/types'
 import QuestionMark from '@mui/icons-material/QuestionMark'
 import { Link } from 'react-router-dom'
+import { apiUrl } from '~/util'
+import { wrapError } from '~/components/ErrorBoundary'
 
-const SidebarHeader: React.FC = () => {
-  const { data, update } = useMainContext()
+const SidebarHeader: React.FC = wrapError(() => {
+  const { data, update } = useDexContext()
 
   return (
     <>
@@ -53,47 +56,55 @@ const SidebarHeader: React.FC = () => {
       )}
     </>
   )
-}
+})
 
-const DexItem: React.FC<{ item: Usage; index: number }> = ({ item, index }) => {
-  const iconUrl = React.useMemo(
-    () =>
-      `https://api.pokegg.online/v1/sprites/pokemon/${item.pokemon.dexId}${
-        item.pokemon.formId !== 0 ? `-${item.pokemon.formId}` : ''
-      }`,
-    [item.pokemon.id]
-  )
+const DexItem: React.FC<{ item: Usage; index: number }> = wrapError(
+  ({ item, index }) => {
+    const {
+      data: { type },
+    } = useDexContext()
 
-  return (
-    <ListItemButton component={Link} to={`/dex/${item.pokemon.id}`}>
-      <Typography
-        variant="body1"
-        sx={{
-          mr: 2,
-          minWidth: 36,
-        }}
-      >
-        #{index + 1}
-      </Typography>
-      <ListItemAvatar>
-        <Avatar
-          imgProps={{ crossOrigin: 'anonymous' }}
-          src={iconUrl}
-          variant="rounded"
+    const iconUrl = React.useMemo(
+      () =>
+        apiUrl(
+          `/v1/sprites/pokemon/${item.pokemon.dexId}${
+            item.pokemon.formId !== 0 ? `-${item.pokemon.formId}` : ''
+          }`
+        ),
+      [item.pokemon.id]
+    )
+
+    return (
+      <ListItemButton component={Link} to={`/dex/${type}/${item.pokemon.id}`}>
+        <Typography
+          variant="body1"
+          sx={{
+            mr: 2,
+            minWidth: 36,
+          }}
         >
-          <QuestionMark />
-        </Avatar>
-      </ListItemAvatar>
-      <ListItemText
-        // primary={`#${index + 1}`}
-        primary={item.pokemon.locales.ko ?? item.pokemon.name}
-      />
-    </ListItemButton>
-  )
-}
+          #{index + 1}
+        </Typography>
+        <ListItemAvatar>
+          <Avatar
+            imgProps={{ crossOrigin: 'anonymous' }}
+            src={iconUrl}
+            variant="rounded"
+          >
+            <QuestionMark />
+          </Avatar>
+        </ListItemAvatar>
+        <ListItemText
+          // primary={`#${index + 1}`}
+          primary={item.pokemon.locales.ko ?? item.pokemon.name}
+        />
+      </ListItemButton>
+    )
+  }
+)
 
 export const MainSidebar: React.FC = () => {
-  const { data } = useMainContext()
+  const { data } = useDexContext()
 
   return (
     <Drawer variant="permanent" open>

@@ -6,7 +6,7 @@ export type DexContextData = {
   usages: Usage[] | null
 }
 
-export const DexContext = React.createContext<{
+export const DexLayoutContext = React.createContext<{
   data: DexContextData
   update: (cb: (data: DexContextData) => DexContextData) => void
 }>({
@@ -18,4 +18,4 @@ export const DexContext = React.createContext<{
   update: () => {},
 })
 
-export const useMainContext = () => React.useContext(DexContext)
+export const useDexContext = () => React.useContext(DexLayoutContext)

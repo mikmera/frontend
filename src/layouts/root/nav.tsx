@@ -16,6 +16,7 @@ import { RootDrawer } from './drawer'
 import Menu from '@mui/icons-material/Menu'
 import ActiveImage from '~/assets/images/파링이보다 귀여운 파치리스.png'
 import { LayoutGroup, motion } from 'framer-motion'
+import { wrapError } from '~/components/ErrorBoundary'
 
 const StyledRouterLink = styled(RouterLink)(() => ({
   display: 'flex',
@@ -26,7 +27,7 @@ const StyledRouterLink = styled(RouterLink)(() => ({
   position: 'relative',
 }))
 
-const NavLinkItem: React.FC<{ item: NavLink }> = ({ item }) => {
+const NavLinkItem: React.FC<{ item: NavLink }> = wrapError(({ item }) => {
   const loc = useLocation()
 
   const pathname = React.useMemo(
@@ -55,9 +56,9 @@ const NavLinkItem: React.FC<{ item: NavLink }> = ({ item }) => {
       {item.label}
     </StyledRouterLink>
   )
-}
+})
 
-export const Nav: React.FC = () => {
+export const Nav: React.FC = wrapError(() => {
   const [drawerOpen, setDrawerOpen] = React.useState(false)
 
   const theme = useTheme()
@@ -117,4 +118,4 @@ export const Nav: React.FC = () => {
       </AppBar>
     </>
   )
-}
+})
