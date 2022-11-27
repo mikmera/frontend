@@ -27,10 +27,12 @@ export class ErrorBoundary extends React.Component<
 }
 
 export function wrapError<T>(Component: React.ComponentType<T>) {
-  return ((props: T) => (
-    <ErrorBoundary>
-      {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-      <Component {...(props as any)} />
-    </ErrorBoundary>
-  )) as React.FC<T>
+  return ((props: T) => {
+    return (
+      <ErrorBoundary>
+        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+        <Component {...(props as any)} />
+      </ErrorBoundary>
+    )
+  }) as React.FC<T>
 }
