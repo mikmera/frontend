@@ -11,7 +11,7 @@ steps:
     settings:
       log_level: debug
       # valid values are production, development, preview
-      vercel_env: preview
+      vercel_env: development
       vercel_token:
         from_secret: vercel_token
       vercel_org_id:
