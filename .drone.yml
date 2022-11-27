@@ -17,6 +17,7 @@ steps:
       secret-key:
         from_secret: cache_secret_key
       restore: true
+      region: us-east-1
       bucket:
         from_secret: cache_bucket
       endpoint:
@@ -46,6 +47,7 @@ steps:
       secret-key:
         from_secret: cache_secret_key
       rebuild: true
+      region: us-east-1
       bucket:
         from_secret: cache_bucket
       endpoint:
