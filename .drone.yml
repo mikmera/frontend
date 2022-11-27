@@ -9,7 +9,6 @@ steps:
     image: node
     commands:
       - 'npm i -g vercel@canary'
-      - 'vercel project add $VERCEL_PROJECT_ID --token $VERCEL_TOKEN'
       - 'vercel pull --yes --environment=development --token $VERCEL_TOKEN'
       - 'vercel build --token $VERCEL_TOKEN'
       - 'vercel build --prebuilt --token=$VERCEL_TOKEN'
