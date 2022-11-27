@@ -7,7 +7,7 @@ export type NavLink = {
 export const navLinks: NavLink[] = [
   {
     to: '/',
-    match: /^\/$/,
+    match: /^\/(dex\/(single|double|vgc)\/(\d+)\/)?$/,
     label: '메인',
   },
   {
