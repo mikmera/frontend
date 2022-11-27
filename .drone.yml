@@ -1,0 +1,21 @@
+kind: pipeline
+type: docker
+name: default
+platform:
+  os: linux
+  arch: amd64
+steps:
+  - name: preview
+    image: docker.io/kameshsampath/drone-vercel-deploy
+    pull: never
+    settings:
+      log_level: debug
+      # valid values are production, development, preview
+      vercel_env: preview
+      vercel_token:
+        from_secret: vercel_token
+      vercel_org_id:
+        from_secret: vercel_org_id
+      vercel_project_id:
+        from_secret: vercel_project_id
+      vercel_project_create: true

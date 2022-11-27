@@ -4,7 +4,6 @@ import {
   ListItemButton,
   ListItemText,
   Toolbar,
-  useTheme,
 } from '@mui/material'
 import { LayoutGroup, motion } from 'framer-motion'
 import React from 'react'
