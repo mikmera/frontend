@@ -11,17 +11,21 @@ steps:
   - name: Restore cache
     image: meltwater/drone-cache:dev
     pull: if-not-exists
-    settings:
-      access-key:
+    environment:
+      AWS_ACCESS_KEY_ID:
         from_secret: cache_access_key
-      secret-key:
+      AWS_SECRET_ACCESS_KEY:
         from_secret: cache_secret_key
+      S3_ENDPOINT:
+        from_secret: cache_endpoint
+      S3_BUCKET:
+        from_secret: cache_bucket
+    settings:
       restore: true
       region: us-east-1
+      cache_key: 'frontend/{{ .Commit.Branch }}-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}'
       bucket:
         from_secret: cache_bucket
-      endpoint:
-        from_secret: cache_endpoint
       mount:
         - '.yarn/cache'
   - name: Build and deploy
@@ -41,16 +45,18 @@ steps:
   - name: Rebuild cache
     image: meltwater/drone-cache:dev
     pull: if-not-exists
-    settings:
-      access-key:
+    environment:
+      AWS_ACCESS_KEY_ID:
         from_secret: cache_access_key
-      secret-key:
+      AWS_SECRET_ACCESS_KEY:
         from_secret: cache_secret_key
-      rebuild: true
-      region: us-east-1
-      bucket:
-        from_secret: cache_bucket
-      endpoint:
+      S3_ENDPOINT:
         from_secret: cache_endpoint
+      S3_BUCKET:
+        from_secret: cache_bucket
+    settings:
+      restore: true
+      region: us-east-1
+      cache_key: 'frontend/{{ .Commit.Branch }}-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}'
       mount:
         - '.yarn/cache'
