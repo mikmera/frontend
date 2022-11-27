@@ -1,10 +1,11 @@
-import { Box, CircularProgress, Container } from '@mui/material'
+import { Box, CircularProgress, Container, Stack } from '@mui/material'
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import { wrapError } from '~/components/ErrorBoundary'
 import { useDexContext } from '~/layouts/dex/context'
 import { DexContext } from './context'
 import { DexHeader } from './Header'
+import { DexStats } from './Stats'
 
 export const DexView: React.FC = wrapError(() => {
   const { id, type } = useParams<'id' | 'type'>()
@@ -45,8 +46,16 @@ export const DexView: React.FC = wrapError(() => {
         </Box>
       ) : (
         <DexContext.Provider value={item}>
-          <Container sx={{ mt: 4 }}>
+          <Container
+            component={Stack}
+            spacing={2}
+            direction="column"
+            sx={{ mt: 4 }}
+          >
             <DexHeader />
+            <Box>
+              <DexStats />
+            </Box>
             <pre>
               <code>{JSON.stringify(item, null, 2)}</code>
             </pre>
