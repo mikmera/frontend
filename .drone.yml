@@ -5,10 +5,14 @@ platform:
   os: linux
   arch: amd64
 steps:
-  - name: preview
+  - name: deploy-development
     image: node
     commands:
-      - 'npx vercel --token $VERCEL_TOKEN'
+      - 'npm i -g vercel@canary'
+      - 'vercel project add $VERCEL_PROJECT_ID'
+      - 'vercel pull --yes --environment=development --token $VERCEL_TOKEN'
+      - 'vercel build --token $VERCEL_TOKEN'
+      - 'vercel build --prebuilt --token=$VERCEL_TOKEN'
     environment:
       VERCEL_TOKEN:
         from_secret: vercel_token
