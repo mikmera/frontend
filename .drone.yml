@@ -2,12 +2,27 @@ kind: pipeline
 type: docker
 name: Deploy (development)
 trigger:
-  branch: 
-  - main
+  branch:
+    - main
 platform:
   os: linux
   arch: amd64
 steps:
+  - name: Restore cache
+    image: meltwater/drone-cache:dev
+    pull: if-not-exists
+    settings:
+      access-key:
+        from_secret: cache_access_key
+      secret-key:
+        from_secret: cache_secret_key
+      restore: true
+      bucket:
+        from_secret: cache_bucket
+      endpoint:
+        from_secret: cache_endpoint
+      mount:
+        - '.yarn/cache'
   - name: Build and deploy
     image: node
     commands:
@@ -22,3 +37,18 @@ steps:
         from_secret: vercel_org_id
       VERCEL_PROJECT_ID:
         from_secret: vercel_project_id
+  - name: Rebuild cache
+    image: meltwater/drone-cache:dev
+    pull: if-not-exists
+    settings:
+      access-key:
+        from_secret: cache_access_key
+      secret-key:
+        from_secret: cache_secret_key
+      rebuild: true
+      bucket:
+        from_secret: cache_bucket
+      endpoint:
+        from_secret: cache_endpoint
+      mount:
+        - '.yarn/cache'
