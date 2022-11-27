@@ -18,7 +18,8 @@ steps:
         from_secret: cache_secret_key
     settings:
       restore: true
-      region: us-east-1
+      region:
+        from_secret: cache_region
       cache_key: 'frontend/{{ .Commit.Branch }}-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}'
       bucket:
         from_secret: cache_bucket
@@ -50,7 +51,8 @@ steps:
         from_secret: cache_secret_key
     settings:
       restore: true
-      region: us-east-1
+      region:
+        from_secret: cache_region
       cache_key: 'frontend/{{ .Commit.Branch }}-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}'
       bucket:
         from_secret: cache_bucket
