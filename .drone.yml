@@ -7,7 +7,7 @@ platform:
 steps:
   - name: preview
     image: docker.io/kameshsampath/drone-vercel-deploy
-    pull: never
+    pull: if-not-exists
     settings:
       log_level: debug
       # valid values are production, development, preview
