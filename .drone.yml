@@ -8,25 +8,6 @@ platform:
   os: linux
   arch: amd64
 steps:
-  - name: Restore cache
-    image: meltwater/drone-cache:dev
-    pull: if-not-exists
-    environment:
-      AWS_ACCESS_KEY_ID:
-        from_secret: cache_access_key
-      AWS_SECRET_ACCESS_KEY:
-        from_secret: cache_secret_key
-    settings:
-      restore: true
-      region:
-        from_secret: cache_region
-      cache_key: 'frontend/{{ .Commit.Branch }}-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}'
-      bucket:
-        from_secret: cache_bucket
-      endpoint:
-        from_secret: cache_endpoint
-      mount:
-        - '.yarn/cache'
   - name: Build and deploy
     image: node
     commands:
@@ -41,22 +22,3 @@ steps:
         from_secret: vercel_org_id
       VERCEL_PROJECT_ID:
         from_secret: vercel_project_id
-  - name: Rebuild cache
-    image: meltwater/drone-cache:dev
-    pull: if-not-exists
-    environment:
-      AWS_ACCESS_KEY_ID:
-        from_secret: cache_access_key
-      AWS_SECRET_ACCESS_KEY:
-        from_secret: cache_secret_key
-    settings:
-      rebuild: true
-      region:
-        from_secret: cache_region
-      cache_key: 'frontend/{{ .Commit.Branch }}-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}'
-      bucket:
-        from_secret: cache_bucket
-      endpoint:
-        from_secret: cache_endpoint
-      mount:
-        - '.yarn/cache'
