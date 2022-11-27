@@ -50,7 +50,7 @@ steps:
       AWS_SECRET_ACCESS_KEY:
         from_secret: cache_secret_key
     settings:
-      restore: true
+      rebuild: true
       region:
         from_secret: cache_region
       cache_key: 'frontend/{{ .Commit.Branch }}-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}'
