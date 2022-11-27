@@ -1,17 +1,20 @@
 kind: pipeline
 type: docker
-name: default
+name: Deploy (development)
+trigger:
+  branch: 
+  - main
 platform:
   os: linux
   arch: amd64
 steps:
-  - name: deploy-development
+  - name: Build and deploy
     image: node
     commands:
       - 'npm i -g vercel@canary'
       - 'vercel pull --yes --environment=development --token $VERCEL_TOKEN'
       - 'vercel build --token $VERCEL_TOKEN'
-      - 'vercel build --prebuilt --token=$VERCEL_TOKEN'
+      - 'vercel deploy --prebuilt --token=$VERCEL_TOKEN'
     environment:
       VERCEL_TOKEN:
         from_secret: vercel_token
