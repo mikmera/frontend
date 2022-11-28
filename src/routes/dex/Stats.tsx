@@ -1,9 +1,12 @@
-import { Box, Grid, Paper, Typography } from '@mui/material'
 import React, { PropsWithChildren } from 'react'
 import { useCurrentDexItem } from './context'
 import { Bar } from 'react-chartjs-2'
 import { StatKey } from '~/types'
 import { ChartData, ChartOptions } from 'chart.js'
+import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
+import Paper from '@mui/material/Paper'
+import Grid from '@mui/material/Grid'
 
 const statLabels: Record<StatKey, [string, string]> = {
   hp: ['#EA3323', '체력'],

@@ -1,11 +1,11 @@
-import { Box } from '@mui/material'
 import React from 'react'
 import { DexLayoutContext, DexContextData } from './context'
-import { MainSidebar } from './Sidebar'
 import useSWR from 'swr'
 import { fetcher } from '~/util'
 import { Outlet, useParams } from 'react-router-dom'
 import { wrapError } from '~/components/ErrorBoundary'
+import Box from '@mui/material/Box'
+import { MainSidebar } from './Sidebar'
 
 export const DexLayout: React.FC = wrapError(() => {
   const [data, setData] = React.useState<DexContextData>({

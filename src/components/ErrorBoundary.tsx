@@ -1,4 +1,4 @@
-import { Alert } from '@mui/material'
+import Alert from '@mui/material/Alert'
 import React, { PropsWithChildren } from 'react'
 
 export class ErrorBoundary extends React.Component<

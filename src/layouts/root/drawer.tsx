@@ -1,16 +1,14 @@
-import {
-  Drawer,
-  List,
-  ListItemButton,
-  ListItemText,
-  Toolbar,
-} from '@mui/material'
 import { LayoutGroup, motion } from 'framer-motion'
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { NavLink, navLinks } from './constants'
 import ActiveImage from '~/assets/images/파링이보다 귀여운 파치리스.png'
 import { wrapError } from '~/components/ErrorBoundary'
+import ListItemButton from '@mui/material/ListItemButton'
+import ListItemText from '@mui/material/ListItemText'
+import Drawer from '@mui/material/Drawer'
+import Toolbar from '@mui/material/Toolbar'
+import List from '@mui/material/List'
 
 export type RootDrawerProps = {
   open: boolean

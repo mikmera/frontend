@@ -1,5 +1,8 @@
 import QuestionMark from '@mui/icons-material/QuestionMark'
-import { Avatar, Stack, Tooltip, Typography } from '@mui/material'
+import Avatar from '@mui/material/Avatar'
+import Stack from '@mui/material/Stack'
+import Tooltip from '@mui/material/Tooltip'
+import Typography from '@mui/material/Typography'
 import React from 'react'
 import { wrapError } from '~/components/ErrorBoundary'
 import { apiUrl } from '~/util'
@@ -21,6 +24,7 @@ export const DexHeader: React.FC = wrapError(() => {
   return (
     <Stack direction="row" alignItems="center" spacing={2}>
       <Avatar
+        alt="image"
         sx={{
           width: 72,
           height: 72,
@@ -38,6 +42,7 @@ export const DexHeader: React.FC = wrapError(() => {
         {pokemon.types.map((x, i) => (
           <Tooltip title={x} key={i}>
             <Avatar
+              alt={x}
               imgProps={{ crossOrigin: 'anonymous' }}
               src={apiUrl(`/v1/sprites/types/${x}.svg`)}
             />

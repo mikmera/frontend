@@ -1,4 +1,7 @@
-import { Box, CircularProgress, Container, Stack } from '@mui/material'
+import Box from '@mui/material/Box'
+import CircularProgress from '@mui/material/CircularProgress'
+import Container from '@mui/material/Container'
+import Stack from '@mui/material/Stack'
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import { wrapError } from '~/components/ErrorBoundary'
@@ -12,11 +15,11 @@ export const DexView: React.FC = wrapError(() => {
   const { data } = useDexContext()
 
   const item = React.useMemo(() => {
-    if (!data.usages) return null
+    if (!data.usages || !data.usages.length) return null
 
     if (data.type !== type) return false
 
-    if (data.type !== type && !data.usages?.length) {
+    if (data.type !== type) {
       return false
     }
 
@@ -56,9 +59,9 @@ export const DexView: React.FC = wrapError(() => {
             <Box>
               <DexStats />
             </Box>
-            <pre>
+            {/* <pre>
               <code>{JSON.stringify(item, null, 2)}</code>
-            </pre>
+            </pre> */}
           </Container>
         </DexContext.Provider>
       )}

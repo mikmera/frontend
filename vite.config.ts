@@ -11,4 +11,12 @@ export default defineConfig({
       '~': path.join(__dirname, 'src'),
     },
   },
+  build: {
+    rollupOptions: {
+      manualChunks: {
+        mui: ['@mui/material'],
+        muicons: ['@mui/icons-material'],
+      },
+    },
+  },
 })

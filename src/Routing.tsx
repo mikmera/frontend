@@ -1,11 +1,28 @@
-import React from 'react'
+import React, { lazy, Suspense } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { wrapError } from './components/ErrorBoundary'
-import { DexLayout } from './layouts/dex'
-import { RootLayout } from './layouts/root'
-import { DexView } from './routes/dex'
 import { Main } from './routes/main'
-import { NotFound } from './routes/notfound'
+import { wrapSuspense } from './utils/suspense'
+
+const RootLayout = wrapSuspense(
+  lazy(() => import('./layouts/root').then((x) => ({ default: x.RootLayout })))
+)
+
+const DexLayout = wrapSuspense(
+  lazy(() => import('./layouts/dex').then((x) => ({ default: x.DexLayout })))
+)
+
+const DexView = wrapSuspense(
+  lazy(() => import('./routes/dex').then((x) => ({ default: x.DexView })))
+)
+
+const NotFound = wrapSuspense(
+  lazy(() =>
+    import('./routes/notfound').then((x) => ({
+      default: x.NotFound,
+    }))
+  )
+)
 
 export const Routing: React.FC = wrapError(() => {
   return (

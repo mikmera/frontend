@@ -1,13 +1,3 @@
-import {
-  AppBar,
-  Toolbar,
-  Box,
-  Stack,
-  useMediaQuery,
-  useTheme,
-  IconButton,
-  styled,
-} from '@mui/material'
 import React from 'react'
 import { Link as RouterLink, useLocation } from 'react-router-dom'
 import Logo from '~/assets/images/logo.png'
@@ -17,6 +7,14 @@ import Menu from '@mui/icons-material/Menu'
 import ActiveImage from '~/assets/images/파링이보다 귀여운 파치리스.png'
 import { LayoutGroup, motion } from 'framer-motion'
 import { wrapError } from '~/components/ErrorBoundary'
+import useTheme from '@mui/material/styles/useTheme'
+import useMediaQuery from '@mui/material/useMediaQuery'
+import AppBar from '@mui/material/AppBar'
+import Toolbar from '@mui/material/Toolbar'
+import Box from '@mui/material/Box'
+import IconButton from '@mui/material/IconButton'
+import Stack from '@mui/material/Stack'
+import styled from '@mui/material/styles/styled'
 
 const StyledRouterLink = styled(RouterLink)(() => ({
   display: 'flex',

@@ -1,18 +1,3 @@
-import {
-  Avatar,
-  Box,
-  CircularProgress,
-  Drawer,
-  FormControl,
-  InputLabel,
-  ListItemAvatar,
-  ListItemButton,
-  ListItemText,
-  MenuItem,
-  Select,
-  Toolbar,
-  Typography,
-} from '@mui/material'
 import React from 'react'
 import { DexContextData, useDexContext } from './context'
 import { Virtuoso } from 'react-virtuoso'
@@ -21,6 +6,19 @@ import QuestionMark from '@mui/icons-material/QuestionMark'
 import { Link } from 'react-router-dom'
 import { apiUrl } from '~/util'
 import { wrapError } from '~/components/ErrorBoundary'
+import Box from '@mui/material/Box'
+import FormControl from '@mui/material/FormControl'
+import InputLabel from '@mui/material/InputLabel'
+import Select from '@mui/material/Select'
+import MenuItem from '@mui/material/MenuItem'
+import CircularProgress from '@mui/material/CircularProgress'
+import ListItemButton from '@mui/material/ListItemButton'
+import Typography from '@mui/material/Typography'
+import ListItemAvatar from '@mui/material/ListItemAvatar'
+import Avatar from '@mui/material/Avatar'
+import ListItemText from '@mui/material/ListItemText'
+import Drawer from '@mui/material/Drawer'
+import Toolbar from '@mui/material/Toolbar'
 
 const SidebarHeader: React.FC = wrapError(() => {
   const { data, update } = useDexContext()
@@ -85,6 +83,7 @@ const DexItem: React.FC<{ item: Usage; index: number }> = wrapError(
         </Typography>
         <ListItemAvatar>
           <Avatar
+            alt="image"
             imgProps={{ crossOrigin: 'anonymous' }}
             src={iconUrl}
             variant="rounded"
