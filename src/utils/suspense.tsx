@@ -1,6 +1,6 @@
+import React, { Suspense } from 'react'
 import Box from '@mui/material/Box'
-import CircularProgress from '@mui/material/CircularProgress'
-import { Suspense } from 'react'
+import { Spinner } from '~/components/Spinner'
 
 export function wrapSuspense<T>(Component: React.ComponentType<T>) {
   return ((props: T) => {
@@ -15,7 +15,7 @@ export function wrapSuspense<T>(Component: React.ComponentType<T>) {
               transform: 'translate(-50%, -50%)',
             }}
           >
-            <CircularProgress />
+            <Spinner />
           </Box>
         }
       >

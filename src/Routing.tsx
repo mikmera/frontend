@@ -24,6 +24,14 @@ const NotFound = wrapSuspense(
   )
 )
 
+const Loading = wrapSuspense(
+  lazy(() =>
+    import('./routes/InfiniteLoading').then((x) => ({
+      default: x.InfiniteLoadingPage,
+    }))
+  )
+)
+
 export const Routing: React.FC = wrapError(() => {
   return (
     <Routes>
@@ -32,6 +40,7 @@ export const Routing: React.FC = wrapError(() => {
           <Route index element={<Main />} />
           <Route path="dex/:type/:id" element={<DexView />} />
         </Route>
+        <Route path="loading" element={<Loading />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>

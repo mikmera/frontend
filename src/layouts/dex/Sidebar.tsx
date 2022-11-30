@@ -11,7 +11,6 @@ import FormControl from '@mui/material/FormControl'
 import InputLabel from '@mui/material/InputLabel'
 import Select from '@mui/material/Select'
 import MenuItem from '@mui/material/MenuItem'
-import CircularProgress from '@mui/material/CircularProgress'
 import ListItemButton from '@mui/material/ListItemButton'
 import Typography from '@mui/material/Typography'
 import ListItemAvatar from '@mui/material/ListItemAvatar'
@@ -19,6 +18,7 @@ import Avatar from '@mui/material/Avatar'
 import ListItemText from '@mui/material/ListItemText'
 import Drawer from '@mui/material/Drawer'
 import Toolbar from '@mui/material/Toolbar'
+import { Spinner } from '~/components/Spinner'
 
 const SidebarHeader: React.FC = wrapError(() => {
   const { data, update } = useDexContext()
@@ -47,7 +47,7 @@ const SidebarHeader: React.FC = wrapError(() => {
       </Box>
       {!data.usages && (
         <Box sx={{ mt: 1, display: 'flex', justifyContent: 'center' }}>
-          <CircularProgress />
+          <Spinner />
         </Box>
       )}
     </>

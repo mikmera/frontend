@@ -1,10 +1,10 @@
 import Box from '@mui/material/Box'
-import CircularProgress from '@mui/material/CircularProgress'
 import Container from '@mui/material/Container'
 import Stack from '@mui/material/Stack'
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import { wrapError } from '~/components/ErrorBoundary'
+import { Spinner } from '~/components/Spinner'
 import { useDexContext } from '~/layouts/dex/context'
 import { DexContext } from './context'
 import { DexHeader } from './Header'
@@ -45,7 +45,7 @@ export const DexView: React.FC = wrapError(() => {
             alignItems: 'center',
           }}
         >
-          <CircularProgress />
+          <Spinner />
         </Box>
       ) : (
         <DexContext.Provider value={item}>
