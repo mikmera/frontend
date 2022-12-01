@@ -119,7 +119,7 @@ const DetailSection: React.FC<PropsWithChildren<{ title: string }>> = ({
   return (
     <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
       <Typography variant="h6">{title}</Typography>
-      <Paper sx={{ mt: 1, flexGrow: 1, maxHeight: 240 }} variant="outlined">
+      <Paper sx={{ mt: 1, flexGrow: 1, height: 240 }} variant="outlined">
         {children}
       </Paper>
     </Box>
