@@ -13,6 +13,12 @@ export interface Pokemon {
   types: string[]
 }
 
+export interface Terastalize {
+  teratype: string
+  percent: `${number}`
+}
+
 export interface Usage {
   pokemon: Pokemon
+  terastalize: Terastalize[]
 }

@@ -7,6 +7,13 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Paper from '@mui/material/Paper'
 import Grid from '@mui/material/Grid'
+import Avatar from '@mui/material/Avatar'
+import List from '@mui/material/List'
+import ListItem from '@mui/material/ListItem'
+import ListItemAvatar from '@mui/material/ListItemAvatar'
+import ListItemText from '@mui/material/ListItemText'
+import { motion } from 'framer-motion'
+import QuestionMark from '@mui/icons-material/QuestionMark'
 
 const statLabels: Record<StatKey, [string, string]> = {
   hp: ['#EA3323', '체력'],
@@ -28,7 +35,7 @@ const statOptions: ChartOptions = {
   maintainAspectRatio: false,
 }
 
-const StatsArea: React.FC = () => {
+const StatSection: React.FC = () => {
   const item = useCurrentDexItem()
 
   const data: ChartData<'bar', number[]> = React.useMemo(() => {
@@ -43,9 +50,65 @@ const StatsArea: React.FC = () => {
   }, [item.pokemon.stats])
 
   return (
-    <Box sx={{ minHeight: 180, p: 1 }}>
+    <Box sx={{ height: '100%', p: 1 }}>
       <Bar height="100%" data={data} options={statOptions} />
     </Box>
+  )
+}
+
+const MotionList = motion(List)
+const MotionListItem = motion(ListItem)
+
+const AbilitiesSection: React.FC = () => {
+  // const item = useCurrentDexItem()
+
+  return (
+    <Box>Todo</Box>
+    // <MotionList
+    //   transition={{ staggerChildren: 0.1 }}
+    //   sx={{ height: '100%', overflowY: 'scroll', py: 0 }}
+    // >
+    //   {abilities.map((x, i) => (
+    //     <MotionListItem
+    //       key={i}
+    //       initial={{ opacity: 0 }}
+    //       animate={{ opacity: 1 }}
+    //     >
+    //       <ListItemAvatar>
+    //         <Avatar>
+    //           <QuestionMark />
+    //         </Avatar>
+    //       </ListItemAvatar>
+    //       <ListItemText primary="Todo" secondary="asdfasdf" />
+    //     </MotionListItem>
+    //   ))}
+    // </MotionList>
+  )
+}
+
+const TerastalizeSection: React.FC = () => {
+  const item = useCurrentDexItem()
+
+  return (
+    <MotionList
+      transition={{ staggerChildren: 0.1 }}
+      sx={{ height: '100%', overflowY: 'scroll', py: 0 }}
+    >
+      {item.terastalize.map((x, i) => (
+        <MotionListItem
+          key={i}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+        >
+          <ListItemAvatar>
+            <Avatar>
+              <QuestionMark />
+            </Avatar>
+          </ListItemAvatar>
+          <ListItemText primary={x.teratype} secondary={`${x.percent}%`} />
+        </MotionListItem>
+      ))}
+    </MotionList>
   )
 }
 
@@ -54,9 +117,9 @@ const DetailSection: React.FC<PropsWithChildren<{ title: string }>> = ({
   children,
 }) => {
   return (
-    <Box>
+    <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
       <Typography variant="h6">{title}</Typography>
-      <Paper sx={{ mt: 1 }} variant="outlined">
+      <Paper sx={{ mt: 1, flexGrow: 1, maxHeight: 240 }} variant="outlined">
         {children}
       </Paper>
     </Box>
@@ -68,33 +131,37 @@ export const DexStats: React.FC = () => {
     <Grid container spacing={2}>
       <Grid item xs={12} md={6} lg={4}>
         <DetailSection title="종족값 분배">
-          <StatsArea />
+          <StatSection />
         </DetailSection>
       </Grid>
       <Grid item xs={12} md={6} lg={4}>
-        <DetailSection title="기술">ㅁㄴㅇㄹㅁㄴㅇㄹ</DetailSection>
+        <DetailSection title="기술">
+          <AbilitiesSection />
+        </DetailSection>
       </Grid>
       <Grid item xs={12} md={6} lg={4}>
-        <DetailSection title="성격">ㅁㄴㅇㄹㅁㄴㅇㄹ</DetailSection>
+        <DetailSection title="성격">Todo</DetailSection>
       </Grid>
       <Grid item xs={12} md={6}>
         <Paper variant="outlined" sx={{ p: 2 }}>
-          ㅁㄴㅇㄹㅁㄴㅇㄹ
+          Todo
         </Paper>
       </Grid>
       <Grid item xs={12} md={6}>
         <Paper variant="outlined" sx={{ p: 2 }}>
-          ㅁㄴㅇㄹㅁㄴㅇㄹ
+          Todo
         </Paper>
       </Grid>
       <Grid item xs={12} md={6} lg={4}>
-        <DetailSection title="테라스탈 타입">ㅁㄴㅇㄹㅁㄴㅇㄹ</DetailSection>
+        <DetailSection title="테라스탈 타입">
+          <TerastalizeSection />
+        </DetailSection>
       </Grid>
       <Grid item xs={12} md={6} lg={4}>
-        <DetailSection title="지닌 물건">ㅁㄴㅇㄹㅁㄴㅇㄹ</DetailSection>
+        <DetailSection title="지닌 물건">Todo</DetailSection>
       </Grid>
       <Grid item xs={12} md={6} lg={4}>
-        <DetailSection title="특성">ㅁㄴㅇㄹㅁㄴㅇㄹ</DetailSection>
+        <DetailSection title="특성">Todo</DetailSection>
       </Grid>
     </Grid>
   )
