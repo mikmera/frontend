@@ -19,6 +19,11 @@ import ListItemText from '@mui/material/ListItemText'
 import Drawer from '@mui/material/Drawer'
 import Toolbar from '@mui/material/Toolbar'
 import { Spinner } from '~/components/Spinner'
+import useMediaQuery from '@mui/material/useMediaQuery'
+import useTheme from '@mui/material/styles/useTheme'
+import Divider from '@mui/material/Divider'
+import IconButton from '@mui/material/IconButton'
+import ChevronRight from '@mui/icons-material/ChevronRight'
 
 const SidebarHeader: React.FC = wrapError(() => {
   const { data, update } = useDexContext()
@@ -103,17 +108,58 @@ const DexItem: React.FC<{ item: Usage; index: number }> = wrapError(
 export const MainSidebar: React.FC = () => {
   const { data } = useDexContext()
 
+  const theme = useTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'))
+  const [open, setOpen] = React.useState(false)
+
   return (
-    <Drawer variant="permanent" open>
-      <Toolbar sx={{ width: 280 }} />
-      <Virtuoso
-        height="100%"
-        data={data.usages ?? []}
-        itemContent={(index, item) => <DexItem index={index} item={item} />}
-        components={{
-          Header: SidebarHeader,
-        }}
-      ></Virtuoso>
-    </Drawer>
+    <>
+      {isMobile && (
+        <Box
+          sx={{
+            pointerEvents: 'none',
+            position: 'absolute',
+            left: 0,
+            top: 0,
+            zIndex: theme.zIndex.drawer + 1,
+          }}
+        >
+          <Toolbar />
+          <Toolbar>
+            <IconButton
+              onClick={() => setOpen((v) => !v)}
+              sx={{
+                transition: (theme) => theme.transitions.create('transform'),
+                transform: `rotate(${open ? 180 : 0}deg)`,
+                pointerEvents: 'all',
+              }}
+            >
+              <ChevronRight />
+            </IconButton>
+          </Toolbar>
+        </Box>
+      )}
+      <Drawer
+        variant={isMobile ? 'temporary' : 'permanent'}
+        open={!isMobile || open}
+        onClose={() => setOpen(false)}
+      >
+        <Toolbar sx={{ width: 280 }} />
+        {isMobile && (
+          <>
+            <Toolbar />
+            <Divider />
+          </>
+        )}
+        <Virtuoso
+          height="100%"
+          data={data.usages ?? []}
+          itemContent={(index, item) => <DexItem index={index} item={item} />}
+          components={{
+            Header: SidebarHeader,
+          }}
+        ></Virtuoso>
+      </Drawer>
+    </>
   )
 }

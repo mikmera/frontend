@@ -6,6 +6,10 @@ import { Outlet, useParams } from 'react-router-dom'
 import { wrapError } from '~/components/ErrorBoundary'
 import Box from '@mui/material/Box'
 import { MainSidebar } from './Sidebar'
+import useMediaQuery from '@mui/material/useMediaQuery'
+import { useTheme } from '@mui/material/styles'
+import Toolbar from '@mui/material/Toolbar'
+import Divider from '@mui/material/Divider'
 
 export const DexLayout: React.FC = wrapError(() => {
   const [data, setData] = React.useState<DexContextData>({
@@ -32,6 +36,9 @@ export const DexLayout: React.FC = wrapError(() => {
     }))
   }, [usageData])
 
+  const theme = useTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'))
+
   return (
     <DexLayoutContext.Provider
       value={{
@@ -41,7 +48,13 @@ export const DexLayout: React.FC = wrapError(() => {
     >
       <Box sx={{ height: '100%' }}>
         <MainSidebar />
-        <Box sx={{ marginLeft: '280px', height: '100%' }}>
+        <Box sx={{ marginLeft: isMobile ? 0 : '280px', height: '100%' }}>
+          {isMobile && (
+            <>
+              <Toolbar />
+              <Divider />
+            </>
+          )}
           <Outlet />
         </Box>
       </Box>
