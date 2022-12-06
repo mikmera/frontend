@@ -60,29 +60,28 @@ const MotionList = motion(List)
 const MotionListItem = motion(ListItem)
 
 const AbilitiesSection: React.FC = () => {
-  // const item = useCurrentDexItem()
+  const item = useCurrentDexItem()
 
   return (
-    <Box>Todo</Box>
-    // <MotionList
-    //   transition={{ staggerChildren: 0.1 }}
-    //   sx={{ height: '100%', overflowY: 'scroll', py: 0 }}
-    // >
-    //   {abilities.map((x, i) => (
-    //     <MotionListItem
-    //       key={i}
-    //       initial={{ opacity: 0 }}
-    //       animate={{ opacity: 1 }}
-    //     >
-    //       <ListItemAvatar>
-    //         <Avatar>
-    //           <QuestionMark />
-    //         </Avatar>
-    //       </ListItemAvatar>
-    //       <ListItemText primary="Todo" secondary="asdfasdf" />
-    //     </MotionListItem>
-    //   ))}
-    // </MotionList>
+    <MotionList
+      transition={{ staggerChildren: 0.1 }}
+      sx={{ height: '100%', overflowY: 'scroll', py: 0 }}
+    >
+      {item.abilities.map((x, i) => (
+        <MotionListItem
+          key={i}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+        >
+          <ListItemAvatar>
+            <Avatar>
+              <QuestionMark />
+            </Avatar>
+          </ListItemAvatar>
+          <ListItemText primary={x.name} secondary={`${x.usage}%`} />
+        </MotionListItem>
+      ))}
+    </MotionList>
   )
 }
 
@@ -105,7 +104,7 @@ const TerastalizeSection: React.FC = () => {
               <QuestionMark />
             </Avatar>
           </ListItemAvatar>
-          <ListItemText primary={x.teratype} secondary={`${x.percent}%`} />
+          <ListItemText primary={x.type} secondary={`${x.usage}%`} />
         </MotionListItem>
       ))}
     </MotionList>
@@ -135,9 +134,7 @@ export const DexStats: React.FC = () => {
         </DetailSection>
       </Grid>
       <Grid item xs={12} md={6} lg={4}>
-        <DetailSection title="기술">
-          <AbilitiesSection />
-        </DetailSection>
+        <DetailSection title="기술">TODO</DetailSection>
       </Grid>
       <Grid item xs={12} md={6} lg={4}>
         <DetailSection title="성격">Todo</DetailSection>
@@ -161,7 +158,9 @@ export const DexStats: React.FC = () => {
         <DetailSection title="지닌 물건">Todo</DetailSection>
       </Grid>
       <Grid item xs={12} md={6} lg={4}>
-        <DetailSection title="특성">Todo</DetailSection>
+        <DetailSection title="특성">
+          <AbilitiesSection />
+        </DetailSection>
       </Grid>
     </Grid>
   )
