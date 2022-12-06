@@ -3,6 +3,7 @@ import { useCurrentDexItem } from './context'
 import { Bar } from 'react-chartjs-2'
 import { StatKey } from '~/types'
 import { ChartData, ChartOptions } from 'chart.js'
+import { apiUrl } from '~/util'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Paper from '@mui/material/Paper'
@@ -74,9 +75,11 @@ const MoveSection: React.FC = () => {
           animate={{ opacity: 1 }}
         >
           <ListItemAvatar>
-            <Avatar>
-              <QuestionMark />
-            </Avatar>
+            <Avatar
+              alt={x.type || '?'}
+              imgProps={{ crossOrigin: 'anonymous' }}
+              src={apiUrl(`/v1/sprites/types/${x.type}.svg`)}
+            />
           </ListItemAvatar>
           <ListItemText primary={x.name} secondary={`${x.usage}%`} />
         </MotionListItem>
@@ -100,9 +103,11 @@ const TerastalizeSection: React.FC = () => {
           animate={{ opacity: 1 }}
         >
           <ListItemAvatar>
-            <Avatar>
-              <QuestionMark />
-            </Avatar>
+            <Avatar
+              alt={x.type}
+              imgProps={{ crossOrigin: 'anonymous' }}
+              src={apiUrl(`/v1/sprites/types/${x.type}.svg`)}
+            />
           </ListItemAvatar>
           <ListItemText primary={x.type} secondary={`${x.usage}%`} />
         </MotionListItem>
@@ -126,9 +131,11 @@ const ItemSection: React.FC = () => {
           animate={{ opacity: 1 }}
         >
           <ListItemAvatar>
-            <Avatar>
-              <QuestionMark />
-            </Avatar>
+            <Avatar
+              alt={x.name || '?'}
+              imgProps={{ crossOrigin: 'anonymous' }}
+              src={apiUrl(`/v1/sprites/items/${x.name}`)}
+            />
           </ListItemAvatar>
           <ListItemText primary={x.name} secondary={`${x.usage}%`} />
         </MotionListItem>
