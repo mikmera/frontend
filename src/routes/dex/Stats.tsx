@@ -146,7 +146,15 @@ const ItemSection: React.FC = () => {
 
 const AbilitiesSection: React.FC = () => {
   const item = useCurrentDexItem()
-
+  const type = (typeN: string) => {
+    switch (typeN) {
+      case 'hidden':
+        return { children: '숨' } 
+      case 'normal':
+      default:
+        return { children: '일' }
+    }
+  }
   return (
     <MotionList
       transition={{ staggerChildren: 0.1 }}
@@ -159,9 +167,7 @@ const AbilitiesSection: React.FC = () => {
           animate={{ opacity: 1 }}
         >
           <ListItemAvatar>
-            <Avatar>
-              <QuestionMark />
-            </Avatar>
+            <Avatar {...type(x.type)} />
           </ListItemAvatar>
           <ListItemText primary={x.name} secondary={`${x.usage}%`} />
         </MotionListItem>
@@ -207,7 +213,13 @@ export const DexStats: React.FC = () => {
       </Grid>
       <Grid item xs={12} md={6}>
         <Paper variant="outlined" sx={{ p: 2 }}>
-          Todo
+          <ins
+            className="kakao_ad_area"
+            style={{ display: 'none' }}
+            data-ad-unit={'DAN-W57W08vEpEwXzNjG'}
+            data-ad-width={320}
+            data-ad-height={50}
+          ></ins>
         </Paper>
       </Grid>
       <Grid item xs={12} md={6} lg={4}>

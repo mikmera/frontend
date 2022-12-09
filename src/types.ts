@@ -20,6 +20,7 @@ export interface Terastalize {
 
 export interface Abilities {
   name: string
+  type: 'hidden' | 'normal' | 'unknown'
   usage: `${number}`
 }
 
