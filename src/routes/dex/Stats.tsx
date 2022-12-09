@@ -15,6 +15,7 @@ import ListItemAvatar from '@mui/material/ListItemAvatar'
 import ListItemText from '@mui/material/ListItemText'
 import { motion } from 'framer-motion'
 import QuestionMark from '@mui/icons-material/QuestionMark'
+import { GoogleAdsense } from '~/components/GoogleAdsense'
 
 const statLabels: Record<StatKey, [string, string]> = {
   hp: ['#EA3323', '체력'],
@@ -88,6 +89,32 @@ const MoveSection: React.FC = () => {
   )
 }
 
+const NatureSection: React.FC = () => {
+  const item = useCurrentDexItem()
+  console.log(item.natures)
+  return (
+    <MotionList
+      transition={{ staggerChildren: 0.1 }}
+      sx={{ height: '100%', overflowY: 'scroll', py: 0 }}
+    >
+      {item.natures.map((x, i) => (
+        <MotionListItem
+          key={i}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+        >
+          <ListItemAvatar>
+            <Avatar>
+              <QuestionMark />
+            </Avatar>
+          </ListItemAvatar>
+          <ListItemText primary={x.name} secondary={`${x.usage}%`} />
+        </MotionListItem>
+      ))}
+    </MotionList>
+  )
+}
+
 const TerastalizeSection: React.FC = () => {
   const item = useCurrentDexItem()
 
@@ -149,7 +176,7 @@ const AbilitiesSection: React.FC = () => {
   const type = (typeN: string) => {
     switch (typeN) {
       case 'hidden':
-        return { children: '숨' } 
+        return { children: '숨' }
       case 'normal':
       default:
         return { children: '일' }
@@ -204,22 +231,18 @@ export const DexStats: React.FC = () => {
         </DetailSection>
       </Grid>
       <Grid item xs={12} md={6} lg={4}>
-        <DetailSection title="성격">Todo</DetailSection>
+        <DetailSection title="성격">
+          <NatureSection />
+        </DetailSection>
       </Grid>
       <Grid item xs={12} md={6}>
         <Paper variant="outlined" sx={{ p: 2 }}>
-          Todo
+          <GoogleAdsense />
         </Paper>
       </Grid>
       <Grid item xs={12} md={6}>
         <Paper variant="outlined" sx={{ p: 2 }}>
-          <ins
-            className="kakao_ad_area"
-            style={{ display: 'none' }}
-            data-ad-unit={'DAN-W57W08vEpEwXzNjG'}
-            data-ad-width={320}
-            data-ad-height={50}
-          ></ins>
+          Todo
         </Paper>
       </Grid>
       <Grid item xs={12} md={6} lg={4}>

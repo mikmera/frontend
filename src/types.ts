@@ -34,10 +34,16 @@ export interface Moves {
   type: string
   usage: `${number}`
 }
+
+export interface Natures {
+  name: string
+  usage: `${number}`
+}
 export interface Usage {
   pokemon: Pokemon
   terastalize: Terastalize[]
   abilities: Abilities[]
+  natures: Natures[]
   items: Items[]
   moves: Moves[]
 }
