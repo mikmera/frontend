@@ -16,6 +16,10 @@ const DexView = wrapSuspense(
   lazy(() => import('./routes/dex').then((x) => ({ default: x.DexView })))
 )
 
+const Calculator = wrapSuspense(
+  lazy(() => import('./routes/calc').then((x) => ({ default: x.Main })))
+)
+
 const NotFound = wrapSuspense(
   lazy(() =>
     import('./routes/notfound').then((x) => ({
@@ -41,6 +45,7 @@ export const Routing: React.FC = wrapError(() => {
           <Route path="dex/:type/:id" element={<DexView />} />
         </Route>
         <Route path="loading" element={<Loading />} />
+        <Route path="calc" element={<Calculator />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
