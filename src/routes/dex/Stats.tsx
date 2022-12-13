@@ -242,7 +242,7 @@ export const DexStats: React.FC = () => {
       </Grid>
       <Grid item xs={12} md={6}>
         <Paper variant="outlined" sx={{ p: 2 }}>
-          Todo
+          <GoogleAdsense />
         </Paper>
       </Grid>
       <Grid item xs={12} md={6} lg={4}>

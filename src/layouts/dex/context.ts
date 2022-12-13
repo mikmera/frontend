@@ -2,7 +2,7 @@ import React from 'react'
 import { Usage } from '~/types'
 
 export type DexContextData = {
-  type: 'single' | 'double' | 'vgc'
+  type: 'single' | 'double' | 'sereisSingle' | 'seriesDouble'
   usages: Usage[] | null
 }
 

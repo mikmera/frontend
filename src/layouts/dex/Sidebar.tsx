@@ -32,7 +32,7 @@ const SidebarHeader: React.FC = wrapError(() => {
     <>
       <Box sx={{ p: 2 }}>
         <FormControl fullWidth variant="standard">
-          <InputLabel id="main-drawer-type-select-label">type</InputLabel>
+          <InputLabel id="main-drawer-type-select-label">룰</InputLabel>
           <Select
             onChange={(e) =>
               update((v) => ({
@@ -44,9 +44,10 @@ const SidebarHeader: React.FC = wrapError(() => {
             labelId="main-drawer-type-select-label"
             value={data.type}
           >
-            <MenuItem value="single">single</MenuItem>
-            <MenuItem value="double">double</MenuItem>
-            <MenuItem value="vgc">vgc</MenuItem>
+            <MenuItem value="single">싱글배틀</MenuItem>
+            <MenuItem value="double">더블배틀</MenuItem>
+            <MenuItem value="seriesSingle">랭크싱글</MenuItem>
+            <MenuItem value="seriesDouble">랭크더블</MenuItem>
           </Select>
         </FormControl>
       </Box>
