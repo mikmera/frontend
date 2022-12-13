@@ -104,11 +104,16 @@ const NatureSection: React.FC = () => {
           animate={{ opacity: 1 }}
         >
           <ListItemAvatar>
-            <Avatar>
-              <QuestionMark />
-            </Avatar>
+            <Avatar
+              alt={'?'}
+              imgProps={{ crossOrigin: 'anonymous' }}
+              src={apiUrl(`/v1/sprites/natures/${x.plus}.webp`)}
+            />
           </ListItemAvatar>
-          <ListItemText primary={x.name} secondary={`${x.usage}%`} />
+          <ListItemText
+            primary={x.name}
+            secondary={`${x.usage}% (${x.show})`}
+          />
         </MotionListItem>
       ))}
     </MotionList>

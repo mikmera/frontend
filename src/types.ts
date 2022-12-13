@@ -38,6 +38,8 @@ export interface Moves {
 export interface Natures {
   name: string
   usage: `${number}`
+  plus: 'atk' | 'def' | 'spa' | 'spd' | 'spe' | 'none'
+  show: string
 }
 export interface Usage {
   pokemon: Pokemon
