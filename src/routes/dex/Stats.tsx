@@ -14,7 +14,6 @@ import ListItem from '@mui/material/ListItem'
 import ListItemAvatar from '@mui/material/ListItemAvatar'
 import ListItemText from '@mui/material/ListItemText'
 import { motion } from 'framer-motion'
-import QuestionMark from '@mui/icons-material/QuestionMark'
 import { GoogleAdsense } from '~/components/GoogleAdsense'
 
 const statLabels: Record<StatKey, [string, string]> = {
@@ -91,7 +90,6 @@ const MoveSection: React.FC = () => {
 
 const NatureSection: React.FC = () => {
   const item = useCurrentDexItem()
-  console.log(item.natures)
   return (
     <MotionList
       transition={{ staggerChildren: 0.1 }}

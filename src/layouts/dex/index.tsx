@@ -19,7 +19,10 @@ export const DexLayout: React.FC = wrapError(() => {
 
   const params = useParams<'type'>()
 
-  const { data: usageData } = useSWR(`/v1/usage?type=${data.type}`, fetcher)
+  const { data: usageData } = useSWR(
+    `/v1/usage?type=${data.type}&offset=${1}`,
+    fetcher
+  )
 
   React.useEffect(() => {
     if (params.type) {

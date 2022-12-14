@@ -24,6 +24,7 @@ import useTheme from '@mui/material/styles/useTheme'
 import Divider from '@mui/material/Divider'
 import IconButton from '@mui/material/IconButton'
 import ChevronRight from '@mui/icons-material/ChevronRight'
+import { fetcher } from '~/util'
 
 const SidebarHeader: React.FC = wrapError(() => {
   const { data, update } = useDexContext()
@@ -107,11 +108,23 @@ const DexItem: React.FC<{ item: Usage; index: number }> = wrapError(
 )
 
 export const MainSidebar: React.FC = () => {
-  const { data } = useDexContext()
+  const { data, update } = useDexContext()
 
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('md'))
   const [open, setOpen] = React.useState(false)
+
+  const loadMore = React.useCallback(async () => {
+    const { data: usageData } = await fetcher(
+      apiUrl(
+        `/v1/usage?type=${data.type}&offset=${(data.usages?.length ?? 0) + 1}`
+      )
+    )
+    update((v) => ({
+      ...v,
+      usages: [...(v.usages ?? []), ...usageData],
+    }))
+  }, [data])
 
   return (
     <>
@@ -153,6 +166,7 @@ export const MainSidebar: React.FC = () => {
           </>
         )}
         <Virtuoso
+          endReached={loadMore}
           height="100%"
           data={data.usages ?? []}
           itemContent={(index, item) => <DexItem index={index} item={item} />}
