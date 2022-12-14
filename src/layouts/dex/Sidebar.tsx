@@ -113,8 +113,10 @@ export const MainSidebar: React.FC = () => {
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('md'))
   const [open, setOpen] = React.useState(false)
+  const [loading, setLoading] = React.useState(false)
 
   const loadMore = React.useCallback(async () => {
+    setLoading(true)
     const { data: usageData } = await fetcher(
       apiUrl(
         `/v1/usage?type=${data.type}&offset=${(data.usages?.length ?? 0) + 1}`
@@ -124,6 +126,7 @@ export const MainSidebar: React.FC = () => {
       ...v,
       usages: [...(v.usages ?? []), ...usageData],
     }))
+    setLoading(false)
   }, [data])
 
   return (
@@ -174,6 +177,11 @@ export const MainSidebar: React.FC = () => {
             Header: SidebarHeader,
           }}
         ></Virtuoso>
+        {loading && (
+          <Box sx={{ mt: 1, display: 'flex', justifyContent: 'center' }}>
+            <Spinner />
+          </Box>
+        )}
       </Drawer>
     </>
   )
