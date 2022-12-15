@@ -44,9 +44,12 @@ export interface Items {
 }
 
 export interface Moves {
+  id: number
+  category: 'physical' | 'special' | 'status'
   name: string
   type: string
   usage: `${number}`
+  locales: Locales
 }
 
 export interface Natures {
