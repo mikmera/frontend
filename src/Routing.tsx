@@ -16,6 +16,10 @@ const DexView = wrapSuspense(
   lazy(() => import('./routes/dex').then((x) => ({ default: x.DexView })))
 )
 
+const SetsLayout = wrapSuspense(
+  lazy(() => import('./layouts/sets').then((x) => ({ default: x.SetsLayout })))
+)
+
 const SetsView = wrapSuspense(
   lazy(() => import('./routes/sets').then((x) => ({ default: x.SetsView })))
 )
@@ -48,7 +52,9 @@ export const Routing: React.FC = wrapError(() => {
           <Route index element={<Main />} />
           <Route path="dex/:type/:id" element={<DexView />} />
         </Route>
-        <Route path="sample" element={<SetsView />} />
+        <Route element={<SetsLayout />}>
+          <Route path="sample" element={<SetsView />} />
+        </Route>
         <Route path="loading" element={<Loading />} />
         <Route path="calc" element={<Calculator />} />
         <Route path="*" element={<NotFound />} />

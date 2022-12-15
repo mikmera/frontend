@@ -13,6 +13,20 @@ export interface Pokemon {
   types: string[]
 }
 
+export interface Locales {
+  ko: string
+  jp: string
+}
+
+export interface Stats {
+  hp: number
+  atk: number
+  def: number
+  spa: number
+  spd: number
+  spe: number
+}
+
 export interface Terastalize {
   type: string
   usage: `${number}`
@@ -47,5 +61,40 @@ export interface Usage {
   abilities: Abilities[]
   natures: Natures[]
   items: Items[]
+  moves: Moves[]
+}
+
+export interface PokemonSets {
+  id: number
+  name: string
+  createdAt: string
+  updatedAt: string
+  pokemon: Pokemon
+  item: {
+    id: number
+    name: string
+    locales: Locales
+    _id: string
+  }
+  nature: {
+    _id: string
+    id: number
+    name: string
+    locales: Locales
+  }
+  ability: {
+    _id: string
+    id: number
+    name: string
+    locales: Locales
+  }
+  terastalize: {
+    _id: string
+    id: number
+    name: string
+    locales: Locales
+  }
+  evs: Stats
+  ivs: Stats
   moves: Moves[]
 }
