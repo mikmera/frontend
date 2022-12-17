@@ -8,13 +8,6 @@ import useMediaQuery from '@mui/material/useMediaQuery'
 import { useTheme } from '@mui/material/styles'
 import Toolbar from '@mui/material/Toolbar'
 import { SetsContextData, SetsLayoutContext } from './context'
-import { Input, FormControl, InputAdornment } from '@mui/material'
-import Grid from '@mui/material/Unstable_Grid2'
-import searchIcon from '~/assets/images/search.svg'
-import { useSetsContext } from '~/layouts/sets/context'
-import { Virtuoso } from 'react-virtuoso'
-import { Spinner } from '~/components/Spinner'
-import { SetCard } from './SetCard'
 
 export const SetsLayout: React.FC = wrapError(() => {
   const [data, setData] = React.useState<SetsContextData>({

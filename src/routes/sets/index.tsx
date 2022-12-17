@@ -5,9 +5,8 @@ import { Input, FormControl, InputAdornment } from '@mui/material'
 import Grid from '@mui/material/Unstable_Grid2'
 import searchIcon from '~/assets/images/search.svg'
 import { useSetsContext } from '~/layouts/sets/context'
-import { Virtuoso } from 'react-virtuoso'
 import { Spinner } from '~/components/Spinner'
-import { SetCard } from '../../layouts/sets/SetCard'
+import { SetCard } from '~/layouts/sets/SetCard'
 
 export const SetsView: React.FC = wrapError(() => {
   const { data } = useSetsContext()
