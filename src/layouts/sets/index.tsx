@@ -13,6 +13,7 @@ export const SetsLayout: React.FC = wrapError(() => {
   const [data, setData] = React.useState<SetsContextData>({
     sets: [],
     type: 'single',
+    count: 0,
   })
 
   const params = useParams<'type'>()
@@ -31,6 +32,7 @@ export const SetsLayout: React.FC = wrapError(() => {
     setData((v) => ({
       ...v,
       sets: sets.sets,
+      count: sets.count,
     }))
   }, [sets])
 

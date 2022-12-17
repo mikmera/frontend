@@ -116,6 +116,7 @@ export const MainSidebar: React.FC = () => {
   const [loading, setLoading] = React.useState(false)
 
   const loadMore = React.useCallback(async () => {
+    if (data.usages?.length === data.count) return
     setLoading(true)
     const { data: usageData } = await fetcher(
       apiUrl(

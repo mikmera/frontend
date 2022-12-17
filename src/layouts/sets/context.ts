@@ -4,6 +4,7 @@ import { PokemonSets } from '~/types'
 export type SetsContextData = {
   type: 'single' | 'double' | 'all'
   sets: PokemonSets[] | null
+  count: number
 }
 
 export const SetsLayoutContext = React.createContext<{
@@ -13,6 +14,7 @@ export const SetsLayoutContext = React.createContext<{
   data: {
     type: 'single',
     sets: [],
+    count: 0,
   },
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   update: () => {},

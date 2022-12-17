@@ -15,6 +15,7 @@ export const DexLayout: React.FC = wrapError(() => {
   const [data, setData] = React.useState<DexContextData>({
     usages: [],
     type: 'single',
+    count: 0,
   })
 
   const params = useParams<'type'>()
@@ -36,6 +37,7 @@ export const DexLayout: React.FC = wrapError(() => {
     setData((v) => ({
       ...v,
       usages: usageData.data,
+      count: usageData.count,
     }))
   }, [usageData])
 

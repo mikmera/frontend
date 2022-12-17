@@ -20,17 +20,21 @@ export const SetsView: React.FC = wrapError(() => {
 
   React.useEffect(() => {
     if (inView && !loading) {
+      console.log(data.sets?.length, data.count)
+      if (data.sets?.length === data.count) return
       setPage((v) => v + 1)
       setLoading(true)
-      fetcher(apiUrl(`/v1/sets?offset=${page}&type=${data.type}`)).then(
-        (res) => {
-          update((v) => ({
-            ...v,
-            sets: [...(v.sets ?? []), ...res.sets],
-          }))
-          setLoading(false)
-        }
-      )
+      fetcher(
+        apiUrl(
+          `/v1/sets?offset=${data.sets?.length ?? 0 + 1}&type=${data.type}`
+        )
+      ).then((res) => {
+        update((v) => ({
+          ...v,
+          sets: [...(v.sets ?? []), ...res.sets],
+        }))
+        setLoading(false)
+      })
     }
   }, [inView, loading])
 
