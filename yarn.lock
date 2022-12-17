@@ -3769,6 +3769,7 @@ eslint@latest:
     react-chartjs-2: ^5.0.1
     react-dom: ^18.2.0
     react-router-dom: ^6.4.3
+    react-snowfall: ^1.2.1
     react-virtuoso: ^3.1.5
     sass: ^1.56.1
     swr: ^1.3.0
@@ -3892,6 +3893,13 @@ eslint@latest:
   languageName: node
   linkType: hard
 
+"react-fast-compare@npm:^3.2.0":
+  version: 3.2.0
+  resolution: "react-fast-compare@npm:3.2.0"
+  checksum: 8ef272c825ae329f61633ce4ce7f15aa5b84e5214d88bc0823880236e03e985a13195befa2c7a4eda7db3b017dc7985729152d88445823f652403cf36c2b86aa
+  languageName: node
+  linkType: hard
+
 "react-is@npm:^16.13.1, react-is@npm:^16.7.0":
   version: 16.13.1
   resolution: "react-is@npm:16.13.1"
@@ -3934,6 +3942,18 @@ eslint@latest:
   peerDependencies:
     react: ">=16.8"
   checksum: d82cc8b8bdf10e02e07d089f9d82987fa161c2f07583c973126f5f8a052c02b3d2339891ddbda1738f877755a407e2c35f0dc1ac52aaa1d2c853774d19753ea7
+  languageName: node
+  linkType: hard
+
+"react-snowfall@npm:^1.2.1":
+  version: 1.2.1
+  resolution: "react-snowfall@npm:1.2.1"
+  dependencies:
+    react-fast-compare: ^3.2.0
+  peerDependencies:
+    react: ^16.8 || 17.x || 18.x
+    react-dom: ^16.8 || 17.x || 18.x
+  checksum: 297ca9846611cbf2e013298def259486e489c9d56918f7b38e67e22e35e7900d3987e44d9115f8ba6e009aa0c6e9aeaf1aeec02b5fd1c7aa82538a94dcb433f6
   languageName: node
   linkType: hard
 

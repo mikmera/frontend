@@ -12,9 +12,15 @@ import TableBody from '@mui/material/TableBody'
 import Paper from '@mui/material/Paper'
 import Button from '@mui/material/Button'
 import CardActions from '@mui/material/CardActions'
-import { PokemonSets, Stats, Moves } from '~/types'
+import { PokemonSets, Stats, Moves, StatKey } from '~/types'
 
-export function SetCard({ data: data }: PokemonSets) {
+export const SetCard: React.FC<{ item: PokemonSets; key: number }> = ({
+  item,
+  key,
+}: {
+  item: PokemonSets
+  key: number
+}) => {
   const Dictionary = {
     hp: 'H',
     atk: 'A',
@@ -26,14 +32,14 @@ export function SetCard({ data: data }: PokemonSets) {
 
   const getShowdownText = () => {
     const result = []
-    const nature: string = data.nature.name
+    const nature: string = item.nature.name
     const display = nature.slice(0, 1).toUpperCase() + nature.slice(1)
-    result.push(`${data.pokemon.name} @ ${data.item.name}`)
-    result.push(`Ability: ${data.ability.name}`)
-    result.push(`EVs: ${getEV(data.evs, true)}`)
+    result.push(`${item.pokemon.name} @ ${item.item.name}`)
+    result.push(`Ability: ${item.ability.name}`)
+    result.push(`EVs: ${getEV(item.evs, true)}`)
     result.push(`${display} Nature`)
-    result.push(`IVs: ${getIV(data.ivs, true)}`)
-    for (const move of data.moves) {
+    result.push(`IVs: ${getIV(item.ivs, true)}`)
+    for (const move of item.moves) {
       result.push(`- ${move.name}`)
     }
     return result.join('\n')
@@ -42,18 +48,20 @@ export function SetCard({ data: data }: PokemonSets) {
   const getIV = (iv: Stats, type?: boolean) => {
     const result = []
     if (type) {
-      for (const key in iv) {
+      for (const ikey in iv) {
+        const key: StatKey = ikey as StatKey
         if (iv[key] !== 31) result.push(iv[key] + ' ' + key)
       }
       return result
     } else {
-      for (const key in iv) {
+      for (const ikey in iv) {
+        const key: StatKey = ikey as StatKey
         if (iv[key] === 31) result.push('V')
         else if (iv[key] === 30) result.push('U')
         else if (iv[key] === 0) result.push('Z')
         else result.push(iv[key])
       }
-      return result
+      return result.join('.')
     }
   }
   // ev = {hp: 252, atk: 6, def: 0, spa: 0, spd: 0, spe: 252}
@@ -63,12 +71,14 @@ export function SetCard({ data: data }: PokemonSets) {
   const getEV = (ev: Stats, type?: boolean) => {
     const result = []
     if (type) {
-      for (const key in ev) {
+      for (const ikey in ev) {
+        const key: StatKey = ikey as StatKey
         if (ev[key] !== 0) result.push(ev[key] + ' ' + key)
       }
       return result.join(' / ')
     } else {
-      for (const key in ev) {
+      for (const ikey in ev) {
+        const key: StatKey = ikey as StatKey
         if (ev[key] !== 0) result.push(Dictionary[key] + ev[key])
       }
     }
@@ -76,47 +86,47 @@ export function SetCard({ data: data }: PokemonSets) {
   }
 
   return (
-    <Card sx={{ minWidth: '330px', maxWidth: '400px' }}>
+    <Card sx={{ minWidth: '330px', maxWidth: '400px' }} key={key}>
       <CardContent>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          {data.name}
+          {item.name}
           <Avatar
             sx={{ float: 'right', width: 72, height: 72 }}
             imgProps={{ crossOrigin: 'anonymous' }}
             src={
-              data.pokemon.formId
+              item.pokemon.formId
                 ? apiUrl(
-                    `/v1/sprites/pokemon/${data.pokemon.dexId}-${data.pokemon.formId}`
+                    `/v1/sprites/pokemon/${item.pokemon.dexId}-${item.pokemon.formId}`
                   )
-                : apiUrl(`/v1/sprites/pokemon/${data.pokemon.dexId}`)
+                : apiUrl(`/v1/sprites/pokemon/${item.pokemon.dexId}`)
             }
           />
         </Typography>
         <Avatar
           sx={{ float: 'right', width: 32, height: 32 }}
           imgProps={{ crossOrigin: 'anonymous' }}
-          src={apiUrl(`/v1/sprites/items/${data.item.id}`)}
+          src={apiUrl(`/v1/sprites/items/${item.item.id}`)}
         />
         <Typography variant="h5" component="div" sx={{ wordBreak: 'keep-all' }}>
-          {data.pokemon.locales.ko}
+          {item.pokemon.locales.ko}
         </Typography>
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          @{data.item.locales.ko}
+          @{item.item.locales.ko}
         </Typography>
         <Typography variant="body2">
-          특성: {data.ability.locales.ko}
+          특성: {item.ability.locales.ko}
           <br />
-          성격: {data.nature.locales.ko}
+          성격: {item.nature.locales.ko}
           <br />
-          개체값: {getIV(data.ivs)}
+          개체값: {getIV(item.ivs)}
           <br />
-          노력치: {getEV(data.evs)}
+          노력치: {getEV(item.evs)}
         </Typography>
         <Typography variant="body2">
           <TableContainer component={Paper} sx={{ width: '100%' }}>
             <Table sx={{ width: '100%', textAlign: 'left' }} size="small">
               <TableBody>
-                {data.moves.map((move: Moves) => (
+                {item.moves.map((move: Moves) => (
                   <TableRow key={move.id}>
                     <TableCell align="left" sx={{ width: '22px' }}>
                       <Avatar

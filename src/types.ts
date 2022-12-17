@@ -101,3 +101,8 @@ export interface PokemonSets {
   ivs: Stats
   moves: Moves[]
 }
+
+export interface SetcardProps {
+  item: PokemonSets
+  key: number
+}

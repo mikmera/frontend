@@ -4,31 +4,14 @@ import { wrapError } from '~/components/ErrorBoundary'
 import { Input, FormControl, InputAdornment } from '@mui/material'
 import Grid from '@mui/material/Unstable_Grid2'
 import searchIcon from '~/assets/images/search.svg'
-import { SetCard } from './SetsCard'
 import { useSetsContext } from '~/layouts/sets/context'
+import { Virtuoso } from 'react-virtuoso'
+import { Spinner } from '~/components/Spinner'
+import { SetCard } from '../../layouts/sets/SetCard'
 
 export const SetsView: React.FC = wrapError(() => {
-  const { data, update } = useSetsContext()
-
-  const rendering = () => {
-    const result = []
-    if (!data.sets) return null
-
-    for (let i = 0; i < data.sets?.length; i++) {
-      result.push(
-        <Grid
-          xs={6}
-          md={2}
-          mdOffset={0}
-          sx={{ minWidth: '350px', maxWidth: '400px' }}
-        >
-          <SetCard data={data.sets[i]} />
-        </Grid>
-      )
-    }
-    return result
-  }
-
+  const { data } = useSetsContext()
+  console.log(data)
   return (
     <Box>
       <Box
@@ -60,7 +43,35 @@ export const SetsView: React.FC = wrapError(() => {
             marginLeft: 0,
           }}
         >
-          {rendering()}
+          {data.sets?.length === 0 ? (
+            <Box
+              sx={{
+                height: '100%',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <Spinner />
+            </Box>
+          ) : (
+            // <Virtuoso
+            //   height="100%"
+            //   data={data.sets ?? []}
+            //   itemContent={(index, item) => <SetCard item={item} key={index} />}
+            // ></Virtuoso>
+            data.sets?.map((item, index) => (
+              <Grid
+                xs={6}
+                md={2}
+                mdOffset={0}
+                sx={{ minWidth: '350px', maxWidth: '400px' }}
+                key={index}
+              >
+                <SetCard item={item} key={index} />
+              </Grid>
+            ))
+          )}
         </Grid>
       </Box>
     </Box>
