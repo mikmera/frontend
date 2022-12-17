@@ -14,12 +14,10 @@ import Button from '@mui/material/Button'
 import CardActions from '@mui/material/CardActions'
 import { PokemonSets, Stats, Moves, StatKey } from '~/types'
 
-export const SetCard: React.FC<{ item: PokemonSets; key: number }> = ({
+export const SetCard: React.FC<{ item: PokemonSets }> = ({
   item,
-  key,
 }: {
   item: PokemonSets
-  key: number
 }) => {
   const Dictionary = {
     hp: 'H',
@@ -86,21 +84,21 @@ export const SetCard: React.FC<{ item: PokemonSets; key: number }> = ({
   }
 
   return (
-    <Card sx={{ minWidth: '330px', maxWidth: '400px' }} key={key}>
+    <Card sx={{ minWidth: '330px', maxWidth: '400px' }}>
       <CardContent>
+        <Avatar
+          sx={{ float: 'right', width: 72, height: 72 }}
+          imgProps={{ crossOrigin: 'anonymous' }}
+          src={
+            item.pokemon.formId
+              ? apiUrl(
+                  `/v1/sprites/pokemon/${item.pokemon.dexId}-${item.pokemon.formId}`
+                )
+              : apiUrl(`/v1/sprites/pokemon/${item.pokemon.dexId}`)
+          }
+        />
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           {item.name}
-          <Avatar
-            sx={{ float: 'right', width: 72, height: 72 }}
-            imgProps={{ crossOrigin: 'anonymous' }}
-            src={
-              item.pokemon.formId
-                ? apiUrl(
-                    `/v1/sprites/pokemon/${item.pokemon.dexId}-${item.pokemon.formId}`
-                  )
-                : apiUrl(`/v1/sprites/pokemon/${item.pokemon.dexId}`)
-            }
-          />
         </Typography>
         <Avatar
           sx={{ float: 'right', width: 32, height: 32 }}
@@ -122,35 +120,31 @@ export const SetCard: React.FC<{ item: PokemonSets; key: number }> = ({
           <br />
           노력치: {getEV(item.evs)}
         </Typography>
-        <Typography variant="body2">
-          <TableContainer component={Paper} sx={{ width: '100%' }}>
-            <Table sx={{ width: '100%', textAlign: 'left' }} size="small">
-              <TableBody>
-                {item.moves.map((move: Moves) => (
-                  <TableRow key={move.id}>
-                    <TableCell align="left" sx={{ width: '22px' }}>
-                      <Avatar
-                        sx={{ width: 20, height: 20 }}
-                        imgProps={{ crossOrigin: 'anonymous' }}
-                        src={apiUrl(`/v1/sprites/types/${move.type}.svg`)}
-                      />
-                    </TableCell>
-                    <TableCell align="left">{move.locales.ko}</TableCell>
-                    <TableCell>
-                      <Avatar
-                        sx={{ width: 30, height: 20 }}
-                        imgProps={{ crossOrigin: 'anonymous' }}
-                        src={apiUrl(
-                          `/v1/sprites/Movetypes/${move.category}.png`
-                        )}
-                      />
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Typography>
+        <TableContainer component={Paper} sx={{ width: '100%' }}>
+          <Table sx={{ width: '100%', textAlign: 'left' }} size="small">
+            <TableBody>
+              {item.moves.map((move: Moves) => (
+                <TableRow key={move.id}>
+                  <TableCell align="left" sx={{ width: '22px' }}>
+                    <Avatar
+                      sx={{ width: 20, height: 20 }}
+                      imgProps={{ crossOrigin: 'anonymous' }}
+                      src={apiUrl(`/v1/sprites/types/${move.type}.svg`)}
+                    />
+                  </TableCell>
+                  <TableCell align="left">{move.locales.ko}</TableCell>
+                  <TableCell>
+                    <Avatar
+                      sx={{ width: 30, height: 20 }}
+                      imgProps={{ crossOrigin: 'anonymous' }}
+                      src={apiUrl(`/v1/sprites/Movetypes/${move.category}.png`)}
+                    />
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
       </CardContent>
       <CardActions>
         <Button size="small">자세히 보기</Button>

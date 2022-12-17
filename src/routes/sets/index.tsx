@@ -10,7 +10,7 @@ import { SetCard } from '~/routes/sets/Setcard'
 
 export const SetsView: React.FC = wrapError(() => {
   const { data } = useSetsContext()
-  console.log(data)
+
   return (
     <Box>
       <Box
@@ -55,9 +55,19 @@ export const SetsView: React.FC = wrapError(() => {
             </Box>
           ) : (
             // <Virtuoso
-            //   height="100%"
+            //   style={{ height: '400px' }}
             //   data={data.sets ?? []}
-            //   itemContent={(index, item) => <SetCard item={item} key={index} />}
+            //   itemContent={(index, item) => (
+            //     <Grid
+            //       xs={6}
+            //       md={2}
+            //       mdOffset={0}
+            //       sx={{ minWidth: '350px', maxWidth: '400px' }}
+            //       key={index}
+            //     >
+            //       <SetCard item={item} key={index} />
+            //     </Grid>
+            //   )}
             // ></Virtuoso>
             data.sets?.map((item, index) => (
               <Grid
@@ -65,7 +75,7 @@ export const SetsView: React.FC = wrapError(() => {
                 md={2}
                 mdOffset={0}
                 sx={{ minWidth: '350px', maxWidth: '400px' }}
-                key={index}
+                key={index + 10}
               >
                 <SetCard item={item} key={index} />
               </Grid>
