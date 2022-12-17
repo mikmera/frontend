@@ -3768,6 +3768,7 @@ eslint@latest:
     react: ^18.2.0
     react-chartjs-2: ^5.0.1
     react-dom: ^18.2.0
+    react-intersection-observer: ^9.4.1
     react-router-dom: ^6.4.3
     react-snowfall: ^1.2.1
     react-virtuoso: ^3.1.5
@@ -3897,6 +3898,15 @@ eslint@latest:
   version: 3.2.0
   resolution: "react-fast-compare@npm:3.2.0"
   checksum: 8ef272c825ae329f61633ce4ce7f15aa5b84e5214d88bc0823880236e03e985a13195befa2c7a4eda7db3b017dc7985729152d88445823f652403cf36c2b86aa
+  languageName: node
+  linkType: hard
+
+"react-intersection-observer@npm:^9.4.1":
+  version: 9.4.1
+  resolution: "react-intersection-observer@npm:9.4.1"
+  peerDependencies:
+    react: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+  checksum: 13d1c36658470a781d8db8870dbd272c5b4b32329fa69c27ee96424de4e1599526a9bf2a91ea59922c18323c97d6909f0ac120c5af6076d1c01e654b43fb03c1
   languageName: node
   linkType: hard
 

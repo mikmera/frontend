@@ -17,7 +17,7 @@ export const SetsLayout: React.FC = wrapError(() => {
 
   const params = useParams<'type'>()
 
-  const { data: usageData } = useSWR(`/v1/sets?offset=${1}`, fetcher)
+  const { data: sets } = useSWR(`/v1/sets?offset=${1}&type=single`, fetcher)
 
   React.useEffect(() => {
     if (params.type) {
@@ -26,13 +26,13 @@ export const SetsLayout: React.FC = wrapError(() => {
   }, [params.type])
 
   React.useEffect(() => {
-    if (!usageData) return
+    if (!sets) return
 
     setData((v) => ({
       ...v,
-      sets: usageData.data,
+      sets: sets.sets,
     }))
-  }, [usageData])
+  }, [sets])
 
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('md'))

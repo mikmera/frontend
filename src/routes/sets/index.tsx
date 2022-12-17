@@ -2,14 +2,37 @@ import Box from '@mui/material/Box'
 import React from 'react'
 import { wrapError } from '~/components/ErrorBoundary'
 import { Input, FormControl, InputAdornment } from '@mui/material'
+import { useInView } from 'react-intersection-observer'
 import Grid from '@mui/material/Unstable_Grid2'
 import searchIcon from '~/assets/images/search.svg'
 import { useSetsContext } from '~/layouts/sets/context'
 import { Spinner } from '~/components/Spinner'
 import { SetCard } from '~/routes/sets/Setcard'
+import { apiUrl, fetcher } from '~/util'
 
 export const SetsView: React.FC = wrapError(() => {
-  const { data } = useSetsContext()
+  const { data, update } = useSetsContext()
+
+  const [page, setPage] = React.useState(2)
+  const [loading, setLoading] = React.useState(false)
+
+  const [ref, inView] = useInView()
+
+  React.useEffect(() => {
+    if (inView && !loading) {
+      setPage((v) => v + 1)
+      setLoading(true)
+      fetcher(apiUrl(`/v1/sets?offset=${page}&type=${data.type}`)).then(
+        (res) => {
+          update((v) => ({
+            ...v,
+            sets: [...(v.sets ?? []), ...res.sets],
+          }))
+          setLoading(false)
+        }
+      )
+    }
+  }, [inView, loading])
 
   return (
     <Box>
@@ -54,32 +77,23 @@ export const SetsView: React.FC = wrapError(() => {
               <Spinner />
             </Box>
           ) : (
-            // <Virtuoso
-            //   style={{ height: '400px' }}
-            //   data={data.sets ?? []}
-            //   itemContent={(index, item) => (
-            //     <Grid
-            //       xs={6}
-            //       md={2}
-            //       mdOffset={0}
-            //       sx={{ minWidth: '350px', maxWidth: '400px' }}
-            //       key={index}
-            //     >
-            //       <SetCard item={item} key={index} />
-            //     </Grid>
-            //   )}
-            // ></Virtuoso>
             data.sets?.map((item, index) => (
               <Grid
                 xs={6}
                 md={2}
                 mdOffset={0}
                 sx={{ minWidth: '350px', maxWidth: '400px' }}
-                key={index + 10}
+                key={index}
+                ref={ref}
               >
                 <SetCard item={item} key={index} />
               </Grid>
             ))
+          )}
+          {loading && (
+            <Box sx={{ mt: 1, display: 'flex', justifyContent: 'center' }}>
+              <Spinner />
+            </Box>
           )}
         </Grid>
       </Box>

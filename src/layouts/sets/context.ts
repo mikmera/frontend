@@ -2,7 +2,7 @@ import React from 'react'
 import { PokemonSets } from '~/types'
 
 export type SetsContextData = {
-  type: 'single' | 'double'
+  type: 'single' | 'double' | 'all'
   sets: PokemonSets[] | null
 }
 
