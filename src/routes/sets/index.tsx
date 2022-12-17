@@ -6,7 +6,7 @@ import Grid from '@mui/material/Unstable_Grid2'
 import searchIcon from '~/assets/images/search.svg'
 import { useSetsContext } from '~/layouts/sets/context'
 import { Spinner } from '~/components/Spinner'
-import { SetCard } from '~/layouts/sets/SetCard'
+import { SetCard } from '~/routes/sets/Setcard'
 
 export const SetsView: React.FC = wrapError(() => {
   const { data } = useSetsContext()
