@@ -1,5 +1,4 @@
 import Box from '@mui/material/Box'
-import Alert from '@mui/material/Alert'
 import React from 'react'
 import { wrapError } from '~/components/ErrorBoundary'
 

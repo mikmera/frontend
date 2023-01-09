@@ -20,6 +20,12 @@ const SetsLayout = wrapSuspense(
   lazy(() => import('./layouts/sets').then((x) => ({ default: x.SetsLayout })))
 )
 
+const SetsAutoLayout = wrapSuspense(
+  lazy(() =>
+    import('./layouts/sets').then((x) => ({ default: x.AutoCompleteLayout }))
+  )
+)
+
 const SetsView = wrapSuspense(
   lazy(() => import('./routes/sets').then((x) => ({ default: x.SetsView })))
 )
@@ -54,6 +60,9 @@ export const Routing: React.FC = wrapError(() => {
         </Route>
         <Route element={<SetsLayout />}>
           <Route path="sample" element={<SetsView />} />
+        </Route>
+        <Route element={<SetsAutoLayout />}>
+          <Route path="sample/:mode" element={<SetsView />} />
         </Route>
         <Route path="loading" element={<Loading />} />
         <Route path="calc" element={<Calculator />} />

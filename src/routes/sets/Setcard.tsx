@@ -106,10 +106,10 @@ export const SetCard: React.FC<{ item: PokemonSets }> = ({
           src={apiUrl(`/v1/sprites/items/${item.item.id}`)}
         />
         <Typography variant="h5" component="div" sx={{ wordBreak: 'keep-all' }}>
-          {item.pokemon.locales.ko}
+          {item.pokemon.locales.ko ?? item.pokemon.name}
         </Typography>
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          @{item.item.locales.ko}
+          @{item.item.locales.ko ?? item.item.name}
         </Typography>
         <Typography variant="body2">
           특성: {item.ability.locales.ko}
@@ -124,7 +124,7 @@ export const SetCard: React.FC<{ item: PokemonSets }> = ({
           <Table sx={{ width: '100%', textAlign: 'left' }} size="small">
             <TableBody>
               {item.moves.map((move: Moves) => (
-                <TableRow key={move.id}>
+                <TableRow key={move.id + Math.random()}>
                   <TableCell align="left" sx={{ width: '22px' }}>
                     <Avatar
                       sx={{ width: 20, height: 20 }}

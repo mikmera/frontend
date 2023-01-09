@@ -69,6 +69,7 @@ export interface Usage {
 
 export interface PokemonSets {
   id: number
+  type: ['single' | 'double']
   name: string
   createdAt: string
   updatedAt: string
