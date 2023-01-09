@@ -1334,6 +1334,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"adblock-detect-react@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "adblock-detect-react@npm:1.1.0"
+  peerDependencies:
+    react: ">=16.8.0"
+    react-dom: ">=16.8.0"
+  checksum: 714aeb3f190e0d5c35c5ed5330e5dc32acd03d969826806f67ba03ce53fe4b55e79f3e3121a70f600e5807e323479bb78bd64584a7173ed1d82323a5adce8dce
+  languageName: node
+  linkType: hard
+
 "agent-base@npm:6, agent-base@npm:^6.0.2":
   version: 6.0.2
   resolution: "agent-base@npm:6.0.2"
@@ -3756,6 +3766,7 @@ eslint@latest:
     "@typescript-eslint/eslint-plugin": latest
     "@typescript-eslint/parser": latest
     "@vitejs/plugin-react": ^2.2.0
+    adblock-detect-react: ^1.1.0
     axios: ^1.2.0
     chart.js: ^4.0.1
     eslint: latest
