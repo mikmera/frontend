@@ -16,9 +16,8 @@ import IconButton from '@mui/material/IconButton'
 import Stack from '@mui/material/Stack'
 import styled from '@mui/material/styles/styled'
 import { useThemeContext } from '../../context'
-import { Avatar } from '@mui/material'
-import darkmode from '../../assets/images/dark.png'
-import lightmode from '../../assets/images/light.png'
+import { FormControlLabel } from '@mui/material'
+import { ToggleDarkmode } from '../../components/ToggleDarkmode'
 
 const StyledRouterLink = styled(RouterLink)(() => ({
   display: 'flex',
@@ -101,7 +100,16 @@ export const Nav: React.FC = wrapError(() => {
           {/* Space */}
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ mr: 5 }}>
-            {theme === 'dark' ? (
+            <FormControlLabel
+              control={<ToggleDarkmode sx={{ m: 1 }} defaultChecked />}
+              label={
+                isMobile ? '' : theme === 'dark' ? '루나톤모드' : '솔록모드'
+              }
+              onChange={() => {
+                update(() => (theme === 'dark' ? 'light' : 'dark'))
+              }}
+            />
+            {/* {theme === 'dark' ? (
               <Avatar
                 alt="라이트모드"
                 src={lightmode}
@@ -117,7 +125,7 @@ export const Nav: React.FC = wrapError(() => {
                   update(() => 'dark')
                 }}
               />
-            )}
+            )} */}
           </Box>
 
           {/* Links / Drawer button */}
