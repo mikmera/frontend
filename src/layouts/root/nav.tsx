@@ -15,6 +15,10 @@ import Box from '@mui/material/Box'
 import IconButton from '@mui/material/IconButton'
 import Stack from '@mui/material/Stack'
 import styled from '@mui/material/styles/styled'
+import { useThemeContext } from '../../context'
+import { Avatar } from '@mui/material'
+import darkmode from '../../assets/images/dark.png'
+import lightmode from '../../assets/images/light.png'
 
 const StyledRouterLink = styled(RouterLink)(() => ({
   display: 'flex',
@@ -57,11 +61,13 @@ const NavLinkItem: React.FC<{ item: NavLink }> = wrapError(({ item }) => {
 })
 
 export const Nav: React.FC = wrapError(() => {
+  const { theme, update } = useThemeContext()
+
   const [drawerOpen, setDrawerOpen] = React.useState(false)
 
-  const theme = useTheme()
+  const themePalette = useTheme()
 
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'))
+  const isMobile = useMediaQuery(themePalette.breakpoints.down('md'))
 
   const closeDrawer = React.useCallback(
     () => setDrawerOpen(false),
@@ -88,10 +94,31 @@ export const Nav: React.FC = wrapError(() => {
             width={164}
             alt="logo"
             draggable={false}
+            // goto main page when clicked
+            onClick={closeDrawer}
           />
 
           {/* Space */}
           <Box sx={{ flexGrow: 1 }} />
+          <Box sx={{ mr: 5 }}>
+            {theme === 'dark' ? (
+              <Avatar
+                alt="라이트모드"
+                src={lightmode}
+                onClick={() => {
+                  update(() => 'light')
+                }}
+              />
+            ) : (
+              <Avatar
+                alt="다크모드"
+                src={darkmode}
+                onClick={() => {
+                  update(() => 'dark')
+                }}
+              />
+            )}
+          </Box>
 
           {/* Links / Drawer button */}
           {isMobile ? (
