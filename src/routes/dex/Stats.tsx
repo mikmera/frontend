@@ -119,14 +119,27 @@ const NatureSection: React.FC = () => {
 }
 
 const TerastalizeSection: React.FC = () => {
-  const item = useCurrentDexItem()
+  // const item = useCurrentDexItem()
 
   return (
     <MotionList
       transition={{ staggerChildren: 0.1 }}
       sx={{ height: '100%', overflowY: 'scroll', py: 0 }}
     >
-      {item.terastalize.map((x, i) => (
+      <MotionListItem initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <ListItemAvatar>
+          <Avatar
+            alt="작업중"
+            imgProps={{ crossOrigin: 'anonymous' }}
+            src={apiUrl(`/v1/sprites/types/Normal.svg`)}
+          />
+        </ListItemAvatar>
+        <ListItemText
+          primary={'작업중입니다'}
+          secondary={'빠른 시일내에 제공해드리겠습니다'}
+        />
+      </MotionListItem>
+      {/* {item.terastalize.map((x, i) => (
         <MotionListItem
           key={i}
           initial={{ opacity: 0 }}
@@ -141,7 +154,7 @@ const TerastalizeSection: React.FC = () => {
           </ListItemAvatar>
           <ListItemText primary={x.type} secondary={`${x.usage}%`} />
         </MotionListItem>
-      ))}
+      ))} */}
     </MotionList>
   )
 }

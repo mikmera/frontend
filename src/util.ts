@@ -10,5 +10,9 @@ export const fetcher = async (url: string) => {
   return data.body
 }
 
+export const put = async (url: string, data: object) => {
+  await api.put(url, data)
+}
+
 export const apiUrl = (path: string) =>
   `${import.meta.env.VITE_API_BASE}${path}`

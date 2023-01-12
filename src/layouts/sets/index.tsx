@@ -1,7 +1,7 @@
 import React from 'react'
 import useSWR from 'swr'
 import { fetcher } from '~/util'
-import { Outlet, useParams } from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
 import { wrapError } from '~/components/ErrorBoundary'
 import Box from '@mui/material/Box'
 import useMediaQuery from '@mui/material/useMediaQuery'
@@ -14,7 +14,6 @@ import {
   SetsLayoutContext,
 } from './context'
 import { SearchBar, SearchFilters } from './SearchFilters'
-import { Alert } from '@mui/material'
 
 export const SetsLayout: React.FC = wrapError(() => {
   const theme = useTheme()
@@ -75,6 +74,7 @@ export const AutoCompleteLayout: React.FC = wrapError(() => {
     pokemon: [],
     items: [],
     natures: [],
+    types: [],
   })
 
   React.useEffect(() => {
@@ -84,6 +84,7 @@ export const AutoCompleteLayout: React.FC = wrapError(() => {
   const { data: pokemons } = useSWR('/v1/autocomplete/pokemons', fetcher)
   const { data: items } = useSWR('/v1/autocomplete/items', fetcher)
   const { data: natures } = useSWR('/v1/autocomplete/natures', fetcher)
+  const { data: types } = useSWR('/v1/autocomplete/types', fetcher)
 
   React.useEffect(() => {
     if (!pokemons) return
@@ -112,6 +113,15 @@ export const AutoCompleteLayout: React.FC = wrapError(() => {
     }))
   }, [natures])
 
+  React.useEffect(() => {
+    if (!types) return
+
+    setData((v) => ({
+      ...v,
+      types: types.types,
+    }))
+  }, [types])
+
   return (
     <AutoCompleteContext.Provider
       value={{
@@ -119,14 +129,11 @@ export const AutoCompleteLayout: React.FC = wrapError(() => {
         update: setData,
       }}
     >
-      <Alert severity="warning">
-        패러독스 포켓몬은 현재 기술셋이 없어 등록이 불가합니다
-      </Alert>
       <Box sx={{ height: '100%' }}>
         <Box
           sx={{
-            marginLeft: isMobile ? 0 : '20px',
-            marginRight: isMobile ? 0 : '20px',
+            marginLeft: isMobile ? '5px' : '20px',
+            marginRight: isMobile ? '5px' : '20px',
             height: '100%',
           }}
         >

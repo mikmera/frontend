@@ -9,12 +9,14 @@ export type SetsContextData = {
 
 interface AutoCompleteDataPokemon {
   name: string
+  id: number
   moves: [
     {
       locales: {
         ko: string
         jp: string
       }
+      Mtype: string
       name: string
       route: string
       level: number
@@ -34,10 +36,16 @@ interface NatureAutoCompleteData {
   view: string
 }
 
+interface TypeAutoCompleteData {
+  name: string
+  en: string
+}
+
 export type AutoCompleteData = {
   pokemon: AutoCompleteDataPokemon[] | null
   items: AutoCompleteDataDefault[] | null
   natures: NatureAutoCompleteData[] | null
+  types: TypeAutoCompleteData[] | null
 }
 
 export const SetsLayoutContext = React.createContext<{
@@ -61,6 +69,7 @@ export const AutoCompleteContext = React.createContext<{
     pokemon: [],
     items: [],
     natures: [],
+    types: [],
   },
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   update: () => {},

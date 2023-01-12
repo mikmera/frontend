@@ -16,6 +16,7 @@ import {
 import './global.scss'
 import { ThemeContext } from './context'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
+import { SnackbarProvider } from 'notistack'
 
 export default function ToggleColorMode() {
   const [themes, setTheme] = React.useState<'light' | 'dark'>('light')
@@ -41,7 +42,9 @@ export default function ToggleColorMode() {
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <BrowserRouter>
-            <Routing />
+            <SnackbarProvider>
+              <Routing />
+            </SnackbarProvider>
           </BrowserRouter>
         </ThemeProvider>
       </React.StrictMode>
