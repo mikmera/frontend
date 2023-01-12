@@ -98,6 +98,7 @@ export interface PokemonSets {
     name: string
     locales: Locales
   }
+  teratype: string
   evs: Stats
   ivs: Stats
   moves: Moves[]
