@@ -34,6 +34,7 @@ export const SetCard: React.FC<{ item: PokemonSets }> = ({
     const display = nature.slice(0, 1).toUpperCase() + nature.slice(1)
     result.push(`${item.pokemon.name} @ ${item.item.name}`)
     result.push(`Ability: ${item.ability.name}`)
+    result.push(`Tera Type: ${item.teratype.name} `)
     result.push(`EVs: ${getEV(item.evs, true)}`)
     result.push(`${display} Nature`)
     result.push(`IVs: ${getIV(item.ivs, true)}`)
@@ -102,7 +103,12 @@ export const SetCard: React.FC<{ item: PokemonSets }> = ({
           <Avatar
             sx={{ float: 'right', width: 32, height: 32 }}
             imgProps={{ crossOrigin: 'anonymous' }}
-            src={apiUrl(`/v1/sprites/types/${item.teratype}.svg`)}
+            src={apiUrl(
+              `/v1/sprites/types/${
+                item.teratype.name[0].toUpperCase() +
+                item.teratype.name.slice(1)
+              }.svg`
+            )}
           />
         </Typography>
         <Typography variant="h5" component="div" sx={{ wordBreak: 'keep-all' }}>
@@ -124,6 +130,8 @@ export const SetCard: React.FC<{ item: PokemonSets }> = ({
           개체값: {getIV(item.ivs)}
           <br />
           노력치: {getEV(item.evs)}
+          <br />
+          테라스탈 타입: {item.teratype.locales.ko}
         </Typography>
         <TableContainer component={Paper} sx={{ width: '100%' }}>
           <Table sx={{ width: '100%', textAlign: 'left' }} size="small">
