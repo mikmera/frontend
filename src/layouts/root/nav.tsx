@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link as RouterLink, useLocation } from 'react-router-dom'
 import Logo from '~/assets/images/logo.png'
+import LogoLight from '~/assets/images/logo-light.png'
 import { NavLink, navLinks } from './constants'
 import { RootDrawer } from './drawer'
 import Menu from '@mui/icons-material/Menu'
@@ -88,7 +89,7 @@ export const Nav: React.FC = wrapError(() => {
         <Toolbar>
           {/* Logo */}
           <img
-            src={Logo}
+            src={theme === 'dark' ? LogoLight : Logo}
             height={32}
             width={164}
             alt="logo"
@@ -101,7 +102,12 @@ export const Nav: React.FC = wrapError(() => {
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ mr: 5 }}>
             <FormControlLabel
-              control={<ToggleDarkmode sx={{ m: 1 }} defaultChecked />}
+              control={
+                <ToggleDarkmode
+                  sx={{ m: 1 }}
+                  defaultChecked={theme === 'light'}
+                />
+              }
               label={
                 isMobile ? '' : theme === 'dark' ? '루나톤모드' : '솔록모드'
               }
@@ -109,23 +115,6 @@ export const Nav: React.FC = wrapError(() => {
                 update(() => (theme === 'dark' ? 'light' : 'dark'))
               }}
             />
-            {/* {theme === 'dark' ? (
-              <Avatar
-                alt="라이트모드"
-                src={lightmode}
-                onClick={() => {
-                  update(() => 'light')
-                }}
-              />
-            ) : (
-              <Avatar
-                alt="다크모드"
-                src={darkmode}
-                onClick={() => {
-                  update(() => 'dark')
-                }}
-              />
-            )} */}
           </Box>
 
           {/* Links / Drawer button */}

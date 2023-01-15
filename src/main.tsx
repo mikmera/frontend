@@ -17,9 +17,19 @@ import './global.scss'
 import { ThemeContext } from './context'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 import { SnackbarProvider } from 'notistack'
+import { useMediaQuery } from '@mui/material'
 
 export default function ToggleColorMode() {
   const [themes, setTheme] = React.useState<'light' | 'dark'>('light')
+  const isDarkModeEnabled = useMediaQuery('(prefers-color-scheme: dark)')
+
+  React.useEffect(() => {
+    if (isDarkModeEnabled) {
+      setTheme('dark')
+    } else {
+      setTheme('light')
+    }
+  }, [isDarkModeEnabled])
 
   const theme = React.useMemo(
     () =>
