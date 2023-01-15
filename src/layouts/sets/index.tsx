@@ -21,14 +21,14 @@ export const SetsLayout: React.FC = wrapError(() => {
 
   const [data, setData] = React.useState<SetsContextData>({
     sets: [],
-    type: 'single',
+    type: 'all',
     count: 0,
   })
 
-  const { data: sets } = useSWR(`/v1/sets?offset=${1}&type=single`, fetcher)
+  const { data: sets } = useSWR(`/v1/sets?offset=${0}`, fetcher)
 
   React.useEffect(() => {
-    setData((v) => ({ ...v, type: 'single' }))
+    setData((v) => ({ ...v, type: 'all' }))
   }, [])
 
   React.useEffect(() => {

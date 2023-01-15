@@ -6,10 +6,11 @@ import { wrapError } from '~/components/ErrorBoundary'
 import { FormControl, Input, InputAdornment } from '@mui/material'
 import searchIcon from '~/assets/images/search.svg'
 import { SetsContextData, SetsLayoutContext } from './context'
+import { apiUrl, fetcher } from '~/util'
 
 export const SearchFilters: React.FC = wrapError(() => {
   const { update } = React.useContext(SetsLayoutContext)
-  const [alignment, setAlignment] = React.useState('single')
+  const [alignment, setAlignment] = React.useState('all')
 
   const handleChange = (
     event: React.MouseEvent<HTMLElement>,
@@ -43,6 +44,31 @@ export const SearchFilters: React.FC = wrapError(() => {
 })
 
 export const SearchBar: React.FC = wrapError(() => {
+  const [query, setQuery] = React.useState('')
+
+  const [data, setData] = React.useState<SetsContextData>({
+    sets: [],
+    type: 'single',
+    count: 0,
+  })
+
+  React.useEffect(() => {
+    const fetchData = async () => {
+      if (query === '') return
+      const { sets, count } = await fetcher(
+        apiUrl(`/v1/sets?type=single&query=${query}`)
+      )
+      if (!sets) return
+      console.log(sets)
+      setData({
+        sets: sets,
+        type: 'all',
+        count: count,
+      })
+    }
+    fetchData().catch(console.error)
+  }, [query])
+
   return (
     <Box>
       <Box
@@ -54,12 +80,15 @@ export const SearchBar: React.FC = wrapError(() => {
           <Input
             id="input-with-icon-adornment"
             placeholder="검색"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
             startAdornment={
               <InputAdornment position="start">
                 <img src={searchIcon} />
               </InputAdornment>
             }
           />
+          {query}
         </FormControl>
       </Box>
     </Box>
