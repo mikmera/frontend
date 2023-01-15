@@ -11,8 +11,12 @@ import { apiUrl, fetcher } from '~/util'
 export const SetsList: React.FC = wrapError(() => {
   const { data, update } = useSetsContext()
   const filterd = data.sets?.filter((item) => {
-    if (!data.type || data.type === 'all') return true
-    else return item.type?.[0] === data.type
+    if (data.query && (data.result?.length ?? 0) > 0) {
+      return data.result?.includes(item._id)
+    } else {
+      if (!data.type || data.type === 'all') return true
+      else return item.type?.[0] === data.type
+    }
   })
 
   const [loading, setLoading] = React.useState(false)
@@ -22,17 +26,15 @@ export const SetsList: React.FC = wrapError(() => {
     if (inView && !loading) {
       if (data.sets?.length === data.count) return
       setLoading(true)
-      fetcher(
-        apiUrl(
-          `/v1/sets?offset=${data.sets?.length ?? 0 + 1}&type=${data.type}`
-        )
-      ).then((res) => {
-        update((v) => ({
-          ...v,
-          sets: [...(v.sets ?? []), ...res.sets],
-        }))
-        setLoading(false)
-      })
+      fetcher(apiUrl(`/v1/sets?offset=${data.sets?.length ?? 0 + 1}`)).then(
+        (res) => {
+          update((v) => ({
+            ...v,
+            sets: [...(v.sets ?? []), ...res.sets],
+          }))
+          setLoading(false)
+        }
+      )
     }
   }, [inView, loading])
 

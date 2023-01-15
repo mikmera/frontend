@@ -4,7 +4,9 @@ import { PokemonSets } from '~/types'
 export type SetsContextData = {
   type: 'single' | 'double' | 'all'
   sets: PokemonSets[] | null
+  result: string[] | null
   count: number
+  query: string
 }
 
 interface AutoCompleteDataPokemon {
@@ -56,6 +58,8 @@ export const SetsLayoutContext = React.createContext<{
     type: 'all',
     sets: [],
     count: 0,
+    query: '',
+    result: [],
   },
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   update: () => {},

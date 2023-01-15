@@ -21,7 +21,9 @@ export const SetsLayout: React.FC = wrapError(() => {
 
   const [data, setData] = React.useState<SetsContextData>({
     sets: [],
+    result: [],
     type: 'all',
+    query: '',
     count: 0,
   })
 
@@ -33,6 +35,7 @@ export const SetsLayout: React.FC = wrapError(() => {
 
   React.useEffect(() => {
     if (!sets) return
+    if (data.sets?.length === sets.count) return
 
     setData((v) => ({
       ...v,

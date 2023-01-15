@@ -5,7 +5,7 @@ import Box from '@mui/material/Box'
 import { wrapError } from '~/components/ErrorBoundary'
 import { FormControl, Input, InputAdornment } from '@mui/material'
 import searchIcon from '~/assets/images/search.svg'
-import { SetsContextData, SetsLayoutContext } from './context'
+import { SetsContextData, SetsLayoutContext, useSetsContext } from './context'
 import { apiUrl, fetcher } from '~/util'
 
 export const SearchFilters: React.FC = wrapError(() => {
@@ -45,26 +45,17 @@ export const SearchFilters: React.FC = wrapError(() => {
 
 export const SearchBar: React.FC = wrapError(() => {
   const [query, setQuery] = React.useState('')
-
-  const [data, setData] = React.useState<SetsContextData>({
-    sets: [],
-    type: 'single',
-    count: 0,
-  })
+  const { update } = useSetsContext()
 
   React.useEffect(() => {
     const fetchData = async () => {
       if (query === '') return
-      const { sets, count } = await fetcher(
-        apiUrl(`/v1/sets?type=single&query=${query}`)
+      const { sets } = await fetcher(
+        apiUrl(`/v1/sets?&query=${query}&offset=0`)
       )
       if (!sets) return
-      console.log(sets)
-      setData({
-        sets: sets,
-        type: 'all',
-        count: count,
-      })
+
+      update((v) => ({ ...v, result: sets, query }))
     }
     fetchData().catch(console.error)
   }, [query])
@@ -88,7 +79,6 @@ export const SearchBar: React.FC = wrapError(() => {
               </InputAdornment>
             }
           />
-          {query}
         </FormControl>
       </Box>
     </Box>
