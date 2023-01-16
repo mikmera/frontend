@@ -1146,6 +1146,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@smogon/calc@npm:^0.7.0":
+  version: 0.7.0
+  resolution: "@smogon/calc@npm:0.7.0"
+  dependencies:
+    "@types/node": ^18.11.9
+  checksum: ef70f6ed99caafb6f02917a30af51a2ef3986fe65291193110834f9a0d0593b770ea88ae716cc51016439abbe73d8c18f189b7a2dfd860926a8b3b324d35f91b
+  languageName: node
+  linkType: hard
+
 "@svgr/babel-plugin-add-jsx-attribute@npm:^6.5.1":
   version: 6.5.1
   resolution: "@svgr/babel-plugin-add-jsx-attribute@npm:6.5.1"
@@ -4490,6 +4499,7 @@ eslint@latest:
     "@mui/icons-material": ^5.10.15
     "@mui/lab": ^5.0.0-alpha.115
     "@mui/material": 5.10.15
+    "@smogon/calc": ^0.7.0
     "@types/node": ^18.11.9
     "@types/react": ^18.0.24
     "@types/react-dom": ^18.0.8
