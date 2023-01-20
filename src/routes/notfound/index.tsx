@@ -1,13 +1,12 @@
 import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
 import React from 'react'
 import { wrapError } from '~/components/ErrorBoundary'
-import { ErrorPage } from '~/components/404page'
+import { ErrorPage } from '~/components/ErrorPage'
 
 export const NotFound: React.FC = wrapError(() => {
   return (
     <Box>
-      <ErrorPage />
+      <ErrorPage code="404" />
     </Box>
   )
 })

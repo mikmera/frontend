@@ -1,15 +1,14 @@
-import { Box } from '@mui/material'
 import React from 'react'
 import { wrapError } from '~/components/ErrorBoundary'
-import ToggleButton from '@mui/material/ToggleButton';
-import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import ToggleButton from '@mui/material/ToggleButton'
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup'
 
 export const Main: React.FC = wrapError(() => {
   const [calcMode, setCalcMode] = React.useState('')
 
   const handleChange = (
     event: React.MouseEvent<HTMLElement>,
-    newAlignment: string,
+    newAlignment: string
   ) => {
     setCalcMode(newAlignment)
   }

@@ -3,7 +3,13 @@ import './404page.scss'
 import { Button, useMediaQuery, useTheme } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 
-export const ErrorPage: React.FC = () => {
+export interface Iprops {
+  code: string
+}
+
+export const ErrorPage: React.FC<Iprops> = (props: {
+  code: Iprops['code']
+}) => {
   const theme = useTheme()
   const navigate = useNavigate()
   const isMobile = useMediaQuery(theme.breakpoints.down('md'))
@@ -18,7 +24,7 @@ export const ErrorPage: React.FC = () => {
         style={{ fontSize: isMobile ? '120px' : '200px' }}
       >
         {' '}
-        <span>4</span>
+        <span>{props.code?.[0]}</span>
         <div
           className="pokeball notfound"
           style={{
@@ -26,7 +32,7 @@ export const ErrorPage: React.FC = () => {
             height: isMobile ? '80px' : '120px',
           }}
         ></div>
-        <span>4</span>
+        <span>{props.code?.[2]}</span>
       </div>
       {/* make center */}
       <div className="error-text" style={{ textAlign: 'center' }}>
