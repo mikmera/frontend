@@ -25,4 +25,9 @@ export const navLinks: NavLink[] = [
     match: /^\/calc\//,
     label: '계산기',
   },
+  {
+    to: '/auth',
+    match: /^\/auth\//,
+    label: '계정',
+  },
 ]
