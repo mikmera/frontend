@@ -13,6 +13,7 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js'
+import { getCookie } from 'react-use-cookie'
 import './global.scss'
 import { ThemeContext } from './context'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
@@ -21,7 +22,9 @@ import { useMediaQuery } from '@mui/material'
 
 export default function ToggleColorMode() {
   const [themes, setTheme] = React.useState<'light' | 'dark'>('light')
-  const isDarkModeEnabled = useMediaQuery('(prefers-color-scheme: dark)')
+  const isDarkModeEnabled = getCookie('theme')
+    ? getCookie('theme') === 'dark'
+    : useMediaQuery('(prefers-color-scheme: dark)')
 
   React.useEffect(() => {
     if (isDarkModeEnabled) {

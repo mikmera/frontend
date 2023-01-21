@@ -37,7 +37,6 @@ export const MyPage: React.FC<Iprops> = wrapError((props) => {
   }, [props.user])
 
   React.useEffect(() => {
-    console.log(props.user)
     if (
       !props.user?.emailVerified &&
       props.user?.providerData[0].providerId !== 'twitter.com'

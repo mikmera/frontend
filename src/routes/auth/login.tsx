@@ -33,7 +33,6 @@ export async function logout() {
 export const Login: React.FC = wrapError(() => {
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
-  const [error, setError] = React.useState('')
 
   const navigate = useNavigate()
 

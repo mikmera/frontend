@@ -19,6 +19,7 @@ import styled from '@mui/material/styles/styled'
 import { useThemeContext } from '../../context'
 import { FormControlLabel } from '@mui/material'
 import { ToggleDarkmode } from '../../components/ToggleDarkmode'
+import { setCookie } from 'react-use-cookie'
 
 const StyledRouterLink = styled(RouterLink)(() => ({
   display: 'flex',
@@ -112,6 +113,7 @@ export const Nav: React.FC = wrapError(() => {
                 isMobile ? '' : theme === 'dark' ? '루나톤모드' : '솔록모드'
               }
               onChange={() => {
+                setCookie('theme', theme === 'dark' ? 'light' : 'dark')
                 update(() => (theme === 'dark' ? 'light' : 'dark'))
               }}
             />

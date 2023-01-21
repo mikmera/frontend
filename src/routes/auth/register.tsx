@@ -15,6 +15,7 @@ import {
   sendEmailVerification,
   createUserWithEmailAndPassword,
   updateProfile,
+  User,
 } from 'firebase/auth'
 import { authService } from '~/service/firebase'
 import TwitterIcon from '@mui/icons-material/Twitter'
@@ -29,6 +30,7 @@ async function loginWithTwitter() {
 }
 
 export const Register: React.FC = wrapError(() => {
+  const [user, setUser] = React.useState<User | null>(null)
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
 
@@ -39,6 +41,17 @@ export const Register: React.FC = wrapError(() => {
   const handleClickVariant = (variant: VariantType, message: string) => () => {
     enqueueSnackbar(message, { variant })
   }
+
+  React.useEffect(() => {
+    authService.onAuthStateChanged((user) => {
+      if (user) {
+        setUser(user)
+        navigate('/')
+      } else {
+        setUser(null)
+      }
+    })
+  }, [])
 
   async function register(email: string, password: string) {
     if (email === '' || password === '')
