@@ -21,16 +21,21 @@ import {
   TableContainer,
 } from '@mui/material'
 import Chip from '@mui/material/Chip'
+import { getAuth } from 'firebase/auth'
 import LoadingButton from '@mui/lab/LoadingButton'
 import { useAutoCompleteContext } from '~/layouts/sets/context'
 import { apiUrl, fetcher, put } from '~/util'
 import { Spinner } from '~/components/Spinner'
 import { VariantType, useSnackbar } from 'notistack'
 import { useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2'
 
 export const CreateSets: React.FC = () => {
-  const { data } = useAutoCompleteContext()
   const navigate = useNavigate()
+  const { data } = useAutoCompleteContext()
+
+  const auth = getAuth()
+  const user = auth.currentUser
 
   const [pokemons] = React.useState<
     [
@@ -314,6 +319,7 @@ export const CreateSets: React.FC = () => {
       ivs: Ivs,
       type,
       teratype: teratype,
+      author: user?.uid,
     })
       .then(() => {
         handleClickVariant('success', '업로드 완료')()
@@ -321,6 +327,22 @@ export const CreateSets: React.FC = () => {
       })
       .catch(handleClickVariant('error', '에러가 발생했습니다'))
   }
+
+  React.useEffect(() => {
+    if (
+      !user ||
+      (!user.emailVerified && user.providerData[0].providerId == 'password')
+    ) {
+      Swal.fire({
+        title: '로그인이 필요합니다',
+        text: '로그인 후 이용해주세요',
+        icon: 'error',
+        confirmButtonText: '확인',
+      }).then(() => {
+        navigate('/auth')
+      })
+    }
+  }, [user])
 
   React.useEffect(() => {
     if (!data.pokemon) return
