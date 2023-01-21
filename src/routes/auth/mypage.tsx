@@ -37,15 +37,18 @@ export const MyPage: React.FC<Iprops> = wrapError((props) => {
   }, [props.user])
 
   React.useEffect(() => {
-    if (!props.user) return
-    if (
-      !props.user?.emailVerified &&
-      props.user?.providerData[0].providerId !== 'twitter.com'
-    ) {
-      handleClickVariant('error', '이메일 인증이 완료되지 않았습니다')()
-      sendEmailVerification(props.user)
-      signOut(authService)
+    const CheckEmail = async () => {
+      if (!props.user) return
+      if (
+        !props.user?.emailVerified &&
+        props.user?.providerData[0].providerId !== 'twitter.com'
+      ) {
+        handleClickVariant('error', '이메일 인증이 완료되지 않았습니다')()
+        await sendEmailVerification(props.user)
+        await signOut(authService)
+      }
     }
+    CheckEmail().then()
   }, [props.user])
 
   return (
