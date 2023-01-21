@@ -29,7 +29,16 @@ export const fetcher = async (url: string) => {
 }
 
 export const put = async (url: string, data: object) => {
-  await api.put(url, data)
+  const appCheckTokenResponse = await getToken(
+    appCheck,
+    /* forceRefresh= */ true
+  )
+
+  await api.put(url, data, {
+    headers: {
+      'X-Firebase-AppCheck': appCheckTokenResponse.token,
+    },
+  })
 }
 
 export const apiUrl = (path: string) =>

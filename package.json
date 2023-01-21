@@ -19,6 +19,7 @@
     "@types/firebase": "^3.2.1",
     "adblock-detect-react": "^1.1.0",
     "axios": "^1.2.0",
+    "browser-image-compression": "^2.0.0",
     "chart.js": "^4.0.1",
     "firebase": "^9.15.0",
     "framer-motion": "^7.6.9",

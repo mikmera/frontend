@@ -38,6 +38,12 @@ const Auth = wrapSuspense(
   lazy(() => import('./routes/auth').then((x) => ({ default: x.Main })))
 )
 
+const Register = wrapSuspense(
+  lazy(() =>
+    import('./routes/auth/register').then((x) => ({ default: x.Register }))
+  )
+)
+
 const NotFound = wrapSuspense(
   lazy(() =>
     import('./routes/notfound').then((x) => ({
@@ -71,6 +77,7 @@ export const Routing: React.FC = wrapError(() => {
         <Route path="loading" element={<Loading />} />
         <Route path="calc" element={<Calculator />} />
         <Route path="auth" element={<Auth />} />
+        <Route path="auth/register" element={<Register />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>

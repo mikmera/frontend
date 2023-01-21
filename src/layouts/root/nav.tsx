@@ -19,7 +19,6 @@ import styled from '@mui/material/styles/styled'
 import { useThemeContext } from '../../context'
 import { FormControlLabel } from '@mui/material'
 import { ToggleDarkmode } from '../../components/ToggleDarkmode'
-import { authService } from '~/service/firebase'
 
 const StyledRouterLink = styled(RouterLink)(() => ({
   display: 'flex',
@@ -79,12 +78,6 @@ export const Nav: React.FC = wrapError(() => {
     () => setDrawerOpen((v) => !v),
     [setDrawerOpen]
   )
-
-  React.useEffect(() => {
-    authService.onAuthStateChanged((user) => {
-      console.log(user)
-    })
-  }, [])
 
   return (
     <>
