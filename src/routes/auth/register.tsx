@@ -12,7 +12,6 @@ import {
   getRedirectResult,
   TwitterAuthProvider,
   signInWithRedirect,
-  sendEmailVerification,
   createUserWithEmailAndPassword,
   updateProfile,
   User,
@@ -66,7 +65,6 @@ export const Register: React.FC = wrapError(() => {
         displayName: email.split('@')[0],
       })
       handleClickVariant('success', '회원가입에 성공했습니다')()
-      await sendEmailVerification(user.user)
       navigate('/auth')
     } catch (error: any) {
       if (error.code === 'auth/email-already-in-use') {

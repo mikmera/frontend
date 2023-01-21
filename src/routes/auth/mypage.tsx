@@ -1,7 +1,7 @@
 import React from 'react'
 import { wrapError } from '~/components/ErrorBoundary'
 import Box from '@mui/material/Box'
-import { User } from 'firebase/auth'
+import { User, sendEmailVerification } from 'firebase/auth'
 import {
   Typography,
   Avatar,
@@ -37,11 +37,13 @@ export const MyPage: React.FC<Iprops> = wrapError((props) => {
   }, [props.user])
 
   React.useEffect(() => {
+    if (!props.user) return
     if (
       !props.user?.emailVerified &&
       props.user?.providerData[0].providerId !== 'twitter.com'
     ) {
       handleClickVariant('error', '이메일 인증이 완료되지 않았습니다')()
+      sendEmailVerification(props.user)
       signOut(authService)
     }
   }, [props.user])
