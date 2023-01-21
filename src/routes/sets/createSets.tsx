@@ -10,9 +10,15 @@ import {
   FormLabel,
   Grid,
   Input,
+  Paper,
   Radio,
   RadioGroup,
   Slider,
+  Table,
+  TableRow,
+  TableBody,
+  TableCell,
+  TableContainer,
 } from '@mui/material'
 import Chip from '@mui/material/Chip'
 import LoadingButton from '@mui/lab/LoadingButton'
@@ -26,17 +32,61 @@ export const CreateSets: React.FC = () => {
   const { data } = useAutoCompleteContext()
   const navigate = useNavigate()
 
-  const [pokemons] = React.useState<[{ label: string; id: number }]>([
-    { label: '', id: 0 },
+  const [pokemons] = React.useState<
+    [
+      {
+        label: string
+        id: number
+        stats: {
+          hp: number
+          atk: number
+          def: number
+          spa: number
+          spd: number
+          spe: number
+        }
+      }
+    ]
+  >([
+    {
+      label: '',
+      id: 0,
+      stats: { hp: 0, atk: 0, def: 0, spa: 0, spd: 0, spe: 0 },
+    },
   ])
   const [items] = React.useState<[{ label: string; id: number }]>([
     { label: '', id: 0 },
   ])
-  const [natures] = React.useState<[{ label: string; name: string }]>([
-    { label: '', name: '' },
+  const [natures] = React.useState<
+    [
+      {
+        label: string
+        name: string
+        correction: {
+          atk: number
+          def: number
+          spa: number
+          spd: number
+          spe: number
+        }
+      }
+    ]
+  >([
+    {
+      label: '',
+      name: '',
+      correction: { atk: 1, def: 1, spa: 1, spd: 1, spe: 1 },
+    },
   ])
   const [moves] = React.useState<[{ label: string; type: string }]>([
     { label: '쪼리핑펀치', type: 'Normal' },
+  ])
+
+  const [moveList, setMove] = React.useState<{ label: string; type: string }[]>(
+    [{ label: '', type: '' }]
+  )
+  const [teraTypes] = React.useState<{ label: string; type: string }[]>([
+    { label: '노말', type: 'Normal' },
   ])
 
   const [disabled, setDisabled] = React.useState<boolean>(true)
@@ -46,18 +96,14 @@ export const CreateSets: React.FC = () => {
   const [item, setItem] = React.useState<string>('')
   const [nature, setNature] = React.useState<string>('')
   const [ability, setAbility] = React.useState<string>('')
-  const [moveList, setMove] = React.useState<{ label: string; type: string }[]>(
-    [{ label: '', type: '' }]
-  )
-  const [teraTypes] = React.useState<{ label: string; type: string }[]>([
-    { label: '노말', type: 'Normal' },
-  ])
   const [setsName, setName] = React.useState<string>('')
   const [Effort, setEffort] = React.useState<number[]>([0, 0, 0, 0, 0, 0])
   const [Ivs, setIvs] = React.useState<number[]>([31, 31, 31, 31, 31, 31])
   const [type, setType] = React.useState<'single' | 'double'>('single')
   const [teratype, setTeraType] = React.useState<string>()
   const [waitUpload, setWaitUpload] = React.useState<boolean>(false)
+
+  const [realStats, setRealStats] = React.useState<number[]>([0, 0, 0, 0, 0, 0])
 
   const { enqueueSnackbar } = useSnackbar()
 
@@ -286,6 +332,7 @@ export const CreateSets: React.FC = () => {
       pokemons.push({
         label: pokemon.name,
         id: pokemon.id,
+        stats: pokemon.stats,
       })
       pokemonDict.push(pokemon.name)
     }
@@ -314,6 +361,7 @@ export const CreateSets: React.FC = () => {
       natures.push({
         label: nature.name,
         name: nature.name,
+        correction: nature.correction,
       })
     }
   }, [data.natures])
@@ -352,6 +400,37 @@ export const CreateSets: React.FC = () => {
     }
     fetchData().catch(console.error)
   }, [pokemon])
+
+  React.useEffect(() => {
+    if (!pokemon || pokemon === '미싱노') return
+    const stats = pokemons.find((v) => v.label == pokemon)?.stats
+    const correction = natures.find((v) => v.label == nature)?.correction || {
+      atk: 1,
+      def: 1,
+      spa: 1,
+      spd: 1,
+      spe: 1,
+    }
+    if (!stats) return
+    const hp = Math.floor((stats.hp * 2 + Ivs[0] + Effort[0] / 4) * 0.5 + 60)
+    const atk = Math.floor(
+      ((stats.atk * 2 + Ivs[1] + Effort[1] / 4) * 0.5 + 5) * correction?.atk
+    )
+    const def = Math.floor(
+      ((stats.def * 2 + Ivs[2] + Effort[2] / 4) * 0.5 + 5) * correction?.def
+    )
+    const spa = Math.floor(
+      ((stats.spa * 2 + Ivs[3] + Effort[3] / 4) * 0.5 + 5) * correction?.spa
+    )
+    const spd = Math.floor(
+      ((stats.spd * 2 + Ivs[4] + Effort[4] / 4) * 0.5 + 5) * correction?.spd
+    )
+    const spe = Math.floor(
+      ((stats.spe * 2 + Ivs[5] + Effort[5] / 4) * 0.5 + 5) * correction?.spe
+    )
+
+    setRealStats([hp, atk, def, spa, spd, spe])
+  }, [pokemon, nature, Ivs, Effort])
 
   React.useEffect(() => {
     setDisabled(pokemon === '미싱노' ? true : false)
@@ -395,6 +474,7 @@ export const CreateSets: React.FC = () => {
       ) : (
         <Grid container sx={{ width: '450px', m: 3 }}>
           <Grid item xs={12} mb={4}>
+            {/*[{(종족값 * 2) + 개체값 + (노력치/4)} * 1/2 ] + 10 + 50(레벨)*/}
             <Typography variant="h5" sx={{ textAlign: 'center' }}>
               샘플 등록하기
             </Typography>
@@ -696,7 +776,19 @@ export const CreateSets: React.FC = () => {
             />
           </Grid>
           {/* 공격 */}
-          <Grid item xs={1}>
+          <Grid
+            item
+            xs={1}
+            sx={{
+              color:
+                natures.find((v) => v.label == nature)?.correction.atk === 1.1
+                  ? 'red'
+                  : natures.find((v) => v.label == nature)?.correction.atk ===
+                    0.9
+                  ? '#33F'
+                  : null,
+            }}
+          >
             공격
           </Grid>
           <Grid item xs={7} sx={{ paddingLeft: '15px' }}>
@@ -750,7 +842,19 @@ export const CreateSets: React.FC = () => {
             />
           </Grid>
           {/* 방어 */}
-          <Grid item xs={1}>
+          <Grid
+            item
+            xs={1}
+            sx={{
+              color:
+                natures.find((v) => v.label == nature)?.correction.def === 1.1
+                  ? 'red'
+                  : natures.find((v) => v.label == nature)?.correction.def ===
+                    0.9
+                  ? '#33F'
+                  : null,
+            }}
+          >
             방어
           </Grid>
           <Grid item xs={7} sx={{ paddingLeft: '15px' }}>
@@ -804,7 +908,19 @@ export const CreateSets: React.FC = () => {
             />
           </Grid>
           {/* 특공 */}
-          <Grid item xs={1}>
+          <Grid
+            item
+            xs={1}
+            sx={{
+              color:
+                natures.find((v) => v.label == nature)?.correction.spa === 1.1
+                  ? 'red'
+                  : natures.find((v) => v.label == nature)?.correction.spa ===
+                    0.9
+                  ? '#33F'
+                  : null,
+            }}
+          >
             특공
           </Grid>
           <Grid item xs={7} sx={{ paddingLeft: '15px' }}>
@@ -858,7 +974,19 @@ export const CreateSets: React.FC = () => {
             />
           </Grid>
           {/* 특방 */}
-          <Grid item xs={1}>
+          <Grid
+            item
+            xs={1}
+            sx={{
+              color:
+                natures.find((v) => v.label == nature)?.correction.spd === 1.1
+                  ? 'red'
+                  : natures.find((v) => v.label == nature)?.correction.spd ===
+                    0.9
+                  ? '#33F'
+                  : null,
+            }}
+          >
             특방
           </Grid>
           <Grid item xs={7} sx={{ paddingLeft: '15px' }}>
@@ -912,7 +1040,19 @@ export const CreateSets: React.FC = () => {
             />
           </Grid>
           {/* 스핏 */}
-          <Grid item xs={1}>
+          <Grid
+            item
+            xs={1}
+            sx={{
+              color:
+                natures.find((v) => v.label == nature)?.correction.spe === 1.1
+                  ? 'red'
+                  : natures.find((v) => v.label == nature)?.correction.spe ===
+                    0.9
+                  ? '#33F'
+                  : null,
+            }}
+          >
             스핏
           </Grid>
           <Grid item xs={7} sx={{ paddingLeft: '15px' }}>
@@ -964,6 +1104,66 @@ export const CreateSets: React.FC = () => {
                 'aria-labelledby': 'input-slider',
               }}
             />
+          </Grid>
+          <Grid item xs={12}>
+            <TableContainer component={Paper}>
+              <Table sx={{ width: '100%' }} aria-label="simple table">
+                <TableBody>
+                  <TableRow>
+                    <TableCell component="th" scope="row">
+                      hp
+                    </TableCell>
+                    <TableCell align="right">{realStats[0]}</TableCell>
+                    <TableCell component="th" scope="row">
+                      공격
+                    </TableCell>
+                    <TableCell align="right">{realStats[1]}</TableCell>
+                    <TableCell component="th" scope="row">
+                      방어
+                    </TableCell>
+                    <TableCell align="right">{realStats[2]}</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell component="th" scope="row">
+                      특공
+                    </TableCell>
+                    <TableCell align="right">{realStats[3]}</TableCell>
+                    <TableCell component="th" scope="row">
+                      특방
+                    </TableCell>
+                    <TableCell align="right">{realStats[4]}</TableCell>
+                    <TableCell component="th" scope="row">
+                      스핏
+                    </TableCell>
+                    <TableCell align="right">{realStats[5]}</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell component="th" scope="row">
+                      물리내구
+                    </TableCell>
+                    <TableCell align="right">
+                      {item == '진화의휘석'
+                        ? Math.round(
+                            (realStats[0] * (realStats[2] * 1.5)) / 0.411
+                          )
+                        : Math.round((realStats[0] * realStats[2]) / 0.411)}
+                    </TableCell>
+                    <TableCell component="th" scope="row" />
+                    <TableCell scope="row" />
+                    <TableCell component="th" scope="row">
+                      특수내구
+                    </TableCell>
+                    <TableCell align="right">
+                      {item == '돌격조끼' || item == '진화의휘석'
+                        ? Math.round(
+                            (realStats[0] * (realStats[4] * 1.5)) / 0.411
+                          )
+                        : Math.round((realStats[0] * realStats[4]) / 0.411)}
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </TableContainer>
           </Grid>
           <LoadingButton
             sx={{ mt: 2 }}

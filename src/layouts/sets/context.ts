@@ -25,6 +25,14 @@ interface AutoCompleteDataPokemon {
       _id: string
     }
   ]
+  stats: {
+    hp: number
+    atk: number
+    def: number
+    spa: number
+    spd: number
+    spe: number
+  }
 }
 
 interface AutoCompleteDataDefault {
@@ -36,6 +44,13 @@ interface NatureAutoCompleteData {
   name: string
   id: string
   view: string
+  correction: {
+    atk: number
+    def: number
+    spa: number
+    spd: number
+    spe: number
+  }
 }
 
 interface TypeAutoCompleteData {
