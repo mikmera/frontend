@@ -4,7 +4,7 @@ import { PokemonSets } from '~/types'
 export type SetsContextData = {
   type: 'single' | 'double' | 'all'
   sets: PokemonSets[] | null
-  result: string[] | null
+  result: PokemonSets[] | null
   count: number
   query: string
 }

@@ -11,12 +11,13 @@ import { apiUrl, fetcher } from '~/util'
 export const SetsList: React.FC = wrapError(() => {
   const { data, update } = useSetsContext()
   const filterd = data.sets?.filter((item) => {
-    if (data.query && (data.result?.length ?? 0) > 0) {
-      return data.result?.includes(item._id)
-    } else {
-      if (!data.type || data.type === 'all') return true
-      else return item.type?.[0] === data.type
-    }
+    if (!data.type || data.type === 'all') return true
+    else return item.type?.[0] === data.type
+  })
+
+  const SearchFilter = data.result?.filter((item) => {
+    if (!data.type || data.type === 'all') return true
+    else return item.type?.[0] === data.type
   })
 
   const [loading, setLoading] = React.useState(false)
@@ -62,6 +63,19 @@ export const SetsList: React.FC = wrapError(() => {
         >
           <Spinner />
         </Box>
+      ) : data.query && data.result?.length !== 0 ? (
+        SearchFilter?.map((item, index) => (
+          <Grid
+            xs={6}
+            md={2}
+            mdOffset={0}
+            sx={{ minWidth: '350px', maxWidth: '400px' }}
+            key={index}
+            ref={ref}
+          >
+            <SetCard item={item} />
+          </Grid>
+        ))
       ) : (
         filterd?.map((item, index) => (
           <Grid
