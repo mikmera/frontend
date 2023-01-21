@@ -1,4 +1,5 @@
 import React from 'react'
+import Swal from 'sweetalert2'
 import { wrapError } from '~/components/ErrorBoundary'
 import {
   Button,
@@ -15,6 +16,8 @@ import {
   createUserWithEmailAndPassword,
   updateProfile,
   User,
+  sendEmailVerification,
+  signOut,
 } from 'firebase/auth'
 import { authService } from '~/service/firebase'
 import TwitterIcon from '@mui/icons-material/Twitter'
@@ -29,7 +32,6 @@ async function loginWithTwitter() {
 }
 
 export const Register: React.FC = wrapError(() => {
-  const [user, setUser] = React.useState<User | null>(null)
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
 
@@ -40,17 +42,6 @@ export const Register: React.FC = wrapError(() => {
   const handleClickVariant = (variant: VariantType, message: string) => () => {
     enqueueSnackbar(message, { variant })
   }
-
-  React.useEffect(() => {
-    authService.onAuthStateChanged((user) => {
-      if (user) {
-        setUser(user)
-        navigate('/')
-      } else {
-        setUser(null)
-      }
-    })
-  }, [])
 
   async function register(email: string, password: string) {
     if (email === '' || password === '')
@@ -64,7 +55,14 @@ export const Register: React.FC = wrapError(() => {
       updateProfile(user.user, {
         displayName: email.split('@')[0],
       })
-      handleClickVariant('success', '회원가입에 성공했습니다')()
+      await sendEmailVerification(user.user)
+      Swal.fire({
+        title: '인증 메일을 보냈습니다',
+        text: '메일 인증을 완료하셔야 로그인이 가능합니다',
+        icon: 'success',
+        confirmButtonText: '확인',
+      })
+      await signOut(authService)
       navigate('/auth')
     } catch (error: any) {
       if (error.code === 'auth/email-already-in-use') {

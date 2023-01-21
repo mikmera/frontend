@@ -1,4 +1,5 @@
 import React from 'react'
+import Swal from 'sweetalert2'
 import { wrapError } from '~/components/ErrorBoundary'
 import Box from '@mui/material/Box'
 import { User, sendEmailVerification } from 'firebase/auth'
@@ -43,9 +44,46 @@ export const MyPage: React.FC<Iprops> = wrapError((props) => {
         !props.user?.emailVerified &&
         props.user?.providerData[0].providerId !== 'twitter.com'
       ) {
-        handleClickVariant('error', '이메일 인증이 완료되지 않았습니다')()
-        await sendEmailVerification(props.user)
-        await signOut(authService)
+        Swal.fire({
+          title: '이메일 인증이 필요합니다',
+          text: '이메일 인증을 해주세요',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: '인증메일 재전송',
+          cancelButtonText: '로그아웃',
+        }).then(async (result) => {
+          if (result.isConfirmed) {
+            if (!props.user) return
+            signOut(authService)
+            sendEmailVerification(props.user)
+              .then(() => {
+                Swal.fire(
+                  '인증메일이 전송되었습니다',
+                  '이메일을 확인해주세요',
+                  'success'
+                )
+              })
+              .catch((error) => {
+                if (error.code === 'auth/too-many-requests')
+                  Swal.fire(
+                    '인증메일 전송 실패',
+                    '인증메일 전송 횟수가 초과되었습니다 잠시후 다시 시도해주세요',
+                    'error'
+                  )
+                else
+                  Swal.fire(
+                    '인증메일 전송 실패',
+                    '에러가 발생했습니다 잠시후 다시시도해주세요',
+                    'error'
+                  )
+                signOut(authService)
+              })
+          } else {
+            signOut(authService)
+          }
+        })
       }
     }
     CheckEmail().then()

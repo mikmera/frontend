@@ -5319,6 +5319,7 @@ eslint@latest:
     react-use-cookie: ^1.4.0
     react-virtuoso: ^3.1.5
     sass: ^1.56.1
+    sweetalert2: ^11.7.0
     swr: ^1.3.0
     typescript: ^4.6.4
     vite: ^3.2.3
@@ -6296,6 +6297,13 @@ eslint@latest:
   version: 2.0.4
   resolution: "svg-parser@npm:2.0.4"
   checksum: b3de6653048212f2ae7afe4a423e04a76ec6d2d06e1bf7eacc618a7c5f7df7faa5105561c57b94579ec831fbbdbf5f190ba56a9205ff39ed13eabdf8ab086ddf
+  languageName: node
+  linkType: hard
+
+"sweetalert2@npm:^11.7.0":
+  version: 11.7.0
+  resolution: "sweetalert2@npm:11.7.0"
+  checksum: 5c6b441290913d8c77f65c8039022386753df9efe77e52a71e2175be94cb89cb45fb2d6565ecf833198512e2970d8951ed3e3c176924d7404b0fa93ad1e0275e
   languageName: node
   linkType: hard
 
