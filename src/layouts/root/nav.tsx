@@ -20,6 +20,7 @@ import { useThemeContext } from '../../context'
 import { FormControlLabel } from '@mui/material'
 import { ToggleDarkmode } from '../../components/ToggleDarkmode'
 import { setCookie } from 'react-use-cookie'
+import { useNavigate } from 'react-router-dom'
 
 const StyledRouterLink = styled(RouterLink)(() => ({
   display: 'flex',
@@ -62,6 +63,7 @@ const NavLinkItem: React.FC<{ item: NavLink }> = wrapError(({ item }) => {
 })
 
 export const Nav: React.FC = wrapError(() => {
+  const navigate = useNavigate()
   const { theme, update } = useThemeContext()
 
   const [drawerOpen, setDrawerOpen] = React.useState(false)
@@ -80,6 +82,10 @@ export const Nav: React.FC = wrapError(() => {
     [setDrawerOpen]
   )
 
+  const handleLogoClick = React.useCallback(() => {
+    navigate('/')
+  }, [navigate])
+
   return (
     <>
       <RootDrawer open={drawerOpen && isMobile} onClose={closeDrawer} />
@@ -95,8 +101,7 @@ export const Nav: React.FC = wrapError(() => {
             width={164}
             alt="logo"
             draggable={false}
-            // goto main page when clicked
-            onClick={closeDrawer}
+            onClick={handleLogoClick}
           />
 
           {/* Space */}
