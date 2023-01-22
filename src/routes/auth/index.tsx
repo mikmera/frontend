@@ -5,15 +5,29 @@ import { Login } from './login'
 import { MyPage } from './mypage'
 import { authService } from '~/service/firebase'
 import { User } from 'firebase/auth'
+import { useTheme } from '@mui/material/styles'
+import { useMediaQuery } from '@mui/material'
 
 export const Main: React.FC = wrapError(() => {
+  const theme = useTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'))
   const [user, setUser] = React.useState<User | null>(null)
 
-  React.useEffect(() => {
-    authService.onAuthStateChanged((user) => {
-      setUser(user)
-    })
-  }, [])
+  authService.onAuthStateChanged((user) => {
+    setUser(user)
+  })
 
-  return <Box>{user ? <MyPage user={user} /> : <Login />}</Box>
+  return (
+    <Box
+      sx={{
+        alignItems: 'center',
+        display: 'flex',
+        justifyContent: 'center',
+        marginLeft: isMobile ? 0 : '10px',
+        marginRight: isMobile ? 0 : '10px',
+      }}
+    >
+      {user ? <MyPage user={user} /> : <Login />}
+    </Box>
+  )
 })

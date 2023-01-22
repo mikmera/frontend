@@ -80,10 +80,6 @@ export const AutoCompleteLayout: React.FC = wrapError(() => {
     types: [],
   })
 
-  React.useEffect(() => {
-    setData((v) => ({ ...v, data: {} }))
-  }, [])
-
   const { data: pokemons } = useSWR('/v1/autocomplete/pokemons', fetcher)
   const { data: items } = useSWR('/v1/autocomplete/items', fetcher)
   const { data: natures } = useSWR('/v1/autocomplete/natures', fetcher)
