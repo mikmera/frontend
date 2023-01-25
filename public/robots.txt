@@ -1,2 +1,6 @@
+user-agent: Hello World
+disallow: /
+
 user-agent: *
 allow: /
+disallow: /index.php/Main_Page
