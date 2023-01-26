@@ -11,6 +11,7 @@ import TableCell from '@mui/material/TableCell'
 import TableBody from '@mui/material/TableBody'
 import Paper from '@mui/material/Paper'
 import Button from '@mui/material/Button'
+import Popover from '@mui/material/Popover'
 import CardActions from '@mui/material/CardActions'
 import { PokemonSets, Stats, Moves, StatKey } from '~/types'
 
@@ -19,6 +20,11 @@ export const SetCard: React.FC<{ item: PokemonSets }> = ({
 }: {
   item: PokemonSets
 }) => {
+  const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null)
+
+  const open = Boolean(anchorEl)
+  const id = open ? 'simple-popover' : undefined
+
   const Dictionary = {
     hp: 'H',
     atk: 'A',
@@ -160,7 +166,30 @@ export const SetCard: React.FC<{ item: PokemonSets }> = ({
         </TableContainer>
       </CardContent>
       <CardActions>
-        <Button size="small">자세히 보기</Button>
+        <Button
+          size="small"
+          onClick={(event: React.MouseEvent<HTMLButtonElement>) =>
+            setAnchorEl(event.currentTarget)
+          }
+        >
+          자세히 보기
+        </Button>
+        <Popover
+          id={id}
+          open={open}
+          anchorEl={anchorEl}
+          onClose={() => setAnchorEl(null)}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'left',
+          }}
+        >
+          <pre style={{ margin: 10 }}>
+            {item.description
+              ? item.description
+              : '아무말도 남기시지 않았습니다'}
+          </pre>
+        </Popover>
         <Button
           size="small"
           onClick={() => navigator.clipboard.writeText(getShowdownText())}

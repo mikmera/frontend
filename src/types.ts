@@ -71,6 +71,7 @@ export interface PokemonSets {
   _id: string
   type: ['single' | 'double']
   name: string
+  description: string
   createdAt: string
   updatedAt: string
   pokemon: Pokemon
