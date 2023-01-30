@@ -5,6 +5,7 @@ import {
   ReCaptchaV3Provider,
 } from 'firebase/app-check'
 import { app } from '~/service/firebase'
+import { getCookie } from 'react-use-cookie'
 
 const appCheck = initializeAppCheck(app, {
   provider: new ReCaptchaV3Provider('6LcPWBEkAAAAAGvMehTfPWRw4-yqyAJ9mNg28xRp'),
@@ -15,12 +16,14 @@ export const api = Axios.create({
 })
 
 export const fetcher = async (url: string) => {
+  const Authorization = getCookie('Authorization')
   const appCheckTokenResponse = await getToken(
     appCheck,
     /* forceRefresh= */ false
   )
   const { data } = await api.get(url, {
     headers: {
+      Authorization: `Bearer ${Authorization}`,
       'X-Firebase-AppCheck': appCheckTokenResponse.token,
     },
   })
@@ -29,6 +32,7 @@ export const fetcher = async (url: string) => {
 }
 
 export const put = async (url: string, data: object) => {
+  const Authorization = getCookie('Authorization')
   const appCheckTokenResponse = await getToken(
     appCheck,
     /* forceRefresh= */ true
@@ -36,6 +40,7 @@ export const put = async (url: string, data: object) => {
 
   await api.put(url, data, {
     headers: {
+      Authorization: `Bearer ${Authorization}`,
       'X-Firebase-AppCheck': appCheckTokenResponse.token,
     },
   })
