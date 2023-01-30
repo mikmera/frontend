@@ -16,11 +16,12 @@ import Box from '@mui/material/Box'
 import IconButton from '@mui/material/IconButton'
 import Stack from '@mui/material/Stack'
 import styled from '@mui/material/styles/styled'
-import { useThemeContext } from '../../context'
+import { useMainContext } from '../../context'
 import { FormControlLabel } from '@mui/material'
 import { ToggleDarkmode } from '../../components/ToggleDarkmode'
 import { useCookies } from 'react-cookie'
 import { useNavigate } from 'react-router-dom'
+import { setCookie } from 'react-use-cookie'
 
 const StyledRouterLink = styled(RouterLink)(() => ({
   display: 'flex',
@@ -64,8 +65,8 @@ const NavLinkItem: React.FC<{ item: NavLink }> = wrapError(({ item }) => {
 
 export const Nav: React.FC = wrapError(() => {
   const navigate = useNavigate()
-  const { theme, update } = useThemeContext()
-  const [cookies, setCookie] = useCookies(['theme'])
+  const { theme, update } = useMainContext()
+  const [defaultChecked] = React.useState(theme === 'light')
 
   const [drawerOpen, setDrawerOpen] = React.useState(false)
 
@@ -109,8 +110,9 @@ export const Nav: React.FC = wrapError(() => {
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ mr: 5 }}>
             <FormControlLabel
-              control={<ToggleDarkmode sx={{ m: 1 }} />}
-              value={theme === 'dark'}
+              control={
+                <ToggleDarkmode sx={{ m: 1 }} defaultChecked={defaultChecked} />
+              }
               label={
                 isMobile ? '' : theme === 'dark' ? '루나톤모드' : '솔록모드'
               }

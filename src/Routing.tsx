@@ -38,9 +38,9 @@ const Auth = wrapSuspense(
   lazy(() => import('./routes/auth').then((x) => ({ default: x.Main })))
 )
 
-const Register = wrapSuspense(
+const Callback = wrapSuspense(
   lazy(() =>
-    import('./routes/auth/register').then((x) => ({ default: x.Register }))
+    import('./routes/auth/callback').then((x) => ({ default: x.Callback }))
   )
 )
 
@@ -77,7 +77,8 @@ export const Routing: React.FC = wrapError(() => {
         <Route path="loading" element={<Loading />} />
         <Route path="calc" element={<Calculator />} />
         <Route path="auth" element={<Auth />} />
-        <Route path="auth/register" element={<Register />} />
+        <Route path="auth/:mode" element={<Auth />} />
+        <Route path="auth/callback/:provider" element={<Callback />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>

@@ -17,14 +17,17 @@ import './global.scss'
 import { useCookies, CookiesProvider } from 'react-cookie'
 import * as Sentry from '@sentry/react'
 import { BrowserTracing } from '@sentry/tracing'
-import { ThemeContext } from './context'
+import { MainContext } from './context'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 import { SnackbarProvider } from 'notistack'
 import { useMediaQuery } from '@mui/material'
+import { fetcher } from './util'
 
 export default function ToggleColorMode() {
+  const [cookies] = useCookies(['theme', 'Authorization'])
+  const [user, setUser] = React.useState(null)
   const [themes, setTheme] = React.useState<'light' | 'dark'>('light')
-  const [cookies] = useCookies(['theme', 'test'])
+
   const isDarkModeEnabled = cookies.theme
     ? cookies.theme === 'dark'
     : useMediaQuery('(prefers-color-scheme: dark)')
@@ -37,6 +40,17 @@ export default function ToggleColorMode() {
     }
   }, [isDarkModeEnabled])
 
+  React.useEffect(() => {
+    if (!cookies.Authorization) return setUser(null)
+    fetcher('/v1/auth/@me')
+      .then((res) => {
+        setUser(res)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }, [cookies.Authorization])
+
   const theme = React.useMemo(
     () =>
       createTheme({
@@ -48,9 +62,10 @@ export default function ToggleColorMode() {
   )
 
   return (
-    <ThemeContext.Provider
+    <MainContext.Provider
       value={{
         theme: themes,
+        user: user,
         update: setTheme,
       }}
     >
@@ -66,7 +81,7 @@ export default function ToggleColorMode() {
           </CookiesProvider>
         </ThemeProvider>
       </React.StrictMode>
-    </ThemeContext.Provider>
+    </MainContext.Provider>
   )
 }
 

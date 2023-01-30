@@ -3,12 +3,16 @@ import { wrapError } from '~/components/ErrorBoundary'
 import Box from '@mui/material/Box'
 import { Login } from './login'
 import { MyPage } from './mypage'
+import { Callback } from './callback'
 import { useTheme } from '@mui/material/styles'
 import { useMediaQuery } from '@mui/material'
 import { useCookies } from 'react-cookie'
+import { useNavigate, useParams } from 'react-router-dom'
 
 export const Main: React.FC = wrapError(() => {
   const theme = useTheme()
+  const navigate = useNavigate()
+  const { mode } = useParams()
   const isMobile = useMediaQuery(theme.breakpoints.down('md'))
 
   return (
@@ -21,7 +25,10 @@ export const Main: React.FC = wrapError(() => {
         marginRight: isMobile ? 0 : '10px',
       }}
     >
-      <Login />
+      {!mode && <MyPage />}
+      {mode === 'login' && <Login />}
+      {mode === 'callback' && <Callback />}
+      {mode === 'mypage' && <MyPage />}
     </Box>
   )
 })
