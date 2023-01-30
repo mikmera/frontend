@@ -14,7 +14,7 @@ import {
   Legend,
 } from 'chart.js'
 import './global.scss'
-import { getCookie } from 'react-use-cookie'
+import { useCookies, CookiesProvider } from 'react-cookie'
 import * as Sentry from '@sentry/react'
 import { BrowserTracing } from '@sentry/tracing'
 import { ThemeContext } from './context'
@@ -24,8 +24,9 @@ import { useMediaQuery } from '@mui/material'
 
 export default function ToggleColorMode() {
   const [themes, setTheme] = React.useState<'light' | 'dark'>('light')
-  const isDarkModeEnabled = getCookie('theme')
-    ? getCookie('theme') === 'dark'
+  const [cookies] = useCookies(['theme', 'test'])
+  const isDarkModeEnabled = cookies.theme
+    ? cookies.theme === 'dark'
     : useMediaQuery('(prefers-color-scheme: dark)')
 
   React.useEffect(() => {
@@ -55,12 +56,14 @@ export default function ToggleColorMode() {
     >
       <React.StrictMode>
         <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <BrowserRouter>
-            <SnackbarProvider>
-              <Routing />
-            </SnackbarProvider>
-          </BrowserRouter>
+          <CookiesProvider>
+            <CssBaseline />
+            <BrowserRouter>
+              <SnackbarProvider>
+                <Routing />
+              </SnackbarProvider>
+            </BrowserRouter>
+          </CookiesProvider>
         </ThemeProvider>
       </React.StrictMode>
     </ThemeContext.Provider>

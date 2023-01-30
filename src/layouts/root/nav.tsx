@@ -19,7 +19,7 @@ import styled from '@mui/material/styles/styled'
 import { useThemeContext } from '../../context'
 import { FormControlLabel } from '@mui/material'
 import { ToggleDarkmode } from '../../components/ToggleDarkmode'
-import { setCookie } from 'react-use-cookie'
+import { useCookies } from 'react-cookie'
 import { useNavigate } from 'react-router-dom'
 
 const StyledRouterLink = styled(RouterLink)(() => ({
@@ -65,7 +65,7 @@ const NavLinkItem: React.FC<{ item: NavLink }> = wrapError(({ item }) => {
 export const Nav: React.FC = wrapError(() => {
   const navigate = useNavigate()
   const { theme, update } = useThemeContext()
-  const [defaultChecked] = React.useState(theme === 'light')
+  const [cookies, setCookie] = useCookies(['theme'])
 
   const [drawerOpen, setDrawerOpen] = React.useState(false)
 
@@ -109,15 +109,14 @@ export const Nav: React.FC = wrapError(() => {
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ mr: 5 }}>
             <FormControlLabel
-              control={
-                <ToggleDarkmode sx={{ m: 1 }} defaultChecked={defaultChecked} />
-              }
+              control={<ToggleDarkmode sx={{ m: 1 }} />}
+              value={theme === 'dark'}
               label={
                 isMobile ? '' : theme === 'dark' ? '루나톤모드' : '솔록모드'
               }
               onChange={() => {
-                setCookie('theme', theme === 'dark' ? 'light' : 'dark')
                 update(() => (theme === 'dark' ? 'light' : 'dark'))
+                setCookie('theme', theme === 'dark' ? 'light' : 'dark')
               }}
             />
           </Box>
