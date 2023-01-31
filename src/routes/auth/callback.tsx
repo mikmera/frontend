@@ -17,6 +17,7 @@ export const Callback: React.FC = wrapError(() => {
       fetcher(`/v1/auth/${provider}/callback?code=${code}`).then((data) => {
         setCookie('Authorization', data.token, { path: '/' })
         navigate('/auth')
+        window.location.reload()
       })
     }
   }, [code])
