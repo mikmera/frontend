@@ -19,7 +19,6 @@ import styled from '@mui/material/styles/styled'
 import { useMainContext } from '../../context'
 import { FormControlLabel } from '@mui/material'
 import { ToggleDarkmode } from '../../components/ToggleDarkmode'
-import { useCookies } from 'react-cookie'
 import { useNavigate } from 'react-router-dom'
 import { setCookie } from 'react-use-cookie'
 
@@ -117,7 +116,10 @@ export const Nav: React.FC = wrapError(() => {
                 isMobile ? '' : theme === 'dark' ? '루나톤모드' : '솔록모드'
               }
               onChange={() => {
-                update(() => (theme === 'dark' ? 'light' : 'dark'))
+                update((v) => ({
+                  theme: theme === 'dark' ? 'light' : 'dark',
+                  user: v.user,
+                }))
                 setCookie('theme', theme === 'dark' ? 'light' : 'dark')
               }}
             />

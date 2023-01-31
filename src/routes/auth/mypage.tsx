@@ -9,16 +9,28 @@ import {
   Grid,
   Badge,
   Dialog,
+  useTheme,
+  useMediaQuery,
+  Chip,
 } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
-import { apiUrl } from '~/util'
+import { apiUrl, fetcher } from '~/util'
 import { Spinner } from '~/components/Spinner'
 import { UserRankTable } from '~/components/UserRank'
 import { useMainContext } from '~/context'
+import { ref, uploadString, getDownloadURL } from 'firebase/storage'
+import { storageService } from '~/service/firebase'
+import imageCompression from 'browser-image-compression'
+import pointIcon from '~/assets/images/point.png'
+import Swal from 'sweetalert2'
 
 export const MyPage: React.FC = wrapError(() => {
-  const { user } = useMainContext()
+  const { user, update } = useMainContext()
+
+  const theme = useTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'))
+
   const [profileUrl, setProfileUrl] = React.useState<string | undefined>()
   const [displayName, setDisplayName] = React.useState<string | undefined>()
 
@@ -39,14 +51,20 @@ export const MyPage: React.FC = wrapError(() => {
   React.useEffect(() => {
     if (!cookies.Authorization) return navigate('/auth/login')
     if (!user) return
-    setProfileUrl(user.avatarURL)
-    setDisplayName(user.username)
+    setProfileUrl(user.profile.avatar)
+    setDisplayName(user.profile.displayName)
     setLoading(false)
   }, [user, cookies.Authorization])
 
   return (
     <Box
-      sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        marginLeft: isMobile ? '10px' : 0,
+        marginRight: isMobile ? '10px' : 0,
+      }}
     >
       {loading ? (
         <Box sx={{ mt: 6 }}>
@@ -64,7 +82,7 @@ export const MyPage: React.FC = wrapError(() => {
             <Avatar
               alt={'user'}
               src={profileUrl}
-              imgProps={{ crossOrigin: 'anonymous' }}
+              // imgProps={{ crossOrigin: 'anonymous' }}
               sx={{ width: '96px', height: '96px', mt: 6 }}
             />
           </label>
@@ -74,12 +92,12 @@ export const MyPage: React.FC = wrapError(() => {
             sx={{ textAlign: 'center', mt: 2, display: 'flex' }}
           >
             <img
-              src={apiUrl('/v1/sprites/role/9')}
+              src={apiUrl(`/v1/sprites/role/${user?.rank}`)}
               alt="role"
               style={{ width: '32px', height: '32px' }}
               crossOrigin="anonymous"
             />
-            {`${user?.username} 님, 환영합니다`}
+            {`${user?.profile.displayName} 님, 환영합니다`}
           </Typography>
           <Button variant="text" onClick={handleClickOpen}>
             회원등급 설명 보기
@@ -96,6 +114,22 @@ export const MyPage: React.FC = wrapError(() => {
             </Button>
           </Dialog>
           <Grid container spacing={2} sx={{ mt: 2 }}>
+            <Grid item xs={12}>
+              {/* <Typography variant="subtitle1" sx={{ maxWidth: '100%', wordBreak: 'break-all' }}>
+                포인트 : {user?.points}점
+              </Typography> */}
+              <Chip
+                avatar={
+                  <Avatar
+                    src={
+                      'https://archives.bulbagarden.net/media/upload/6/68/SV_Currency_PD.png'
+                    }
+                  />
+                }
+                label={`보유 포인트 ${user?.points}점`}
+                variant="outlined"
+              />
+            </Grid>
             <Grid item xs={7}>
               <TextField
                 id="standard-basic"
@@ -109,7 +143,23 @@ export const MyPage: React.FC = wrapError(() => {
               />
             </Grid>
             <Grid item xs={5}>
-              <Button variant="contained" sx={{ width: '100%' }}>
+              <Button
+                variant="contained"
+                sx={{ width: '100%' }}
+                onClick={async () => {
+                  if (!user || !displayName) return
+                  try {
+                    await fetcher('/v1/users/profile?username=' + displayName)
+                    window.location.reload()
+                  } catch {
+                    Swal.fire({
+                      icon: 'error',
+                      title: '닉네임 변경 실패',
+                      text: '이미 존재하는 닉네임 또는 사용할 수 없는 닉네임입니다.',
+                    })
+                  }
+                }}
+              >
                 닉네임 변경
               </Button>
             </Grid>
@@ -119,6 +169,7 @@ export const MyPage: React.FC = wrapError(() => {
                 sx={{ width: '100%' }}
                 onClick={async () => {
                   removeCookie('Authorization')
+                  update((v) => ({ ...v, user: null }))
                 }}
               >
                 로그아웃
@@ -130,6 +181,18 @@ export const MyPage: React.FC = wrapError(() => {
             style={{ display: 'none' }}
             id="raised-button-file"
             type="file"
+            onChange={async (e) => {
+              const file = e.target.files?.item(0)
+              if (!user) return
+              if (file) {
+                const data = await imageCompression.getDataUrlFromFile(file)
+                const storageRef = ref(storageService, `profile/${user.id}`)
+                const task = await uploadString(storageRef, data, 'data_url')
+                const url = await getDownloadURL(task.ref)
+                setProfileUrl(url)
+                await fetcher(encodeURI('/v1/users/profile?avatar=' + url))
+              }
+            }}
           />
         </Box>
       )}

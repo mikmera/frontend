@@ -21,33 +21,26 @@ import {
   TableContainer,
 } from '@mui/material'
 import Chip from '@mui/material/Chip'
-import { User } from 'firebase/auth'
 import LoadingButton from '@mui/lab/LoadingButton'
 import { useAutoCompleteContext } from '~/layouts/sets/context'
 import { apiUrl, fetcher, put } from '~/util'
 import { Spinner } from '~/components/Spinner'
 import { VariantType, useSnackbar } from 'notistack'
 import { useNavigate } from 'react-router-dom'
-import { authService } from '~/service/firebase'
+import { useMainContext } from '~/context'
+import { getCookie } from 'react-use-cookie'
 
 export const CreateSets: React.FC = () => {
   const navigate = useNavigate()
   const { data } = useAutoCompleteContext()
 
-  const [user, setUser] = React.useState<User | undefined>()
+  const { user } = useMainContext()
 
   React.useEffect(() => {
-    authService.onAuthStateChanged((user) => {
-      if (
-        user &&
-        (user.emailVerified ||
-          user.providerData[0].providerId !== 'twitter.com')
-      ) {
-        setUser(user)
-      } else {
-        navigate('/auth')
-      }
-    })
+    const token = getCookie('Authorization')
+    if (!token) {
+      navigate('/auth')
+    }
   }, [])
 
   const [pokemons] = React.useState<

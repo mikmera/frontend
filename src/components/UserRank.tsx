@@ -11,9 +11,7 @@ export const UserRankTable: React.FC = () => {
   return (
     <Grid container spacing={0}>
       <Grid item xs={12} md={6}>
-        <List
-          sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}
-        >
+        <List sx={{ width: '100%' }}>
           <ListItem>
             <ListItemAvatar>
               <Avatar
@@ -53,9 +51,7 @@ export const UserRankTable: React.FC = () => {
         </List>
       </Grid>
       <Grid item xs={12} md={6}>
-        <List
-          sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}
-        >
+        <List sx={{ width: '100%' }}>
           <ListItem>
             <ListItemAvatar>
               <Avatar

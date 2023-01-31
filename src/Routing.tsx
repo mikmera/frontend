@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from 'react'
+import React, { lazy } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { wrapError } from './components/ErrorBoundary'
 import { Main } from './routes/main'
@@ -44,6 +44,14 @@ const Callback = wrapSuspense(
   )
 )
 
+const PrivacyPolicy = wrapSuspense(
+  lazy(() =>
+    import('./routes/docs').then((x) => ({
+      default: x.PrivacyPolicy,
+    }))
+  )
+)
+
 const NotFound = wrapSuspense(
   lazy(() =>
     import('./routes/notfound').then((x) => ({
@@ -79,6 +87,7 @@ export const Routing: React.FC = wrapError(() => {
         <Route path="auth" element={<Auth />} />
         <Route path="auth/:mode" element={<Auth />} />
         <Route path="auth/callback/:provider" element={<Callback />} />
+        <Route path="privacy" element={<PrivacyPolicy />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>

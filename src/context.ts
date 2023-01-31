@@ -2,21 +2,37 @@ import { useContext, createContext } from 'react'
 
 export type GlobalContextData = 'light' | 'dark'
 export interface User {
-  avatarURL: string
-  email: string
   id: string
+  uid: string
   role: {
     admin: boolean
     banned: boolean
   }
-  username: string
-  verified: boolean
+  profile: {
+    avatar: string
+    bio: string
+    displayName: string
+  }
+  rank: number
+  points: number
+  stats: {
+    posts: number
+    comments: number
+    likes: number
+    dislikes: number
+    setuplods: number
+  }
+}
+
+export interface MainContextData {
+  theme: GlobalContextData
+  user: User | null
 }
 
 export const MainContext = createContext<{
   theme: GlobalContextData
   user: User | null
-  update: (cb: (theme: GlobalContextData) => GlobalContextData) => void
+  update: (cb: (data: MainContextData) => MainContextData) => void
 }>({
   theme: 'dark',
   user: null,

@@ -21,12 +21,15 @@ import { MainContext } from './context'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 import { SnackbarProvider } from 'notistack'
 import { useMediaQuery } from '@mui/material'
+import { MainContextData } from './context'
 import { fetcher } from './util'
 
 export default function ToggleColorMode() {
   const [cookies] = useCookies(['theme', 'Authorization'])
-  const [user, setUser] = React.useState(null)
-  const [themes, setTheme] = React.useState<'light' | 'dark'>('light')
+  const [data, setData] = React.useState<MainContextData>({
+    theme: 'light',
+    user: null,
+  })
 
   const isDarkModeEnabled = cookies.theme
     ? cookies.theme === 'dark'
@@ -34,17 +37,17 @@ export default function ToggleColorMode() {
 
   React.useEffect(() => {
     if (isDarkModeEnabled) {
-      setTheme('dark')
+      setData((v) => ({ ...v, theme: 'dark' }))
     } else {
-      setTheme('light')
+      setData((v) => ({ ...v, theme: 'light' }))
     }
   }, [isDarkModeEnabled])
 
   React.useEffect(() => {
-    if (!cookies.Authorization) return setUser(null)
+    if (!cookies.Authorization) return setData((v) => ({ ...v, user: null }))
     fetcher('/v1/auth/@me')
       .then((res) => {
-        setUser(res)
+        setData((v) => ({ ...v, user: res }))
       })
       .catch((err) => {
         console.log(err)
@@ -55,18 +58,18 @@ export default function ToggleColorMode() {
     () =>
       createTheme({
         palette: {
-          mode: themes,
+          mode: data.theme,
         },
       }),
-    [themes]
+    [data.theme]
   )
 
   return (
     <MainContext.Provider
       value={{
-        theme: themes,
-        user: user,
-        update: setTheme,
+        theme: data.theme,
+        user: data.user,
+        update: setData,
       }}
     >
       <React.StrictMode>
