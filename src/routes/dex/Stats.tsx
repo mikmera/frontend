@@ -187,7 +187,7 @@ const TerastalizeSection: React.FC = () => {
             <Avatar
               alt={x.type}
               imgProps={{ crossOrigin: 'anonymous' }}
-              src={apiUrl(`/v1/sprites/teratypes/${x.type}.png`)}
+              src={apiUrl(`/v1/sprites/teraTypes/${x.type}.png`)}
             />
           </ListItemAvatar>
           <ListItemText primary={x.name} secondary={`${x.usage}%`} />
