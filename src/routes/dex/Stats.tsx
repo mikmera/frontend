@@ -13,10 +13,12 @@ import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import ListItemAvatar from '@mui/material/ListItemAvatar'
 import ListItemText from '@mui/material/ListItemText'
+import ChartDataLabels from 'chartjs-plugin-datalabels'
 import { motion } from 'framer-motion'
 import { GoogleAdsense } from '~/components/GoogleAdsense'
 import AbilityPatch from '~/assets/images/abilitypatch.webp'
 import AbilityCapsule from '~/assets/images/abilitycapsule.webp'
+import { Tooltip } from '@mui/material'
 
 const statLabels: Record<StatKey, [string, string]> = {
   hp: ['#EA3323', '체력'],
@@ -33,6 +35,17 @@ const statOptions: ChartOptions = {
   plugins: {
     legend: {
       position: 'right',
+      labels: {
+        usePointStyle: true,
+        pointStyle: 'rect',
+      },
+    },
+    datalabels: {
+      display: true,
+      color: 'white',
+      font: {
+        size: 14,
+      },
     },
   },
   maintainAspectRatio: false,
@@ -54,7 +67,12 @@ const StatSection: React.FC = () => {
 
   return (
     <Box sx={{ height: '100%', p: 1 }}>
-      <Bar height="100%" data={data} options={statOptions} />
+      <Bar
+        height="100%"
+        data={data}
+        options={statOptions}
+        plugins={[ChartDataLabels]}
+      />
     </Box>
   )
 }
@@ -71,21 +89,19 @@ const MoveSection: React.FC = () => {
       sx={{ height: '100%', overflowY: 'scroll', py: 0 }}
     >
       {item.moves.map((x, i) => (
-        <MotionListItem
-          key={i}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-        >
-          <ListItemAvatar>
-            <img
-              src={apiUrl(`/v1/sprites/types/${x.type}.svg`)}
-              crossOrigin="anonymous"
-              alt={x.type || '?'}
-              style={{ width: 40, height: 40, marginTop: 8 }}
-            />
-          </ListItemAvatar>
-          <ListItemText primary={x.name} secondary={`${x.usage}%`} />
-        </MotionListItem>
+        <Tooltip title={x.description.ko} key={i} followCursor>
+          <MotionListItem initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+            <ListItemAvatar>
+              <img
+                src={apiUrl(`/v1/sprites/types/${x.type}.svg`)}
+                crossOrigin="anonymous"
+                alt={x.type || '?'}
+                style={{ width: 40, height: 40, marginTop: 8 }}
+              />
+            </ListItemAvatar>
+            <ListItemText primary={x.name} secondary={`${x.usage}%`} />
+          </MotionListItem>
+        </Tooltip>
       ))}
     </MotionList>
   )
@@ -210,26 +226,19 @@ const ItemSection: React.FC = () => {
       sx={{ height: '100%', overflowY: 'scroll', py: 0 }}
     >
       {item.items.map((x, i) => (
-        <MotionListItem
-          key={i}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-        >
-          <ListItemAvatar>
-            {/* <Avatar
-              alt={x.name || '?'}
-              imgProps={{ crossOrigin: 'anonymous' }}
-              src={apiUrl(`/v1/sprites/items/${x.name}`)}
-            /> */}
-            <img
-              src={apiUrl(`/v1/sprites/items/${x.name}`)}
-              crossOrigin="anonymous"
-              alt={x.name || '?'}
-              style={{ width: 40, height: 40, marginTop: 6 }}
-            />
-          </ListItemAvatar>
-          <ListItemText primary={x.name} secondary={`${x.usage}%`} />
-        </MotionListItem>
+        <Tooltip key={i} title={x.description.ko} followCursor>
+          <MotionListItem initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+            <ListItemAvatar>
+              <img
+                src={apiUrl(`/v1/sprites/items/${x.name}`)}
+                crossOrigin="anonymous"
+                alt={x.name || '?'}
+                style={{ width: 40, height: 40, marginTop: 6 }}
+              />
+            </ListItemAvatar>
+            <ListItemText primary={x.name} secondary={`${x.usage}%`} />
+          </MotionListItem>
+        </Tooltip>
       ))}
     </MotionList>
   )

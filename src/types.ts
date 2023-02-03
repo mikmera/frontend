@@ -42,6 +42,9 @@ export interface Abilities {
 export interface Items {
   name: string
   usage: `${number}`
+  description: {
+    ko: string
+  }
 }
 
 export interface Moves {
@@ -51,6 +54,9 @@ export interface Moves {
   type: string
   usage: `${number}`
   locales: Locales
+  description: {
+    ko: string
+  }
 }
 
 export interface Natures {

@@ -23,6 +23,7 @@
     "axios": "^1.2.0",
     "browser-image-compression": "^2.0.0",
     "chart.js": "^4.0.1",
+    "chartjs-plugin-datalabels": "^2.2.0",
     "firebase": "^9.15.0",
     "framer-motion": "^7.6.9",
     "node-sass": "^8.0.0",
