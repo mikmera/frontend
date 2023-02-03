@@ -1,7 +1,7 @@
 import React from 'react'
 import useSWR from 'swr'
 import { fetcher } from '~/util'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useParams } from 'react-router-dom'
 import { wrapError } from '~/components/ErrorBoundary'
 import Box from '@mui/material/Box'
 import useMediaQuery from '@mui/material/useMediaQuery'
@@ -27,7 +27,10 @@ export const SetsLayout: React.FC = wrapError(() => {
     count: 0,
   })
 
-  const { data: sets } = useSWR(`/v1/sets?offset=${0}`, fetcher)
+  const { data: sets } = useSWR(
+    `/v1/sets?offset=${0}&type=${data.type}`,
+    fetcher
+  )
 
   React.useEffect(() => {
     setData((v) => ({ ...v, type: 'all' }))

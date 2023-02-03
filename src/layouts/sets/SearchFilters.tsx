@@ -1,16 +1,19 @@
 import React from 'react'
-import ToggleButton from '@mui/material/ToggleButton'
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup'
 import Box from '@mui/material/Box'
 import { wrapError } from '~/components/ErrorBoundary'
-import { FormControl, Input, InputAdornment } from '@mui/material'
+import { FormControl, Input, InputAdornment, ToggleButton } from '@mui/material'
 import searchIcon from '~/assets/images/search.svg'
 import { SetsContextData, SetsLayoutContext, useSetsContext } from './context'
 import { apiUrl, fetcher } from '~/util'
 
 export const SearchFilters: React.FC = wrapError(() => {
-  const { update } = React.useContext(SetsLayoutContext)
+  const { data, update } = React.useContext(SetsLayoutContext)
   const [alignment, setAlignment] = React.useState('all')
+
+  React.useEffect(() => {
+    setAlignment(data.type)
+  }, [data.type])
 
   const handleChange = (
     event: React.MouseEvent<HTMLElement>,

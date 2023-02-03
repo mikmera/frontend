@@ -15,6 +15,8 @@ import ListItemAvatar from '@mui/material/ListItemAvatar'
 import ListItemText from '@mui/material/ListItemText'
 import { motion } from 'framer-motion'
 import { GoogleAdsense } from '~/components/GoogleAdsense'
+import AbilityPatch from '~/assets/images/abilitypatch.webp'
+import AbilityCapsule from '~/assets/images/abilitycapsule.webp'
 
 const statLabels: Record<StatKey, [string, string]> = {
   hp: ['#EA3323', '체력'],
@@ -75,10 +77,11 @@ const MoveSection: React.FC = () => {
           animate={{ opacity: 1 }}
         >
           <ListItemAvatar>
-            <Avatar
-              alt={x.type || '?'}
-              imgProps={{ crossOrigin: 'anonymous' }}
+            <img
               src={apiUrl(`/v1/sprites/types/${x.type}.svg`)}
+              crossOrigin="anonymous"
+              alt={x.type || '?'}
+              style={{ width: 40, height: 40, marginTop: 8 }}
             />
           </ListItemAvatar>
           <ListItemText primary={x.name} secondary={`${x.usage}%`} />
@@ -88,14 +91,45 @@ const MoveSection: React.FC = () => {
   )
 }
 
-const NatureSection: React.FC = () => {
+// const NatureSection: React.FC = () => {
+//   const item = useCurrentDexItem()
+//   return (
+//     <MotionList
+//       transition={{ staggerChildren: 0.1 }}
+//       sx={{ height: '100%', overflowY: 'scroll', py: 0 }}
+//     >
+//       {item.natures.map((x, i) => (
+//         <MotionListItem
+//           key={i}
+//           initial={{ opacity: 0 }}
+//           animate={{ opacity: 1 }}
+//         >
+//           <ListItemAvatar>
+//             {/* <Avatar
+//               alt={'?'}
+//               imgProps={{ crossOrigin: 'anonymous' }}
+//               src={apiUrl(`/v1/sprites/natures/${x.plus}.webp`)}
+//             /> */}
+//           </ListItemAvatar>
+//           <ListItemText
+//             primary={x.name}
+//             secondary={`${x.usage}% (${x.show})`}
+//           />
+//         </MotionListItem>
+//       ))}
+//     </MotionList>
+//   )
+// }
+
+const TeamMatesSection: React.FC = () => {
   const item = useCurrentDexItem()
+
   return (
     <MotionList
       transition={{ staggerChildren: 0.1 }}
       sx={{ height: '100%', overflowY: 'scroll', py: 0 }}
     >
-      {item.natures.map((x, i) => (
+      {item.teammates.map((x, i) => (
         <MotionListItem
           key={i}
           initial={{ opacity: 0 }}
@@ -105,13 +139,30 @@ const NatureSection: React.FC = () => {
             <Avatar
               alt={'?'}
               imgProps={{ crossOrigin: 'anonymous' }}
-              src={apiUrl(`/v1/sprites/natures/${x.plus}.webp`)}
+              src={
+                x.formId === 0
+                  ? apiUrl(`/v1/sprites/pokemon/${x.dexId}`)
+                  : apiUrl(`/v1/sprites/pokemon/${x.dexId}-${x.formId}`)
+              }
             />
+            {x.types.map((x, i) => (
+              <Avatar
+                key={i}
+                alt={x}
+                imgProps={{ crossOrigin: 'anonymous' }}
+                src={apiUrl(`/v1/sprites/types/${x}.svg`)}
+                sx={{
+                  position: 'absolute',
+                  top: 15,
+                  left: 170 + i * 20,
+                  width: 20,
+                  height: 20,
+                  transform: 'translate(0, 0)',
+                }}
+              />
+            ))}
           </ListItemAvatar>
-          <ListItemText
-            primary={x.name}
-            secondary={`${x.usage}% (${x.show})`}
-          />
+          <ListItemText primary={x.name} secondary={`#${i + 1}`} />
         </MotionListItem>
       ))}
     </MotionList>
@@ -119,27 +170,14 @@ const NatureSection: React.FC = () => {
 }
 
 const TerastalizeSection: React.FC = () => {
-  // const item = useCurrentDexItem()
+  const item = useCurrentDexItem()
 
   return (
     <MotionList
       transition={{ staggerChildren: 0.1 }}
       sx={{ height: '100%', overflowY: 'scroll', py: 0 }}
     >
-      <MotionListItem initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-        <ListItemAvatar>
-          <Avatar
-            alt="작업중"
-            imgProps={{ crossOrigin: 'anonymous' }}
-            src={apiUrl(`/v1/sprites/types/Normal.svg`)}
-          />
-        </ListItemAvatar>
-        <ListItemText
-          primary={'작업중입니다'}
-          secondary={'빠른 시일내에 제공해드리겠습니다'}
-        />
-      </MotionListItem>
-      {/* {item.terastalize.map((x, i) => (
+      {item.terastalize.map((x, i) => (
         <MotionListItem
           key={i}
           initial={{ opacity: 0 }}
@@ -149,12 +187,12 @@ const TerastalizeSection: React.FC = () => {
             <Avatar
               alt={x.type}
               imgProps={{ crossOrigin: 'anonymous' }}
-              src={apiUrl(`/v1/sprites/types/${x.type}.svg`)}
+              src={apiUrl(`/v1/sprites/teratypes/${x.type}.png`)}
             />
           </ListItemAvatar>
-          <ListItemText primary={x.type} secondary={`${x.usage}%`} />
+          <ListItemText primary={x.name} secondary={`${x.usage}%`} />
         </MotionListItem>
-      ))} */}
+      ))}
     </MotionList>
   )
 }
@@ -174,10 +212,16 @@ const ItemSection: React.FC = () => {
           animate={{ opacity: 1 }}
         >
           <ListItemAvatar>
-            <Avatar
+            {/* <Avatar
               alt={x.name || '?'}
               imgProps={{ crossOrigin: 'anonymous' }}
               src={apiUrl(`/v1/sprites/items/${x.name}`)}
+            /> */}
+            <img
+              src={apiUrl(`/v1/sprites/items/${x.name}`)}
+              crossOrigin="anonymous"
+              alt={x.name || '?'}
+              style={{ width: 40, height: 40, marginTop: 6 }}
             />
           </ListItemAvatar>
           <ListItemText primary={x.name} secondary={`${x.usage}%`} />
@@ -189,15 +233,15 @@ const ItemSection: React.FC = () => {
 
 const AbilitiesSection: React.FC = () => {
   const item = useCurrentDexItem()
-  const type = (typeN: string) => {
-    switch (typeN) {
-      case 'hidden':
-        return { children: '숨' }
-      case 'normal':
-      default:
-        return { children: '일' }
-    }
-  }
+  // const type = (typeN: string) => {
+  //   switch (typeN) {
+  //     case 'hidden':
+  //       return { children: '숨' }
+  //     case 'normal':
+  //     default:
+  //       return { children: '일' }
+  //   }
+  // }
   return (
     <MotionList
       transition={{ staggerChildren: 0.1 }}
@@ -210,7 +254,10 @@ const AbilitiesSection: React.FC = () => {
           animate={{ opacity: 1 }}
         >
           <ListItemAvatar>
-            <Avatar {...type(x.type)} />
+            <Avatar
+              src={x.type === 'hidden' ? AbilityPatch : AbilityCapsule}
+              alt={x.type === 'hidden' ? '숨' : '일'}
+            />
           </ListItemAvatar>
           <ListItemText primary={x.name} secondary={`${x.usage}%`} />
         </MotionListItem>
@@ -247,8 +294,9 @@ export const DexStats: React.FC = () => {
         </DetailSection>
       </Grid>
       <Grid item xs={12} md={6} lg={4}>
-        <DetailSection title="성격">
-          <NatureSection />
+        <DetailSection title="배틀팀 구성">
+          {/* <NatureSection /> */}
+          <TeamMatesSection />
         </DetailSection>
       </Grid>
       <Grid item xs={12} md={6}>

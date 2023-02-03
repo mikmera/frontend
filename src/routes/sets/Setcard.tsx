@@ -55,9 +55,10 @@ export const SetCard: React.FC<{ item: PokemonSets }> = ({
     if (type) {
       for (const ikey in iv) {
         const key: StatKey = ikey as StatKey
-        if (iv[key] !== 31) result.push(iv[key] + ' ' + key)
+        if (iv[key] !== 31)
+          result.push(iv[key] + ' ' + key[0].toUpperCase() + key.slice(1))
       }
-      return result
+      return result.join(' / ')
     } else {
       for (const ikey in iv) {
         const key: StatKey = ikey as StatKey
@@ -106,26 +107,31 @@ export const SetCard: React.FC<{ item: PokemonSets }> = ({
         />
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           {item.name}
-          <Avatar
-            sx={{ float: 'right', width: 32, height: 32 }}
-            imgProps={{ crossOrigin: 'anonymous' }}
-            src={apiUrl(
-              `/v1/sprites/types/${
-                item.teratype.name[0].toUpperCase() +
-                item.teratype.name.slice(1)
-              }.svg`
-            )}
-          />
         </Typography>
+        <Avatar
+          sx={{
+            float: 'right',
+            width: 32,
+            height: 32,
+            position: 'relative',
+            top: -30,
+          }}
+          imgProps={{ crossOrigin: 'anonymous' }}
+          src={apiUrl(
+            `/v1/sprites/types/${
+              item.teratype.name[0].toUpperCase() + item.teratype.name.slice(1)
+            }.svg`
+          )}
+        />
         <Typography variant="h5" component="div" sx={{ wordBreak: 'keep-all' }}>
           {item.pokemon.locales.ko ?? item.pokemon.name}
         </Typography>
+        <Avatar
+          sx={{ float: 'right', width: 32, height: 32, position: 'relative' }}
+          imgProps={{ crossOrigin: 'anonymous' }}
+          src={apiUrl(`/v1/sprites/items/${item.item.id}`)}
+        />
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          <Avatar
-            sx={{ float: 'right', width: 32, height: 32 }}
-            imgProps={{ crossOrigin: 'anonymous' }}
-            src={apiUrl(`/v1/sprites/items/${item.item.id}`)}
-          />
           @{item.item.locales.ko ?? item.item.name}
         </Typography>
         <Typography variant="body2">

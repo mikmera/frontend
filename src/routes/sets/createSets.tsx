@@ -113,6 +113,7 @@ export const CreateSets: React.FC = () => {
   const [type, setType] = React.useState<'single' | 'double'>('single')
   const [teratype, setTeraType] = React.useState<string>()
   const [waitUpload, setWaitUpload] = React.useState<boolean>(false)
+  const [description, setDescription] = React.useState<string>('')
 
   const [realStats, setRealStats] = React.useState<number[]>([0, 0, 0, 0, 0, 0])
 
@@ -317,6 +318,7 @@ export const CreateSets: React.FC = () => {
     await put(apiUrl('/v1/sets/create'), {
       name: setsName,
       pokemonId: pokemons.find((v) => v.label == pokemon)?.id,
+      description: description,
       itemId: items.find((v) => v.label == item)?.id,
       nature: nature,
       ability: ability,
@@ -725,6 +727,18 @@ export const CreateSets: React.FC = () => {
               setTeraType(v.type)
             }}
           />
+          <Grid item xs={12} mt={4}>
+            <TextField
+              placeholder="샘플 설명을 입력해주세요"
+              multiline
+              rows={2}
+              maxRows={10}
+              inputProps={{ maxLength: 256 }}
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              sx={{ width: '100%' }}
+            />
+          </Grid>
           <Grid item xs={2} mt={2} mb={2}>
             항목
           </Grid>

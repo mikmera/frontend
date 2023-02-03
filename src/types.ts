@@ -29,6 +29,7 @@ export interface Stats {
 
 export interface Terastalize {
   type: string
+  name: string
   usage: `${number}`
 }
 
@@ -65,6 +66,12 @@ export interface Usage {
   natures: Natures[]
   items: Items[]
   moves: Moves[]
+  teammates: {
+    name: string
+    dexId: number
+    formId: number
+    types: string[]
+  }[]
 }
 
 export interface PokemonSets {

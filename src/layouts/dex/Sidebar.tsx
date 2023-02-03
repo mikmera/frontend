@@ -47,8 +47,8 @@ const SidebarHeader: React.FC = wrapError(() => {
           >
             <MenuItem value="single">싱글배틀</MenuItem>
             <MenuItem value="double">더블배틀</MenuItem>
-            <MenuItem value="seriesSingle">랭크싱글</MenuItem>
-            <MenuItem value="seriesDouble">랭크더블</MenuItem>
+            {/* <MenuItem value="seriesSingle">랭크싱글</MenuItem>
+            <MenuItem value="seriesDouble">랭크더블</MenuItem> */}
           </Select>
         </FormControl>
       </Box>

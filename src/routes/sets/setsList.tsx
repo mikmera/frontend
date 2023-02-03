@@ -10,11 +10,6 @@ import { apiUrl, fetcher } from '~/util'
 
 export const SetsList: React.FC = wrapError(() => {
   const { data, update } = useSetsContext()
-  const filterd = data.sets?.filter((item) => {
-    if (!data.type || data.type === 'all') return true
-    else return item.type?.[0] === data.type
-  })
-
   const SearchFilter = data.result?.filter((item) => {
     if (!data.type || data.type === 'all') return true
     else return item.type?.[0] === data.type
@@ -27,17 +22,33 @@ export const SetsList: React.FC = wrapError(() => {
     if (inView && !loading) {
       if (data.sets?.length === data.count) return
       setLoading(true)
-      fetcher(apiUrl(`/v1/sets?offset=${data.sets?.length ?? 0 + 1}`)).then(
-        (res) => {
-          update((v) => ({
-            ...v,
-            sets: [...(v.sets ?? []), ...res.sets],
-          }))
-          setLoading(false)
-        }
-      )
+      fetcher(
+        apiUrl(
+          `/v1/sets?offset=${data.sets?.length ?? 0 + 1}&type=${data.type}`
+        )
+      ).then((res) => {
+        update((v) => ({
+          ...v,
+          sets: [...(v.sets ?? []), ...res.sets],
+        }))
+        setLoading(false)
+      })
     }
   }, [inView, loading])
+
+  React.useEffect(() => {
+    setLoading(true)
+    fetcher(
+      apiUrl(`/v1/sets?offset=${data.sets?.length ?? 0 + 1}&type=${data.type}`)
+    ).then((res) => {
+      update((v) => ({
+        ...v,
+        sets: res.sets,
+        count: res.count,
+      }))
+      setLoading(false)
+    })
+  }, [data.type])
 
   return (
     <Grid
@@ -77,7 +88,7 @@ export const SetsList: React.FC = wrapError(() => {
           </Grid>
         ))
       ) : (
-        filterd?.map((item, index) => (
+        data.sets?.map((item, index) => (
           <Grid
             xs={6}
             md={2}

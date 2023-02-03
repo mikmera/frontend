@@ -22,7 +22,7 @@ import { useMainContext } from '~/context'
 import { ref, uploadString, getDownloadURL } from 'firebase/storage'
 import { storageService } from '~/service/firebase'
 import imageCompression from 'browser-image-compression'
-import pointIcon from '~/assets/images/point.png'
+import pointIcon from '~/assets/images/coin.png'
 import Swal from 'sweetalert2'
 
 export const MyPage: React.FC = wrapError(() => {
@@ -97,7 +97,7 @@ export const MyPage: React.FC = wrapError(() => {
               style={{ width: '32px', height: '32px' }}
               crossOrigin="anonymous"
             />
-            {`${user?.profile.displayName} 님, 환영합니다`}
+            {`${user?.profile.displayName}님, 환영합니다`}
           </Typography>
           <Button variant="text" onClick={handleClickOpen}>
             회원등급 설명 보기
@@ -119,13 +119,7 @@ export const MyPage: React.FC = wrapError(() => {
                 포인트 : {user?.points}점
               </Typography> */}
               <Chip
-                avatar={
-                  <Avatar
-                    src={
-                      'https://archives.bulbagarden.net/media/upload/6/68/SV_Currency_PD.png'
-                    }
-                  />
-                }
+                avatar={<Avatar src={pointIcon} />}
                 label={`보유 포인트 ${user?.points}점`}
                 variant="outlined"
               />
