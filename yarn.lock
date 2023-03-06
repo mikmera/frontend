@@ -1563,6 +1563,31 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@pkmn/dex-types@npm:^0.7.21":
+  version: 0.7.21
+  resolution: "@pkmn/dex-types@npm:0.7.21"
+  dependencies:
+    "@pkmn/types": ^3.0.0
+  checksum: 24e4b6d9a0bd08877be87ec2a179abaeb18f51d9f503aa7ac26e63a74c49d74313cdf6a677c88f391bda50b0fd8c26ef8be9cb55e61384113b9770dbc52cabab
+  languageName: node
+  linkType: hard
+
+"@pkmn/dex@npm:^0.7.21":
+  version: 0.7.21
+  resolution: "@pkmn/dex@npm:0.7.21"
+  dependencies:
+    "@pkmn/dex-types": ^0.7.21
+  checksum: a925a2b25cd86b488447c52fef67e2bcf327024d588079e9debfb52f54a382c5ed77f34bf7727bb0d16f560765bc8f3663f688a49af789b45938e154787902e8
+  languageName: node
+  linkType: hard
+
+"@pkmn/types@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "@pkmn/types@npm:3.0.0"
+  checksum: a6b9c2c65d94c63766d5920b4bece164473c67a384d35ca1f492573428d010da8bff784b4d2a584433c0c828341ee146086c05acd20bd0aeb474fe7a65664342
+  languageName: node
+  linkType: hard
+
 "@popperjs/core@npm:^2.11.6":
   version: 2.11.6
   resolution: "@popperjs/core@npm:2.11.6"
@@ -1873,15 +1898,6 @@ __metadata:
     "@sentry/types": 7.33.0
     tslib: ^1.9.3
   checksum: 0e592ae391933f3ae04646456d1d78feeff64c5a9ee807e225f690f8a29228ef93c5e3444f14023372365e28773416d0d8b606fef2fd92197f25ce172429bf69
-  languageName: node
-  linkType: hard
-
-"@smogon/calc@npm:^0.7.0":
-  version: 0.7.0
-  resolution: "@smogon/calc@npm:0.7.0"
-  dependencies:
-    "@types/node": ^18.11.9
-  checksum: ef70f6ed99caafb6f02917a30af51a2ef3986fe65291193110834f9a0d0593b770ea88ae716cc51016439abbe73d8c18f189b7a2dfd860926a8b3b324d35f91b
   languageName: node
   linkType: hard
 
@@ -5411,9 +5427,9 @@ eslint@latest:
     "@mui/icons-material": ^5.10.15
     "@mui/lab": ^5.0.0-alpha.115
     "@mui/material": ^5.11.5
+    "@pkmn/dex": ^0.7.21
     "@sentry/react": ^7.33.0
     "@sentry/tracing": ^7.33.0
-    "@smogon/calc": ^0.7.0
     "@types/firebase": ^3.2.1
     "@types/node": ^18.11.9
     "@types/react": ^18.0.24
@@ -5434,6 +5450,7 @@ eslint@latest:
     framer-motion: ^7.6.9
     node-sass: ^8.0.0
     notistack: ^2.0.8
+    pokemoncalc: ^1.0.0
     pretendard: ^1.3.6
     prettier: ^2.8.0
     query-string: ^8.1.0
@@ -5457,6 +5474,15 @@ eslint@latest:
     vite-plugin-svgr: ^2.2.2
   languageName: unknown
   linkType: soft
+
+"pokemoncalc@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "pokemoncalc@npm:1.0.0"
+  dependencies:
+    "@types/node": ^18.11.9
+  checksum: 8ce6492eaf687b037958e71b2edc1136d7f14d0b68fd2f8e0f40e7816649d4b7df7988d9f4219c587f2a7065d5491904b4578c94ca541d4e02c34b21d98f8aaa
+  languageName: node
+  linkType: hard
 
 "postcss@npm:^8.4.18":
   version: 8.4.19

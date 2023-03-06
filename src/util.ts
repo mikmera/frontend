@@ -21,14 +21,19 @@ export const fetcher = async (url: string) => {
     appCheck,
     /* forceRefresh= */ false
   )
-  const { data } = await api.get(url, {
-    headers: {
-      Authorization: `Bearer ${Authorization}`,
-      'X-Firebase-AppCheck': appCheckTokenResponse.token,
-    },
-  })
+  try {
+    const { data } = await api.get(url, {
+      headers: {
+        Authorization: `Bearer ${Authorization}`,
+        'X-Firebase-AppCheck': appCheckTokenResponse.token,
+      },
+    })
 
-  return data.body
+    return data.body
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
+    return error.response.data
+  }
 }
 
 export const put = async (url: string, data: object) => {

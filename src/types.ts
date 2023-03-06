@@ -127,3 +127,110 @@ export interface SetcardProps {
   item: PokemonSets
   key: number
 }
+
+type PokemonTypes =
+  | 'Normal'
+  | 'Fire'
+  | 'Water'
+  | 'Electric'
+  | 'Grass'
+  | 'Ice'
+  | 'Fighting'
+  | 'Poison'
+  | 'Ground'
+  | 'Flying'
+  | 'Psychic'
+  | 'Bug'
+  | 'Rock'
+  | 'Ghost'
+  | 'Dragon'
+  | 'Dark'
+  | 'Steel'
+  | 'Fairy'
+
+type PokemonNature =
+  | 'Adamant'
+  | 'Bashful'
+  | 'Bold'
+  | 'Brave'
+  | 'Calm'
+  | 'Careful'
+  | 'Docile'
+  | 'Gentle'
+  | 'Hardy'
+  | 'Hasty'
+  | 'Impish'
+  | 'Jolly'
+  | 'Lax'
+  | 'Lonely'
+  | 'Mild'
+  | 'Modest'
+  | 'Naive'
+  | 'Naughty'
+  | 'Quiet'
+  | 'Quirky'
+  | 'Rash'
+  | 'Relaxed'
+  | 'Sassy'
+  | 'Serious'
+  | 'Timid'
+
+export interface PokemonCalcSet {
+  pokemon: string
+  level: number
+  types: PokemonTypes[]
+  item: string
+  nature: PokemonNature
+  ability: {
+    name: string
+    enabled: boolean
+  }
+  terastalize: {
+    type: PokemonTypes
+    enabled: boolean
+  }
+  gender: 'M' | 'F' | 'N'
+  currentHp: {
+    value: number
+    max: number
+    percent: number
+  }
+  ivs: Stats
+  evs: Stats
+  realStats: Stats
+  rankup: {
+    atk: -6 | -5 | -4 | -3 | -2 | -1 | 0 | 1 | 2 | 3 | 4 | 5 | 6
+    def: -6 | -5 | -4 | -3 | -2 | -1 | 0 | 1 | 2 | 3 | 4 | 5 | 6
+    spa: -6 | -5 | -4 | -3 | -2 | -1 | 0 | 1 | 2 | 3 | 4 | 5 | 6
+    spd: -6 | -5 | -4 | -3 | -2 | -1 | 0 | 1 | 2 | 3 | 4 | 5 | 6
+    spe: -6 | -5 | -4 | -3 | -2 | -1 | 0 | 1 | 2 | 3 | 4 | 5 | 6
+  }
+  status: {
+    name:
+      | 'Healthy'
+      | 'Burned'
+      | 'Paralyzed'
+      | 'Poisoned'
+      | 'Badly Poisoned'
+      | 'Asleep'
+      | 'Frozen'
+    BadlyPoisonedTurns:
+      | 0
+      | 1
+      | 2
+      | 3
+      | 4
+      | 5
+      | 6
+      | 7
+      | 8
+      | 9
+      | 10
+      | 11
+      | 12
+      | 13
+      | 14
+      | 15
+  }
+  saltCure: boolean
+}

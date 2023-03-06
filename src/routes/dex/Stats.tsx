@@ -92,9 +92,10 @@ const MoveSection: React.FC = () => {
         <Tooltip title={x.description.ko} key={i} followCursor>
           <MotionListItem initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
             <ListItemAvatar>
-              <img
+              <Avatar
+                variant="square"
                 src={apiUrl(`/v1/sprites/types/${x.type}.svg`)}
-                crossOrigin="anonymous"
+                imgProps={{ crossOrigin: 'anonymous' }}
                 alt={x.type || '?'}
                 style={{ width: 40, height: 40, marginTop: 8 }}
               />
@@ -229,9 +230,10 @@ const ItemSection: React.FC = () => {
         <Tooltip key={i} title={x.description.ko} followCursor>
           <MotionListItem initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
             <ListItemAvatar>
-              <img
+              <Avatar
+                variant="square"
                 src={apiUrl(`/v1/sprites/items/${x.name}`)}
-                crossOrigin="anonymous"
+                imgProps={{ crossOrigin: 'anonymous' }}
                 alt={x.name || '?'}
                 style={{ width: 40, height: 40, marginTop: 6 }}
               />

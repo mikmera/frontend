@@ -20,6 +20,6 @@
       "~/*": ["./src/*"]
     }
   },
-  "include": ["src"],
+  "include": ["src", "node_modules/calc"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

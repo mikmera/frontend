@@ -530,6 +530,7 @@ export const CreateSets: React.FC = () => {
           </Grid>
           <Grid item xs={4}>
             <Avatar
+              variant="square"
               sx={{
                 width: 100,
                 height: 100,

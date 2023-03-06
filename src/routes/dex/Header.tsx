@@ -43,6 +43,7 @@ export const DexHeader: React.FC = wrapError(() => {
           <Tooltip title={x} key={i}>
             <Avatar
               alt={x}
+              variant="rounded"
               imgProps={{ crossOrigin: 'anonymous' }}
               src={apiUrl(`/v1/sprites/types/${x}.svg`)}
             />

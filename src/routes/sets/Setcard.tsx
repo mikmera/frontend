@@ -95,6 +95,7 @@ export const SetCard: React.FC<{ item: PokemonSets }> = ({
     <Card sx={{ minWidth: '330px', maxWidth: '400px' }}>
       <CardContent>
         <Avatar
+          variant="rounded"
           sx={{ float: 'right', width: 72, height: 72 }}
           imgProps={{ crossOrigin: 'anonymous' }}
           src={
@@ -109,6 +110,7 @@ export const SetCard: React.FC<{ item: PokemonSets }> = ({
           {item.name}
         </Typography>
         <Avatar
+          variant="rounded"
           sx={{
             float: 'right',
             width: 32,
@@ -127,6 +129,7 @@ export const SetCard: React.FC<{ item: PokemonSets }> = ({
           {item.pokemon.locales.ko ?? item.pokemon.name}
         </Typography>
         <Avatar
+          variant="rounded"
           sx={{ float: 'right', width: 32, height: 32, position: 'relative' }}
           imgProps={{ crossOrigin: 'anonymous' }}
           src={apiUrl(`/v1/sprites/items/${item.item.id}`)}
@@ -152,6 +155,7 @@ export const SetCard: React.FC<{ item: PokemonSets }> = ({
                 <TableRow key={move.id + Math.random()}>
                   <TableCell align="left" sx={{ width: '22px' }}>
                     <Avatar
+                      variant="rounded"
                       sx={{ width: 20, height: 20 }}
                       imgProps={{ crossOrigin: 'anonymous' }}
                       src={apiUrl(`/v1/sprites/types/${move.type}.svg`)}
