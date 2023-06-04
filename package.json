@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "linr": "eslint ."
   },
   "dependencies": {
     "@ctrl/react-adsense": "^1.6.1",
