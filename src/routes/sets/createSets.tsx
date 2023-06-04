@@ -428,19 +428,19 @@ export const CreateSets: React.FC = () => {
     if (!stats) return
     const hp = Math.floor((stats.hp * 2 + Ivs[0] + Effort[0] / 4) * 0.5 + 60)
     const atk = Math.floor(
-      ((stats.atk * 2 + Ivs[1] + Effort[1] / 4) * 0.5 + 5) * correction?.atk
+      ((stats.atk * 2 + Ivs[1] + Effort[1] / 4) * 0.5 + 5) * correction.atk
     )
     const def = Math.floor(
-      ((stats.def * 2 + Ivs[2] + Effort[2] / 4) * 0.5 + 5) * correction?.def
+      ((stats.def * 2 + Ivs[2] + Effort[2] / 4) * 0.5 + 5) * correction.def
     )
     const spa = Math.floor(
-      ((stats.spa * 2 + Ivs[3] + Effort[3] / 4) * 0.5 + 5) * correction?.spa
+      ((stats.spa * 2 + Ivs[3] + Effort[3] / 4) * 0.5 + 5) * correction.spa
     )
     const spd = Math.floor(
-      ((stats.spd * 2 + Ivs[4] + Effort[4] / 4) * 0.5 + 5) * correction?.spd
+      ((stats.spd * 2 + Ivs[4] + Effort[4] / 4) * 0.5 + 5) * correction.spd
     )
     const spe = Math.floor(
-      ((stats.spe * 2 + Ivs[5] + Effort[5] / 4) * 0.5 + 5) * correction?.spe
+      ((stats.spe * 2 + Ivs[5] + Effort[5] / 4) * 0.5 + 5) * correction.spe
     )
 
     setRealStats([hp, atk, def, spa, spd, spe])
@@ -671,23 +671,32 @@ export const CreateSets: React.FC = () => {
                 }
               />
             )}
-            renderTags={(value: readonly any[], getTagProps) =>
-              value.map((option: any, index: number) => (
-                // eslint-disable-next-line react/jsx-key
-                <Chip
-                  sx={{ marginBottom: '2px', marginLeft: '2px', width: '47%' }}
-                  label={option.label}
-                  variant="outlined"
-                  avatar={
-                    <Avatar
-                      sx={{ width: 20 }}
-                      imgProps={{ crossOrigin: 'anonymous' }}
-                      src={apiUrl(`/v1/sprites/types/${option.type}.svg`)}
-                    />
-                  }
-                  {...getTagProps({ index })}
-                />
-              ))
+            renderTags={(
+              value: readonly { label: string; type: string }[],
+              getTagProps
+            ) =>
+              value.map(
+                (option: { label: string; type: string }, index: number) => (
+                  // eslint-disable-next-line react/jsx-key
+                  <Chip
+                    sx={{
+                      marginBottom: '2px',
+                      marginLeft: '2px',
+                      width: '47%',
+                    }}
+                    label={option.label}
+                    variant="outlined"
+                    avatar={
+                      <Avatar
+                        sx={{ width: 20 }}
+                        imgProps={{ crossOrigin: 'anonymous' }}
+                        src={apiUrl(`/v1/sprites/types/${option.type}.svg`)}
+                      />
+                    }
+                    {...getTagProps({ index })}
+                  />
+                )
+              )
             }
             onChange={(e, v) => {
               if (!v) return
