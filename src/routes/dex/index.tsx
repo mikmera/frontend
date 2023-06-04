@@ -19,10 +19,6 @@ export const DexView: React.FC = wrapError(() => {
 
     if (data.type !== type) return false
 
-    if (data.type !== type) {
-      return false
-    }
-
     const matched = data.usages.find(
       (x) => x.pokemon?.id === parseInt(id as string)
     )
