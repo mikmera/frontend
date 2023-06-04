@@ -83,7 +83,7 @@ export const Routing: React.FC = wrapError(() => {
           <Route path="sample/:mode" element={<SetsView />} />
         </Route>
         <Route path="loading" element={<Loading />} />
-        <Route path="calc" element={<Calculator />} />
+        {/* <Route path="calc" element={<Calculator />} /> */}
         <Route path="auth" element={<Auth />} />
         <Route path="auth/:mode" element={<Auth />} />
         <Route path="auth/callback/:provider" element={<Callback />} />
