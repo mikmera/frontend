@@ -21,7 +21,7 @@ jobs:
       - name: run eslint
         run: yarn lint
     
-  eslint:
+  build:
     name: Build
     runs-on: ubuntu-latest
     steps:
