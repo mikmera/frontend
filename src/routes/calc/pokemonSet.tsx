@@ -7,12 +7,10 @@ import {
   MenuItem,
   Select,
   TextField,
-  Typography,
   LinearProgress,
   Grid,
   ToggleButtonGroup,
   ToggleButton,
-  Divider,
 } from '@mui/material'
 import { PokemonCalcSet } from '~/types'
 

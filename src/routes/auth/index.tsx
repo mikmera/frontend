@@ -6,12 +6,10 @@ import { MyPage } from './mypage'
 import { Callback } from './callback'
 import { useTheme } from '@mui/material/styles'
 import { useMediaQuery } from '@mui/material'
-import { useCookies } from 'react-cookie'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
 export const Main: React.FC = wrapError(() => {
   const theme = useTheme()
-  const navigate = useNavigate()
   const { mode } = useParams()
   const isMobile = useMediaQuery(theme.breakpoints.down('md'))
 

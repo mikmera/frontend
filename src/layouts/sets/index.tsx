@@ -1,7 +1,7 @@
 import React from 'react'
 import useSWR from 'swr'
 import { fetcher } from '~/util'
-import { Outlet, useParams } from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
 import { wrapError } from '~/components/ErrorBoundary'
 import Box from '@mui/material/Box'
 import useMediaQuery from '@mui/material/useMediaQuery'

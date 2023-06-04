@@ -1,16 +1,9 @@
 import React from 'react'
 import { wrapError } from '~/components/ErrorBoundary'
 import { Button, Box, Typography } from '@mui/material'
-// import TwitterIcon from '@mui/icons-material/Twitter'
 import DiscordIcon from '~/assets/images/discord.svg'
 import { useNavigate } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
-import { fetcher } from '~/util'
-
-// async function getTwitterUrl() {
-//   const response = await fetcher('/v1/auth/twitter')
-//   console.log(response)
-// }
 
 export const Login: React.FC = wrapError(() => {
   const navigate = useNavigate()
