@@ -30,9 +30,9 @@ const SetsView = wrapSuspense(
   lazy(() => import('./routes/sets').then((x) => ({ default: x.SetsView })))
 )
 
-const Calculator = wrapSuspense(
-  lazy(() => import('./routes/calc').then((x) => ({ default: x.Main })))
-)
+// const Calculator = wrapSuspense(
+//   lazy(() => import('./routes/calc').then((x) => ({ default: x.Main })))
+// )
 
 const Auth = wrapSuspense(
   lazy(() => import('./routes/auth').then((x) => ({ default: x.Main })))

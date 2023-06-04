@@ -14,7 +14,7 @@ import {
   Chip,
 } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
-import { useCookies } from 'react-cookie'
+import { Cookies } from 'react-cookie'
 import { apiUrl, fetcher } from '~/util'
 import { Spinner } from '~/components/Spinner'
 import { UserRankTable } from '~/components/UserRank'
@@ -26,6 +26,7 @@ import pointIcon from '~/assets/images/coin.png'
 import Swal from 'sweetalert2'
 
 export const MyPage: React.FC = wrapError(() => {
+  const cookies = new Cookies()
   const { user, update } = useMainContext()
 
   const theme = useTheme()
@@ -34,7 +35,7 @@ export const MyPage: React.FC = wrapError(() => {
   const [profileUrl, setProfileUrl] = React.useState<string | undefined>()
   const [displayName, setDisplayName] = React.useState<string | undefined>()
 
-  const [cookies, setCookie, removeCookie] = useCookies(['Authorization'])
+  const authToken = cookies.get('Authorization')
 
   const [open, setOpen] = React.useState(false)
   const [loading, setLoading] = React.useState<boolean>(true)
@@ -49,12 +50,12 @@ export const MyPage: React.FC = wrapError(() => {
   }
 
   React.useEffect(() => {
-    if (!cookies.Authorization) return navigate('/auth/login')
+    if (!authToken) return navigate('/auth/login')
     if (!user) return
     setProfileUrl(user.profile.avatar)
     setDisplayName(user.profile.displayName)
     setLoading(false)
-  }, [user, cookies.Authorization])
+  }, [user, authToken])
 
   return (
     <Box
@@ -162,7 +163,7 @@ export const MyPage: React.FC = wrapError(() => {
                 variant="contained"
                 sx={{ width: '100%' }}
                 onClick={async () => {
-                  removeCookie('Authorization')
+                  cookies.remove('Authorization')
                   update((v) => ({ ...v, user: null }))
                 }}
               >
