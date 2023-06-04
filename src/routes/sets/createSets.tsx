@@ -117,179 +117,50 @@ export const CreateSets: React.FC = () => {
 
   const [realStats, setRealStats] = React.useState<number[]>([0, 0, 0, 0, 0, 0])
 
+  const statKeys = ['HP', '공격', '방어', '특공', '특방', '스핏']
+
   const { enqueueSnackbar } = useSnackbar()
 
-  const handleHp = () => {
-    if (Effort[0] > 252) {
-      setEffort((v) => [252, v[1], v[2], v[3], v[4], v[5]])
-    } else if (Effort[0] < 0) {
-      setEffort((v) => [0, v[1], v[2], v[3], v[4], v[5]])
+  const handleStat = (index: number, value: number) => {
+    if (value > 252) {
+      value = 252
+    } else if (value < 0) {
+      value = 0
     }
-    if (Effort.reduce((a, b) => a + b) > 508) {
-      const over = 508 - Effort.reduce((a, b) => a + b)
-      setEffort((v) => [v[0] + over, v[1], v[2], v[3], v[4], v[5]])
+
+    const totalEffort = Effort.reduce((a, b) => a + b)
+    if (totalEffort > 508) {
+      const over = 508 - totalEffort
+      value += over
     }
+
+    setEffort((v) => {
+      const updatedEffort = [...v]
+      updatedEffort[index] = value
+      return updatedEffort
+    })
   }
 
-  const handleHpChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEffort((v) => [Number(event.target.value), v[1], v[2], v[3], v[4], v[5]])
+  const handleChange = (
+    index: number,
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const value = Number(event.target.value)
+    handleStat(index, value)
   }
 
-  const handleHPSlider = (event: Event, newValue: number | number[]) => {
-    setEffort((v) => [newValue as number, v[1], v[2], v[3], v[4], v[5]])
+  const handleSlider = (index: number, newValue: number | number[]) => {
+    handleStat(index, newValue as number)
   }
 
-  const handleAtk = () => {
-    if (Effort[1] > 252) {
-      setEffort((v) => [v[0], 252, v[2], v[3], v[4], v[5]])
-    } else if (Effort[1] < 0) {
-      setEffort((v) => [v[0], 0, v[2], v[3], v[4], v[5]])
+  const handleIvBlur = (index: number) => {
+    const updatedIvs = [...Ivs]
+    if (updatedIvs[index] > 31) {
+      updatedIvs[index] = 31
+    } else if (updatedIvs[index] < 0) {
+      updatedIvs[index] = 0
     }
-    // 총합이 508 초과할경우 초과한만큼 낮춤
-    if (Effort.reduce((a, b) => a + b) > 508) {
-      const over = 508 - Effort.reduce((a, b) => a + b)
-      setEffort((v) => [v[0], v[1] + over, v[2], v[3], v[4], v[5]])
-    }
-  }
-
-  const handleAtkChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEffort((v) => [v[0], Number(event.target.value), v[2], v[3], v[4], v[5]])
-  }
-
-  const handleAtkSlider = (event: Event, newValue: number | number[]) => {
-    setEffort((v) => [v[0], newValue as number, v[2], v[3], v[4], v[5]])
-  }
-
-  const handleDef = () => {
-    if (Effort[2] > 252) {
-      setEffort((v) => [v[0], v[1], 252, v[3], v[4], v[5]])
-    } else if (Effort[2] < 0) {
-      setEffort((v) => [v[0], v[1], 0, v[3], v[4], v[5]])
-    }
-    // 총합이 508 초과할경우 초과한만큼 낮춤
-    if (Effort.reduce((a, b) => a + b) > 508) {
-      const over = 508 - Effort.reduce((a, b) => a + b)
-      setEffort((v) => [v[0], v[1], v[2] + over, v[3], v[4], v[5]])
-    }
-  }
-
-  const handleDefChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEffort((v) => [v[0], v[1], Number(event.target.value), v[3], v[4], v[5]])
-  }
-
-  const handleDefSlider = (event: Event, newValue: number | number[]) => {
-    setEffort((v) => [v[0], v[1], newValue as number, v[3], v[4], v[5]])
-  }
-
-  const handleSpa = () => {
-    if (Effort[3] > 252) {
-      setEffort((v) => [v[0], v[1], v[2], 252, v[4], v[5]])
-    } else if (Effort[3] < 0) {
-      setEffort((v) => [v[0], v[1], v[2], 0, v[4], v[5]])
-    }
-    // 총합이 508 초과할경우 초과한만큼 낮춤
-    if (Effort.reduce((a, b) => a + b) > 508) {
-      const over = 508 - Effort.reduce((a, b) => a + b)
-      setEffort((v) => [v[0], v[1], v[2], v[3] + over, v[4], v[5]])
-    }
-  }
-
-  const handleSpaChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEffort((v) => [v[0], v[1], v[2], Number(event.target.value), v[4], v[5]])
-  }
-
-  const handleSpaSlider = (event: Event, newValue: number | number[]) => {
-    setEffort((v) => [v[0], v[1], v[2], newValue as number, v[4], v[5]])
-  }
-
-  const handleSpd = () => {
-    if (Effort[4] > 252) {
-      setEffort((v) => [v[0], v[1], v[2], v[3], 252, v[5]])
-    } else if (Effort[4] < 0) {
-      setEffort((v) => [v[0], v[1], v[2], v[3], 0, v[5]])
-    }
-    // 총합이 508 초과할경우 초과한만큼 낮춤
-    if (Effort.reduce((a, b) => a + b) > 508) {
-      const over = 508 - Effort.reduce((a, b) => a + b)
-      setEffort((v) => [v[0], v[1], v[2], v[3], v[4] + over, v[5]])
-    }
-  }
-
-  const handleSpdChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEffort((v) => [v[0], v[1], v[2], v[3], Number(event.target.value), v[5]])
-  }
-
-  const handleSpdSlider = (event: Event, newValue: number | number[]) => {
-    setEffort((v) => [v[0], v[1], v[2], v[3], newValue as number, v[5]])
-  }
-
-  const handleSpe = () => {
-    if (Effort[5] > 252) {
-      setEffort((v) => [v[0], v[1], v[2], v[3], v[4], 252])
-    } else if (Effort[5] < 0) {
-      setEffort((v) => [v[0], v[1], v[2], v[3], v[4], 0])
-    }
-    // 총합이 508 초과할경우 초과한만큼 낮춤
-    if (Effort.reduce((a, b) => a + b) > 508) {
-      const over = 508 - Effort.reduce((a, b) => a + b)
-      setEffort((v) => [v[0], v[1], v[2], v[3], v[4], v[5] + over])
-    }
-  }
-
-  const handleSpeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEffort((v) => [v[0], v[1], v[2], v[3], v[4], Number(event.target.value)])
-  }
-
-  const handleSpeSlider = (event: Event, newValue: number | number[]) => {
-    setEffort((v) => [v[0], v[1], v[2], v[3], v[4], newValue as number])
-  }
-
-  const IvHpBlur = () => {
-    if (Ivs[0] > 31) {
-      setIvs((v) => [31, v[1], v[2], v[3], v[4], v[5]])
-    } else if (Ivs[0] < 0) {
-      setIvs((v) => [0, v[1], v[2], v[3], v[4], v[5]])
-    }
-  }
-
-  const IvAtkBlur = () => {
-    if (Ivs[1] > 31) {
-      setIvs((v) => [v[0], 31, v[2], v[3], v[4], v[5]])
-    } else if (Ivs[1] < 0) {
-      setIvs((v) => [v[0], 0, v[2], v[3], v[4], v[5]])
-    }
-  }
-
-  const IvDefBlur = () => {
-    if (Ivs[2] > 31) {
-      setIvs((v) => [v[0], v[1], 31, v[3], v[4], v[5]])
-    } else if (Ivs[2] < 0) {
-      setIvs((v) => [v[0], v[1], 0, v[3], v[4], v[5]])
-    }
-  }
-
-  const IvSpaBlur = () => {
-    if (Ivs[3] > 31) {
-      setIvs((v) => [v[0], v[1], v[2], 31, v[4], v[5]])
-    } else if (Ivs[3] < 0) {
-      setIvs((v) => [v[0], v[1], v[2], 0, v[4], v[5]])
-    }
-  }
-
-  const IvSpdBlur = () => {
-    if (Ivs[4] > 31) {
-      setIvs((v) => [v[0], v[1], v[2], v[3], 31, v[5]])
-    } else if (Ivs[4] < 0) {
-      setIvs((v) => [v[0], v[1], v[2], v[3], 0, v[5]])
-    }
-  }
-
-  const IvSpeBlur = () => {
-    if (Ivs[5] > 31) {
-      setIvs((v) => [v[0], v[1], v[2], v[3], v[4], 31])
-    } else if (Ivs[5] < 0) {
-      setIvs((v) => [v[0], v[1], v[2], v[3], v[4], 0])
-    }
+    setIvs(updatedIvs)
   }
 
   const handleClickVariant = (variant: VariantType, message: string) => () => {
@@ -758,449 +629,60 @@ export const CreateSets: React.FC = () => {
           <Grid item xs={2} mt={2} mb={2}>
             개체값
           </Grid>
-          <Grid item xs={1}>
-            HP
-          </Grid>
-          <Grid item xs={7} sx={{ paddingLeft: '15px' }}>
-            <Slider
-              value={typeof Effort[0] === 'number' ? Effort[0] : 0}
-              onBlur={handleHp}
-              onChange={handleHPSlider}
-              step={4}
-              marks
-              min={0}
-              max={252}
-              aria-labelledby="input-slider"
-            />
-          </Grid>
-          <Grid item xs={3} sx={{ marginLeft: '20px' }}>
-            <Input
-              size="small"
-              onBlur={handleHp}
-              onChange={handleHpChange}
-              value={Effort[0]}
-              inputProps={{
-                step: 4,
-                min: 0,
-                max: 252,
-                type: 'number',
-                'aria-labelledby': 'input-slider',
-              }}
-            />
-            <Input
-              sx={{ marginLeft: '10px' }}
-              size="small"
-              value={Ivs[0]}
-              onBlur={IvHpBlur}
-              onChange={(e) => {
-                setIvs([
-                  Number(e.target.value),
-                  Ivs[1],
-                  Ivs[2],
-                  Ivs[3],
-                  Ivs[4],
-                  Ivs[5],
-                ])
-              }}
-              inputProps={{
-                step: 1,
-                min: 0,
-                max: 31,
-                type: 'number',
-                'aria-labelledby': 'input-slider',
-              }}
-            />
-          </Grid>
-          {/* 공격 */}
-          <Grid
-            item
-            xs={1}
-            sx={{
-              color:
-                natures.find((v) => v.label == nature)?.correction.atk === 1.1
-                  ? 'red'
-                  : natures.find((v) => v.label == nature)?.correction.atk ===
-                    0.9
-                  ? '#33F'
-                  : null,
-            }}
-          >
-            공격
-          </Grid>
-          <Grid item xs={7} sx={{ paddingLeft: '15px' }}>
-            <Slider
-              value={typeof Effort[1] === 'number' ? Effort[1] : 0}
-              onBlur={handleAtk}
-              onChange={handleAtkSlider}
-              step={4}
-              marks
-              min={0}
-              max={252}
-              aria-labelledby="input-slider"
-            />
-          </Grid>
-          <Grid item xs={3} sx={{ marginLeft: '20px' }}>
-            <Input
-              size="small"
-              onBlur={handleAtk}
-              onChange={handleAtkChange}
-              value={Effort[1]}
-              inputProps={{
-                step: 4,
-                min: 0,
-                max: 252,
-                type: 'number',
-                'aria-labelledby': 'input-slider',
-              }}
-            />
-            <Input
-              sx={{ marginLeft: '10px' }}
-              size="small"
-              value={Ivs[1]}
-              onBlur={IvAtkBlur}
-              onChange={(e) => {
-                setIvs([
-                  Ivs[0],
-                  Number(e.target.value),
-                  Ivs[2],
-                  Ivs[3],
-                  Ivs[4],
-                  Ivs[5],
-                ])
-              }}
-              inputProps={{
-                step: 1,
-                min: 0,
-                max: 31,
-                type: 'number',
-                'aria-labelledby': 'input-slider',
-              }}
-            />
-          </Grid>
-          {/* 방어 */}
-          <Grid
-            item
-            xs={1}
-            sx={{
-              color:
-                natures.find((v) => v.label == nature)?.correction.def === 1.1
-                  ? 'red'
-                  : natures.find((v) => v.label == nature)?.correction.def ===
-                    0.9
-                  ? '#33F'
-                  : null,
-            }}
-          >
-            방어
-          </Grid>
-          <Grid item xs={7} sx={{ paddingLeft: '15px' }}>
-            <Slider
-              value={typeof Effort[2] === 'number' ? Effort[2] : 0}
-              onBlur={handleDef}
-              onChange={handleDefSlider}
-              step={4}
-              marks
-              min={0}
-              max={252}
-              aria-labelledby="input-slider"
-            />
-          </Grid>
-          <Grid item xs={3} sx={{ marginLeft: '20px' }}>
-            <Input
-              size="small"
-              onBlur={handleDef}
-              onChange={handleDefChange}
-              value={Effort[2]}
-              inputProps={{
-                step: 4,
-                min: 0,
-                max: 252,
-                type: 'number',
-                'aria-labelledby': 'input-slider',
-              }}
-            />
-            <Input
-              sx={{ marginLeft: '10px' }}
-              size="small"
-              value={Ivs[2]}
-              onBlur={IvDefBlur}
-              onChange={(e) => {
-                setIvs([
-                  Ivs[0],
-                  Ivs[1],
-                  Number(e.target.value),
-                  Ivs[3],
-                  Ivs[4],
-                  Ivs[5],
-                ])
-              }}
-              inputProps={{
-                step: 1,
-                min: 0,
-                max: 31,
-                type: 'number',
-                'aria-labelledby': 'input-slider',
-              }}
-            />
-          </Grid>
-          {/* 특공 */}
-          <Grid
-            item
-            xs={1}
-            sx={{
-              color:
-                natures.find((v) => v.label == nature)?.correction.spa === 1.1
-                  ? 'red'
-                  : natures.find((v) => v.label == nature)?.correction.spa ===
-                    0.9
-                  ? '#33F'
-                  : null,
-            }}
-          >
-            특공
-          </Grid>
-          <Grid item xs={7} sx={{ paddingLeft: '15px' }}>
-            <Slider
-              value={typeof Effort[3] === 'number' ? Effort[3] : 0}
-              onBlur={handleSpa}
-              onChange={handleSpaSlider}
-              step={4}
-              marks
-              min={0}
-              max={252}
-              aria-labelledby="input-slider"
-            />
-          </Grid>
-          <Grid item xs={3} sx={{ marginLeft: '20px' }}>
-            <Input
-              size="small"
-              onBlur={handleSpa}
-              onChange={handleSpaChange}
-              value={Effort[3]}
-              inputProps={{
-                step: 4,
-                min: 0,
-                max: 252,
-                type: 'number',
-                'aria-labelledby': 'input-slider',
-              }}
-            />
-            <Input
-              sx={{ marginLeft: '10px' }}
-              size="small"
-              value={Ivs[3]}
-              onBlur={IvSpaBlur}
-              onChange={(e) => {
-                setIvs([
-                  Ivs[0],
-                  Ivs[1],
-                  Ivs[2],
-                  Number(e.target.value),
-                  Ivs[4],
-                  Ivs[5],
-                ])
-              }}
-              inputProps={{
-                step: 1,
-                min: 0,
-                max: 31,
-                type: 'number',
-                'aria-labelledby': 'input-slider',
-              }}
-            />
-          </Grid>
-          {/* 특방 */}
-          <Grid
-            item
-            xs={1}
-            sx={{
-              color:
-                natures.find((v) => v.label == nature)?.correction.spd === 1.1
-                  ? 'red'
-                  : natures.find((v) => v.label == nature)?.correction.spd ===
-                    0.9
-                  ? '#33F'
-                  : null,
-            }}
-          >
-            특방
-          </Grid>
-          <Grid item xs={7} sx={{ paddingLeft: '15px' }}>
-            <Slider
-              value={typeof Effort[4] === 'number' ? Effort[4] : 0}
-              onBlur={handleSpd}
-              onChange={handleSpdSlider}
-              step={4}
-              marks
-              min={0}
-              max={252}
-              aria-labelledby="input-slider"
-            />
-          </Grid>
-          <Grid item xs={3} sx={{ marginLeft: '20px' }}>
-            <Input
-              size="small"
-              onBlur={handleSpd}
-              onChange={handleSpdChange}
-              value={Effort[4]}
-              inputProps={{
-                step: 4,
-                min: 0,
-                max: 252,
-                type: 'number',
-                'aria-labelledby': 'input-slider',
-              }}
-            />
-            <Input
-              sx={{ marginLeft: '10px' }}
-              size="small"
-              value={Ivs[4]}
-              onBlur={IvSpdBlur}
-              onChange={(e) => {
-                setIvs([
-                  Ivs[0],
-                  Ivs[1],
-                  Ivs[2],
-                  Ivs[3],
-                  Number(e.target.value),
-                  Ivs[5],
-                ])
-              }}
-              inputProps={{
-                step: 1,
-                min: 0,
-                max: 31,
-                type: 'number',
-                'aria-labelledby': 'input-slider',
-              }}
-            />
-          </Grid>
-          {/* 스핏 */}
-          <Grid
-            item
-            xs={1}
-            sx={{
-              color:
-                natures.find((v) => v.label == nature)?.correction.spe === 1.1
-                  ? 'red'
-                  : natures.find((v) => v.label == nature)?.correction.spe ===
-                    0.9
-                  ? '#33F'
-                  : null,
-            }}
-          >
-            스핏
-          </Grid>
-          <Grid item xs={7} sx={{ paddingLeft: '15px' }}>
-            <Slider
-              value={typeof Effort[5] === 'number' ? Effort[5] : 0}
-              onBlur={handleSpe}
-              onChange={handleSpeSlider}
-              step={4}
-              marks
-              min={0}
-              max={252}
-              aria-labelledby="input-slider"
-            />
-          </Grid>
-          <Grid item xs={3} sx={{ marginLeft: '20px' }}>
-            <Input
-              size="small"
-              onBlur={handleSpe}
-              onChange={handleSpeChange}
-              value={Effort[5]}
-              inputProps={{
-                step: 4,
-                min: 0,
-                max: 252,
-                type: 'number',
-                'aria-labelledby': 'input-slider',
-              }}
-            />
-            <Input
-              sx={{ marginLeft: '10px' }}
-              size="small"
-              value={Ivs[5]}
-              onBlur={IvSpeBlur}
-              onChange={(e) => {
-                setIvs([
-                  Ivs[0],
-                  Ivs[1],
-                  Ivs[2],
-                  Ivs[3],
-                  Ivs[4],
-                  Number(e.target.value),
-                ])
-              }}
-              inputProps={{
-                step: 1,
-                min: 0,
-                max: 31,
-                type: 'number',
-                'aria-labelledby': 'input-slider',
-              }}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TableContainer component={Paper}>
-              <Table sx={{ width: '100%' }} aria-label="simple table">
-                <TableBody>
-                  <TableRow>
-                    <TableCell component="th" scope="row">
-                      hp
-                    </TableCell>
-                    <TableCell align="right">{realStats[0]}</TableCell>
-                    <TableCell component="th" scope="row">
-                      공격
-                    </TableCell>
-                    <TableCell align="right">{realStats[1]}</TableCell>
-                    <TableCell component="th" scope="row">
-                      방어
-                    </TableCell>
-                    <TableCell align="right">{realStats[2]}</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell component="th" scope="row">
-                      특공
-                    </TableCell>
-                    <TableCell align="right">{realStats[3]}</TableCell>
-                    <TableCell component="th" scope="row">
-                      특방
-                    </TableCell>
-                    <TableCell align="right">{realStats[4]}</TableCell>
-                    <TableCell component="th" scope="row">
-                      스핏
-                    </TableCell>
-                    <TableCell align="right">{realStats[5]}</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell component="th" scope="row">
-                      물리내구
-                    </TableCell>
-                    <TableCell align="right">
-                      {item == '진화의휘석'
-                        ? Math.round(
-                            (realStats[0] * (realStats[2] * 1.5)) / 0.411
-                          )
-                        : Math.round((realStats[0] * realStats[2]) / 0.411)}
-                    </TableCell>
-                    <TableCell component="th" scope="row" />
-                    <TableCell scope="row" />
-                    <TableCell component="th" scope="row">
-                      특수내구
-                    </TableCell>
-                    <TableCell align="right">
-                      {item == '돌격조끼' || item == '진화의휘석'
-                        ? Math.round(
-                            (realStats[0] * (realStats[4] * 1.5)) / 0.411
-                          )
-                        : Math.round((realStats[0] * realStats[4]) / 0.411)}
-                    </TableCell>
-                  </TableRow>
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </Grid>
+          {statKeys.map((stat, index) => (
+            <React.Fragment key={index}>
+              <Grid item xs={1}>
+                {stat}
+              </Grid>
+              <Grid item xs={7} sx={{ paddingLeft: '15px' }}>
+                <Slider
+                  value={typeof Effort[index] === 'number' ? Effort[index] : 0}
+                  onBlur={() => handleStat(index, Effort[index])}
+                  onChange={(_, newValue) => handleSlider(index, newValue)}
+                  step={4}
+                  marks
+                  min={0}
+                  max={252}
+                  aria-labelledby="input-slider"
+                />
+              </Grid>
+              <Grid item xs={3} sx={{ marginLeft: '20px' }}>
+                <Input
+                  size="small"
+                  onBlur={() => handleStat(index, Effort[index])}
+                  onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                    handleChange(index, event)
+                  }
+                  value={Effort[index]}
+                  inputProps={{
+                    step: 4,
+                    min: 0,
+                    max: 252,
+                    type: 'number',
+                    'aria-labelledby': 'input-slider',
+                  }}
+                />
+                <Input
+                  sx={{ marginLeft: '10px' }}
+                  size="small"
+                  value={Ivs[index]}
+                  onBlur={() => handleIvBlur(index)}
+                  onChange={(e) => {
+                    const updatedIvs = [...Ivs]
+                    updatedIvs[index] = Number(e.target.value)
+                    setIvs(updatedIvs)
+                  }}
+                  inputProps={{
+                    step: 1,
+                    min: 0,
+                    max: 31,
+                    type: 'number',
+                    'aria-labelledby': 'input-slider',
+                  }}
+                />
+              </Grid>
+            </React.Fragment>
+          ))}
           <LoadingButton
             sx={{ mt: 2 }}
             variant="contained"
