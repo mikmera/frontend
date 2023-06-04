@@ -2735,7 +2735,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chalk@npm:^2.0.0":
+"chalk@npm:^2.0.0, chalk@npm:^2.4.2":
   version: 2.4.2
   resolution: "chalk@npm:2.4.2"
   dependencies:
@@ -2884,6 +2884,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"commit-msg-linter@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "commit-msg-linter@npm:1.0.0"
+  dependencies:
+    did-you-mean: ^0.0.1
+    supports-color: ^8.1.1
+  checksum: 8f5293fdfcc7ef76a0d41060d6cceec655ef949c0b78939528863316fba06c2a29d298888042c5555ed0df8b810c3955c92eb54e7a0374c2bb007ca8b996993f
+  languageName: node
+  linkType: hard
+
 "concat-map@npm:0.0.1":
   version: 0.0.1
   resolution: "concat-map@npm:0.0.1"
@@ -3021,6 +3031,16 @@ __metadata:
   version: 1.1.2
   resolution: "depd@npm:1.1.2"
   checksum: 6b406620d269619852885ce15965272b829df6f409724415e0002c8632ab6a8c0a08ec1f0bd2add05dc7bd7507606f7e2cc034fa24224ab829580040b835ecd9
+  languageName: node
+  linkType: hard
+
+"did-you-mean@npm:^0.0.1":
+  version: 0.0.1
+  resolution: "did-you-mean@npm:0.0.1"
+  dependencies:
+    levenshtein: "*"
+    underscore: "*"
+  checksum: df777543e834facfccede1285ba06c907314a6c72059165b8688c8905df9065feb23a4419a16897a5e5b54c46a099dda2ff1eccdd08d7bf0602e72045057bc44
   languageName: node
   linkType: hard
 
@@ -3946,6 +3966,18 @@ eslint@latest:
   languageName: node
   linkType: hard
 
+"git-commit-msg-linter@npm:^5.0.4":
+  version: 5.0.4
+  resolution: "git-commit-msg-linter@npm:5.0.4"
+  dependencies:
+    chalk: ^2.4.2
+    commit-msg-linter: ^1.0.0
+  bin:
+    commit-msg-linter: cli/validate.js
+  checksum: 858b2869bfc1cc85a647b4e3bf4465b934bf2967358d1b65f3cc5dd9c28f5276e246e7ffe1ec086f9e6c09f3af68a9b7612977db6f94da379f5f52bdabe9443a
+  languageName: node
+  linkType: hard
+
 "glob-parent@npm:^5.1.2, glob-parent@npm:~5.1.2":
   version: 5.1.2
   resolution: "glob-parent@npm:5.1.2"
@@ -4584,6 +4616,13 @@ eslint@latest:
   version: 6.0.3
   resolution: "kind-of@npm:6.0.3"
   checksum: 3ab01e7b1d440b22fe4c31f23d8d38b4d9b91d9f291df683476576493d5dfd2e03848a8b05813dd0c3f0e835bc63f433007ddeceb71f05cb25c45ae1b19c6d3b
+  languageName: node
+  linkType: hard
+
+"levenshtein@npm:*":
+  version: 1.0.5
+  resolution: "levenshtein@npm:1.0.5"
+  checksum: d5ceca3bfc4804ad50515291841d968eea5f1f740310c21b5ae6cb6d5514ee68b9c00405059f36934611d3258967bad6d306dcf299f446c7cdd25bdda2c4720c
   languageName: node
   linkType: hard
 
@@ -5448,6 +5487,7 @@ eslint@latest:
     eslint-plugin-react: latest
     firebase: ^9.15.0
     framer-motion: ^7.6.9
+    git-commit-msg-linter: ^5.0.4
     node-sass: ^8.0.0
     notistack: ^2.0.8
     pokemoncalc: ^1.0.0
@@ -6474,6 +6514,15 @@ eslint@latest:
   languageName: node
   linkType: hard
 
+"supports-color@npm:^8.1.1":
+  version: 8.1.1
+  resolution: "supports-color@npm:8.1.1"
+  dependencies:
+    has-flag: ^4.0.0
+  checksum: c052193a7e43c6cdc741eb7f378df605636e01ad434badf7324f17fb60c69a880d8d8fcdcb562cf94c2350e57b937d7425ab5b8326c67c2adc48f7c87c1db406
+  languageName: node
+  linkType: hard
+
 "supports-preserve-symlinks-flag@npm:^1.0.0":
   version: 1.0.0
   resolution: "supports-preserve-symlinks-flag@npm:1.0.0"
@@ -6674,6 +6723,13 @@ eslint@latest:
     has-symbols: ^1.0.3
     which-boxed-primitive: ^1.0.2
   checksum: b7a1cf5862b5e4b5deb091672ffa579aa274f648410009c81cca63fed3b62b610c4f3b773f912ce545bb4e31edc3138975b5bc777fc6e4817dca51affb6380e9
+  languageName: node
+  linkType: hard
+
+"underscore@npm:*":
+  version: 1.13.6
+  resolution: "underscore@npm:1.13.6"
+  checksum: d5cedd14a9d0d91dd38c1ce6169e4455bb931f0aaf354108e47bd46d3f2da7464d49b2171a5cf786d61963204a42d01ea1332a903b7342ad428deaafaf70ec36
   languageName: node
   linkType: hard
 
