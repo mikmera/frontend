@@ -89,6 +89,7 @@ export const CreateSets: React.FC = () => {
       correction: { atk: 1, def: 1, spa: 1, spd: 1, spe: 1 },
     },
   ])
+
   const [moves] = React.useState<[{ label: string; type: string }]>([
     { label: '쪼리핑펀치', type: 'Normal' },
   ])
@@ -116,6 +117,9 @@ export const CreateSets: React.FC = () => {
   const [description, setDescription] = React.useState<string>('')
 
   const [realStats, setRealStats] = React.useState<number[]>([0, 0, 0, 0, 0, 0])
+  const [tableRows, setTableRows] = React.useState<
+    { label: string; value: number }[]
+  >([])
 
   const statKeys = ['HP', '공격', '방어', '특공', '특방', '스핏']
 
@@ -288,34 +292,68 @@ export const CreateSets: React.FC = () => {
 
   React.useEffect(() => {
     if (!pokemon || pokemon === '미싱노') return
-    const stats = pokemons.find((v) => v.label == pokemon)?.stats
-    const correction = natures.find((v) => v.label == nature)?.correction || {
+
+    const { stats } = pokemons.find((v) => v.label === pokemon) || {}
+    const correction = natures.find((v) => v.label === nature)?.correction || {
       atk: 1,
       def: 1,
       spa: 1,
       spd: 1,
       spe: 1,
     }
-    if (!stats) return
-    const hp = Math.floor((stats.hp * 2 + Ivs[0] + Effort[0] / 4) * 0.5 + 60)
-    const atk = Math.floor(
-      ((stats.atk * 2 + Ivs[1] + Effort[1] / 4) * 0.5 + 5) * correction.atk
-    )
-    const def = Math.floor(
-      ((stats.def * 2 + Ivs[2] + Effort[2] / 4) * 0.5 + 5) * correction.def
-    )
-    const spa = Math.floor(
-      ((stats.spa * 2 + Ivs[3] + Effort[3] / 4) * 0.5 + 5) * correction.spa
-    )
-    const spd = Math.floor(
-      ((stats.spd * 2 + Ivs[4] + Effort[4] / 4) * 0.5 + 5) * correction.spd
-    )
-    const spe = Math.floor(
-      ((stats.spe * 2 + Ivs[5] + Effort[5] / 4) * 0.5 + 5) * correction.spe
-    )
 
-    setRealStats([hp, atk, def, spa, spd, spe])
+    if (!stats) return
+
+    const calculateStat = (
+      base: number,
+      iv: number,
+      effort: number,
+      statCorr: number,
+      index: number
+    ) => {
+      if (index === 0)
+        return Math.floor((base * 2 + iv + effort / 4) * 0.5 + 60)
+      else
+        return Math.floor(((base * 2 + iv + effort / 4) * 0.5 + 5) * statCorr)
+    }
+
+    const realStats = Object.keys(stats).map((key, index) => {
+      const stat = stats[key as keyof typeof stats]
+      if (index === -1) return 0
+      return calculateStat(
+        stat,
+        Ivs[index],
+        Effort[index],
+        correction[key as keyof typeof correction],
+        index
+      )
+    })
+
+    setRealStats(realStats)
   }, [pokemon, nature, Ivs, Effort])
+
+  React.useEffect(() => {
+    const physicalEndurance =
+      item === '진화의휘석'
+        ? Math.round((realStats[0] * (realStats[2] * 1.5)) / 0.411)
+        : Math.round((realStats[0] * realStats[2]) / 0.411)
+
+    const specialEndurance =
+      item === '돌격조끼' || item === '진화의휘석'
+        ? Math.round((realStats[0] * (realStats[4] * 1.5)) / 0.411)
+        : Math.round((realStats[0] * realStats[4]) / 0.411)
+
+    setTableRows([
+      { label: 'hp', value: realStats[0] },
+      { label: '공격', value: realStats[1] },
+      { label: '방어', value: realStats[2] },
+      { label: '특공', value: realStats[3] },
+      { label: '특방', value: realStats[4] },
+      { label: '스핏', value: realStats[5] },
+      { label: '물리내구', value: physicalEndurance },
+      { label: '특수내구', value: specialEndurance },
+    ])
+  }, [realStats, item])
 
   React.useEffect(() => {
     setDisabled(pokemon === '미싱노' ? true : false)
@@ -683,6 +721,22 @@ export const CreateSets: React.FC = () => {
               </Grid>
             </React.Fragment>
           ))}
+          <Grid item xs={12}>
+            <TableContainer component={Paper}>
+              <Table sx={{ width: '100%' }} aria-label="simple table">
+                <TableBody>
+                  {tableRows.map((row, index) => (
+                    <TableRow key={index}>
+                      <TableCell component="th" scope="row">
+                        {row.label}
+                      </TableCell>
+                      <TableCell align="right">{row.value}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Grid>
           <LoadingButton
             sx={{ mt: 2 }}
             variant="contained"
