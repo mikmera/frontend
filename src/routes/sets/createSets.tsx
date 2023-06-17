@@ -725,14 +725,26 @@ export const CreateSets: React.FC = () => {
             <TableContainer component={Paper}>
               <Table sx={{ width: '100%' }} aria-label="simple table">
                 <TableBody>
-                  {tableRows.map((row, index) => (
-                    <TableRow key={index}>
-                      <TableCell component="th" scope="row">
-                        {row.label}
-                      </TableCell>
-                      <TableCell align="right">{row.value}</TableCell>
-                    </TableRow>
-                  ))}
+                  {tableRows.map((row, index) =>
+                    index % 2 === 0 ? (
+                      <TableRow key={index}>
+                        <TableCell component="th" scope="row">
+                          {row.label}
+                        </TableCell>
+                        <TableCell align="right">{row.value}</TableCell>
+                        {index + 1 < tableRows.length && (
+                          <React.Fragment>
+                            <TableCell component="th" scope="row">
+                              {tableRows[index + 1].label}
+                            </TableCell>
+                            <TableCell align="right">
+                              {tableRows[index + 1].value}
+                            </TableCell>
+                          </React.Fragment>
+                        )}
+                      </TableRow>
+                    ) : null
+                  )}
                 </TableBody>
               </Table>
             </TableContainer>
