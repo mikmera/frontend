@@ -29,9 +29,9 @@ PR과 이슈는 언제든지 환영합니다 다만 [커밋메세지 규칙](htt
 <table>
   <tr>
     <td align="center">
-      <a href="https://github.com/rihayoru">
+      <a href="https://github.com/soy0ka">
         <img src="https://avatars.githubusercontent.com/u/55011525?v=4" width="100px;">
-        <br />rihayoru
+        <br />soy0ka
       </a>
     </td>
     <td align="center">
