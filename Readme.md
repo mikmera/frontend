@@ -5,7 +5,7 @@
 > 포켓몬 실전배틀 도우미 프로젝트
 
 ## 문의
-[개발자 이메일](mailto://admin@pokegg.online)
+[개발자 이메일](mailto://me@yoru.icu)
 ## 기여하기
 PR과 이슈는 언제든지 환영합니다 다만 [커밋메세지 규칙](https://www.npmjs.com/package/git-commit-msg-linter)을 지켜주세요
 
