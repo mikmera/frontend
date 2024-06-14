@@ -1,7 +1,7 @@
 [![CI](https://github.com/pokegg-online/pokegg-frontend/actions/workflows/ci.yml/badge.svg)](https://github.com/pokegg-online/pokegg-frontend/actions/workflows/ci.yml)
 [![DeepScan grade](https://deepscan.io/api/teams/21365/projects/24790/branches/766783/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=21365&pid=24790&bid=766783)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/a619ebade97248f89ac38e21fe841d16)](https://app.codacy.com/gh/pokegg-online/pokegg-frontend/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
-# 포케지지
+# 미끄메라넷
 > 포켓몬 실전배틀 도우미 프로젝트
 
 ## 문의
