@@ -1,7 +1,4 @@
-import TextField from '@mui/material/TextField'
-import Typography from '@mui/material/Typography'
-import Box from '@mui/material/Box'
-import React from 'react'
+import LoadingButton from '@mui/lab/LoadingButton'
 import {
   Autocomplete,
   Avatar,
@@ -15,20 +12,23 @@ import {
   RadioGroup,
   Slider,
   Table,
-  TableRow,
   TableBody,
   TableCell,
   TableContainer,
+  TableRow,
 } from '@mui/material'
+import Box from '@mui/material/Box'
 import Chip from '@mui/material/Chip'
-import LoadingButton from '@mui/lab/LoadingButton'
+import TextField from '@mui/material/TextField'
+import Typography from '@mui/material/Typography'
+import { VariantType, useSnackbar } from 'notistack'
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
+import { getCookie } from 'react-use-cookie'
+import { Spinner } from '~/components/Spinner'
+import { useMainContext } from '~/context'
 import { useAutoCompleteContext } from '~/layouts/sets/context'
 import { apiUrl, fetcher, put } from '~/util'
-import { Spinner } from '~/components/Spinner'
-import { VariantType, useSnackbar } from 'notistack'
-import { useNavigate } from 'react-router-dom'
-import { useMainContext } from '~/context'
-import { getCookie } from 'react-use-cookie'
 
 export const CreateSets: React.FC = () => {
   const navigate = useNavigate()
@@ -445,7 +445,7 @@ export const CreateSets: React.FC = () => {
                 margin: 'auto',
                 marginTop: '20px',
               }}
-              imgProps={{ crossOrigin: 'anonymous' }}
+              slotProps={{ img: { crossOrigin: 'anonymous' } }}
               src={apiUrl(`/v1/sprites/pokemon/${pokemon}`)}
             />
           </Grid>
@@ -596,7 +596,7 @@ export const CreateSets: React.FC = () => {
                     avatar={
                       <Avatar
                         sx={{ width: 20 }}
-                        imgProps={{ crossOrigin: 'anonymous' }}
+                        slotProps={{ img: { crossOrigin: 'anonymous' } }}
                         src={apiUrl(`/v1/sprites/types/${option.type}.svg`)}
                       />
                     }
