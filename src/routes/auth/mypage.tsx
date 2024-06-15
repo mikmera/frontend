@@ -25,7 +25,6 @@ import { wrapError } from '~/components/ErrorBoundary'
 import imageCompression from 'browser-image-compression'
 import { ref, uploadString, getDownloadURL } from 'firebase/storage'
 
-
 export const MyPage: React.FC = wrapError(() => {
   const cookies = new Cookies()
   const { user, update } = useMainContext()
@@ -62,7 +61,7 @@ export const MyPage: React.FC = wrapError(() => {
       await fetcher(encodeURI('/v1/users/profile?avatar=' + url))
     }
   }
-  
+
   const handleNicknameChange = async () => {
     if (!user || !displayName) return
     try {

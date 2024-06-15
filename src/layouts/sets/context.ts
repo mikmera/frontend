@@ -1,5 +1,11 @@
 import React from 'react'
-import { PokemonSets, AutoCompleteDataDefault, AutoCompleteDataPokemon, TypeAutoCompleteData, NatureAutoCompleteData  } from '~/types'
+import {
+  PokemonSets,
+  AutoCompleteDataDefault,
+  AutoCompleteDataPokemon,
+  TypeAutoCompleteData,
+  NatureAutoCompleteData,
+} from '~/types'
 
 export type SetsContextData = {
   count: number
