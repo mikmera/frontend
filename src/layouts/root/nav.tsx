@@ -1,11 +1,9 @@
 import React from 'react'
 import { Link as RouterLink, useLocation } from 'react-router-dom'
-import Logo from '~/assets/images/logo.png'
-import LogoLight from '~/assets/images/logo-light.png'
 import { NavLink, navLinks } from './constants'
 import { RootDrawer } from './drawer'
 import Menu from '@mui/icons-material/Menu'
-import ActiveImage from '~/assets/images/pachirisu.png'
+import ActiveImage from '~/assets/images/Goomy.png'
 import { LayoutGroup, motion } from 'framer-motion'
 import { wrapError } from '~/components/ErrorBoundary'
 import useTheme from '@mui/material/styles/useTheme'
@@ -16,9 +14,9 @@ import Box from '@mui/material/Box'
 import IconButton from '@mui/material/IconButton'
 import Stack from '@mui/material/Stack'
 import styled from '@mui/material/styles/styled'
-import { useMainContext } from '../../context'
-import { FormControlLabel } from '@mui/material'
-import { ToggleDarkmode } from '../../components/ToggleDarkmode'
+import { useMainContext } from '~/context'
+import { FormControlLabel, Typography } from '@mui/material'
+import { ToggleDarkmode } from '~/components/ToggleDarkmode'
 import { useNavigate } from 'react-router-dom'
 import { setCookie } from 'react-use-cookie'
 
@@ -95,15 +93,15 @@ export const Nav: React.FC = wrapError(() => {
         sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
       >
         <Toolbar>
-          {/* Logo */}
-          <img
-            src={theme === 'dark' ? LogoLight : Logo}
-            height={32}
-            width={164}
-            alt="logo"
-            draggable={false}
+          <Typography
+            variant="h6"
+            component="div"
             onClick={handleLogoClick}
-          />
+            fontSize={24}
+            sx={{ flexGrow: 1, fontFamily: 'Unown, ONE-Mobile-POP' }}
+          >
+            미끄메라 NET
+          </Typography>
 
           {/* Space */}
           <Box sx={{ flexGrow: 1 }} />

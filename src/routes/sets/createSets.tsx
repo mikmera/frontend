@@ -397,7 +397,6 @@ export const CreateSets: React.FC = () => {
       ) : (
         <Grid container sx={{ width: '450px', m: 3 }}>
           <Grid item xs={12} mb={4}>
-            {/*[{(종족값 * 2) + 개체값 + (노력치/4)} * 1/2 ] + 10 + 50(레벨)*/}
             <Typography variant="h5" sx={{ textAlign: 'center' }}>
               샘플 등록하기
             </Typography>

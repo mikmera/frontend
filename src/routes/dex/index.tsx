@@ -55,9 +55,6 @@ export const DexView: React.FC = wrapError(() => {
             <Box>
               <DexStats />
             </Box>
-            {/* <pre>
-              <code>{JSON.stringify(item, null, 2)}</code>
-            </pre> */}
           </Container>
         </DexContext.Provider>
       )}

@@ -10,13 +10,14 @@ import { apiUrl, fetcher } from '~/util'
 
 export const SetsList: React.FC = wrapError(() => {
   const { data, update } = useSetsContext()
+
+  const [ref, inView] = useInView()
+  const [loading, setLoading] = React.useState(false)
+
   const SearchFilter = data.result?.filter((item) => {
     if (!data.type || data.type === 'all') return true
     else return item.type?.[0] === data.type
   })
-
-  const [loading, setLoading] = React.useState(false)
-  const [ref, inView] = useInView()
 
   React.useEffect(() => {
     if (inView && !loading) {
