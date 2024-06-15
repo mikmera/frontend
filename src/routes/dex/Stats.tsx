@@ -95,7 +95,7 @@ const MoveSection: React.FC = () => {
               <Avatar
                 variant="square"
                 src={apiUrl(`/v1/sprites/types/${x.type}.svg`)}
-                slotProps={{ img: { crossOrigin: 'anonymous' } }}
+                imgProps={{ crossOrigin: 'anonymous' }}
                 alt={x.type || '?'}
                 style={{ width: 40, height: 40, marginTop: 8 }}
               />
@@ -125,7 +125,7 @@ const TeamMatesSection: React.FC = () => {
           <ListItemAvatar>
             <Avatar
               alt={'?'}
-              slotProps={{ img: { crossOrigin: 'anonymous' } }}
+              imgProps={{ crossOrigin: 'anonymous' }}
               src={
                 x.formId === 0
                   ? apiUrl(`/v1/sprites/pokemon/${x.dexId}`)
@@ -136,7 +136,7 @@ const TeamMatesSection: React.FC = () => {
               <Avatar
                 key={i}
                 alt={x}
-                slotProps={{ img: { crossOrigin: 'anonymous' } }}
+                imgProps={{ crossOrigin: 'anonymous' }}
                 src={apiUrl(`/v1/sprites/types/${x}.svg`)}
                 sx={{
                   position: 'absolute',
@@ -173,7 +173,7 @@ const TerastalizeSection: React.FC = () => {
           <ListItemAvatar>
             <Avatar
               alt={x.type}
-              slotProps={{ img: { crossOrigin: 'anonymous' } }}
+              imgProps={{ crossOrigin: 'anonymous' }}
               src={apiUrl(
                 `/v1/sprites/teraTypes/${
                   x.type[0].toUpperCase() + x.type.slice(1)
@@ -203,7 +203,7 @@ const ItemSection: React.FC = () => {
               <Avatar
                 variant="square"
                 src={apiUrl(`/v1/sprites/items/${x.name}`)}
-                slotProps={{ img: { crossOrigin: 'anonymous' } }}
+                imgProps={{ crossOrigin: 'anonymous' }}
                 alt={x.name || '?'}
                 style={{ width: 40, height: 40, marginTop: 6 }}
               />
