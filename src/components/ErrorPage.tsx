@@ -1,7 +1,7 @@
-import React from 'react'
 import './404page.scss'
-import { Button, useMediaQuery, useTheme } from '@mui/material'
+import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import { Button, useMediaQuery, useTheme } from '@mui/material'
 
 export interface Iprops {
   code: string
@@ -34,7 +34,6 @@ export const ErrorPage: React.FC<Iprops> = (props: {
         ></div>
         <span>{props.code?.[2]}</span>
       </div>
-      {/* make center */}
       <div className="error-text" style={{ textAlign: 'center' }}>
         <h1>페이지를 찾을 수 없습니다</h1>
         <p>

@@ -36,7 +36,6 @@ export const MainContext = createContext<{
 }>({
   theme: 'dark',
   user: null,
-
   update: () => {},
 })
 

@@ -7,6 +7,13 @@ import { Spinner } from '~/components/Spinner'
 import { setCookie } from 'react-use-cookie'
 import queryString from 'query-string'
 
+const styles = {
+  alignItems: 'center',
+  display: 'flex',
+  justifyContent: 'center',
+  marginTop: 10,
+}
+
 export const Callback: React.FC = wrapError(() => {
   const navigate = useNavigate()
   const { provider } = useParams()
@@ -23,14 +30,7 @@ export const Callback: React.FC = wrapError(() => {
   }, [code])
 
   return (
-    <Box
-      sx={{
-        alignItems: 'center',
-        display: 'flex',
-        justifyContent: 'center',
-        marginTop: 10,
-      }}
-    >
+    <Box sx={styles}>
       <Spinner />
     </Box>
   )

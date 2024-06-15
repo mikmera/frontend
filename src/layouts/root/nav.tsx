@@ -1,24 +1,25 @@
 import React from 'react'
-import { Link as RouterLink, useLocation } from 'react-router-dom'
-import { NavLink, navLinks } from './constants'
+import Box from '@mui/material/Box'
 import { RootDrawer } from './drawer'
+import Stack from '@mui/material/Stack'
+import AppBar from '@mui/material/AppBar'
+import { useMainContext } from '~/context'
+import Toolbar from '@mui/material/Toolbar'
 import Menu from '@mui/icons-material/Menu'
+import { setCookie } from 'react-use-cookie'
+import { useNavigate } from 'react-router-dom'
+import { NavLink, navLinks } from './constants'
+import styled from '@mui/material/styles/styled'
+import Typography from '@mui/material/Typography'
+import IconButton from '@mui/material/IconButton'
 import ActiveImage from '~/assets/images/Goomy.png'
 import { LayoutGroup, motion } from 'framer-motion'
 import { wrapError } from '~/components/ErrorBoundary'
 import useTheme from '@mui/material/styles/useTheme'
 import useMediaQuery from '@mui/material/useMediaQuery'
-import AppBar from '@mui/material/AppBar'
-import Toolbar from '@mui/material/Toolbar'
-import Box from '@mui/material/Box'
-import IconButton from '@mui/material/IconButton'
-import Stack from '@mui/material/Stack'
-import styled from '@mui/material/styles/styled'
-import { useMainContext } from '~/context'
-import { FormControlLabel, Typography } from '@mui/material'
+import FormControlLabel from '@mui/material/FormControlLabel'
 import { ToggleDarkmode } from '~/components/ToggleDarkmode'
-import { useNavigate } from 'react-router-dom'
-import { setCookie } from 'react-use-cookie'
+import { Link as RouterLink, useLocation } from 'react-router-dom'
 
 const StyledRouterLink = styled(RouterLink)(() => ({
   display: 'flex',
@@ -122,8 +123,6 @@ export const Nav: React.FC = wrapError(() => {
               }}
             />
           </Box>
-
-          {/* Links / Drawer button */}
           {isMobile ? (
             <IconButton aria-label="Menu" onClick={toggleDrawer}>
               <Menu />

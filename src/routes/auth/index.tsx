@@ -1,12 +1,11 @@
 import React from 'react'
-import { wrapError } from '~/components/ErrorBoundary'
-import Box from '@mui/material/Box'
 import { Login } from './login'
 import { MyPage } from './mypage'
 import { Callback } from './callback'
-import { useTheme } from '@mui/material/styles'
-import { useMediaQuery } from '@mui/material'
 import { useParams } from 'react-router-dom'
+import { useTheme } from '@mui/material/styles'
+import { Box, useMediaQuery } from '@mui/material'
+import { wrapError } from '~/components/ErrorBoundary'
 
 export const Main: React.FC = wrapError(() => {
   const theme = useTheme()

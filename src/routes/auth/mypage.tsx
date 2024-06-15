@@ -1,6 +1,3 @@
-import React from 'react'
-import { wrapError } from '~/components/ErrorBoundary'
-import Box from '@mui/material/Box'
 import {
   Typography,
   Avatar,
@@ -13,17 +10,21 @@ import {
   useMediaQuery,
   Chip,
 } from '@mui/material'
-import { useNavigate } from 'react-router-dom'
+import React from 'react'
+import Swal from 'sweetalert2'
+import Box from '@mui/material/Box'
 import { Cookies } from 'react-cookie'
 import { apiUrl, fetcher } from '~/util'
-import { Spinner } from '~/components/Spinner'
-import { UserRankTable } from '~/components/UserRank'
 import { useMainContext } from '~/context'
-import { ref, uploadString, getDownloadURL } from 'firebase/storage'
-import { storageService } from '~/service/firebase'
-import imageCompression from 'browser-image-compression'
+import { Spinner } from '~/components/Spinner'
+import { useNavigate } from 'react-router-dom'
 import pointIcon from '~/assets/images/coin.png'
-import Swal from 'sweetalert2'
+import { storageService } from '~/service/firebase'
+import { UserRankTable } from '~/components/UserRank'
+import { wrapError } from '~/components/ErrorBoundary'
+import imageCompression from 'browser-image-compression'
+import { ref, uploadString, getDownloadURL } from 'firebase/storage'
+
 
 export const MyPage: React.FC = wrapError(() => {
   const cookies = new Cookies()
@@ -47,6 +48,33 @@ export const MyPage: React.FC = wrapError(() => {
 
   const handleClose = () => {
     setOpen(false)
+  }
+
+  const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.item(0)
+    if (!user) return
+    if (file) {
+      const data = await imageCompression.getDataUrlFromFile(file)
+      const storageRef = ref(storageService, `profile/${user.id}`)
+      const task = await uploadString(storageRef, data, 'data_url')
+      const url = await getDownloadURL(task.ref)
+      setProfileUrl(url)
+      await fetcher(encodeURI('/v1/users/profile?avatar=' + url))
+    }
+  }
+  
+  const handleNicknameChange = async () => {
+    if (!user || !displayName) return
+    try {
+      await fetcher('/v1/users/profile?username=' + displayName)
+      window.location.reload()
+    } catch {
+      Swal.fire({
+        icon: 'error',
+        title: '닉네임 변경 실패',
+        text: '이미 존재하는 닉네임 또는 사용할 수 없는 닉네임입니다.',
+      })
+    }
   }
 
   React.useEffect(() => {
@@ -83,11 +111,11 @@ export const MyPage: React.FC = wrapError(() => {
             <Avatar
               alt={'user'}
               src={profileUrl}
-              // imgProps={{ crossOrigin: 'anonymous' }}
+              imgProps={{ crossOrigin: 'anonymous' }}
               sx={{ width: '96px', height: '96px', mt: 6 }}
             />
           </label>
-          {user?.role.admin && <Badge color="info" badgeContent={'Admin'} />}
+          {user?.role.admin && <Badge color="success" badgeContent={'Admin'} />}
           <Typography
             variant="h5"
             sx={{ textAlign: 'center', mt: 2, display: 'flex' }}
@@ -116,9 +144,6 @@ export const MyPage: React.FC = wrapError(() => {
           </Dialog>
           <Grid container spacing={2} sx={{ mt: 2 }}>
             <Grid item xs={12}>
-              {/* <Typography variant="subtitle1" sx={{ maxWidth: '100%', wordBreak: 'break-all' }}>
-                포인트 : {user?.points}점
-              </Typography> */}
               <Chip
                 avatar={<Avatar src={pointIcon} />}
                 label={`보유 포인트 ${user?.points}점`}
@@ -141,19 +166,7 @@ export const MyPage: React.FC = wrapError(() => {
               <Button
                 variant="contained"
                 sx={{ width: '100%' }}
-                onClick={async () => {
-                  if (!user || !displayName) return
-                  try {
-                    await fetcher('/v1/users/profile?username=' + displayName)
-                    window.location.reload()
-                  } catch {
-                    Swal.fire({
-                      icon: 'error',
-                      title: '닉네임 변경 실패',
-                      text: '이미 존재하는 닉네임 또는 사용할 수 없는 닉네임입니다.',
-                    })
-                  }
-                }}
+                onClick={handleNicknameChange}
               >
                 닉네임 변경
               </Button>
@@ -176,18 +189,7 @@ export const MyPage: React.FC = wrapError(() => {
             style={{ display: 'none' }}
             id="raised-button-file"
             type="file"
-            onChange={async (e) => {
-              const file = e.target.files?.item(0)
-              if (!user) return
-              if (file) {
-                const data = await imageCompression.getDataUrlFromFile(file)
-                const storageRef = ref(storageService, `profile/${user.id}`)
-                const task = await uploadString(storageRef, data, 'data_url')
-                const url = await getDownloadURL(task.ref)
-                setProfileUrl(url)
-                await fetcher(encodeURI('/v1/users/profile?avatar=' + url))
-              }
-            }}
+            onChange={handleUpload}
           />
         </Box>
       )}
