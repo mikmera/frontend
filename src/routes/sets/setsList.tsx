@@ -1,13 +1,29 @@
 import Box from '@mui/material/Box'
-import React from 'react'
-import { wrapError } from '~/components/ErrorBoundary'
-import { useInView } from 'react-intersection-observer'
 import Grid from '@mui/material/Unstable_Grid2'
-import { useSetsContext } from '~/layouts/sets/context'
+import React from 'react'
+import { useInView } from 'react-intersection-observer'
+import { wrapError } from '~/components/ErrorBoundary'
 import { Spinner } from '~/components/Spinner'
+import { useSetsContext } from '~/layouts/sets/context'
 import { SetCard } from '~/routes/sets/Setcard'
 import { apiUrl, fetcher } from '~/util'
 
+const styles = {
+  grid: {
+    flexGrow: 10,
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    marginLeft: 0,
+  },
+  box: {
+    height: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 10,
+  },
+}
 export const SetsList: React.FC = wrapError(() => {
   const { data, update } = useSetsContext()
 
@@ -52,27 +68,9 @@ export const SetsList: React.FC = wrapError(() => {
   }, [data.type])
 
   return (
-    <Grid
-      container
-      spacing={3}
-      sx={{
-        flexGrow: 10,
-        width: '100%',
-        display: 'flex',
-        justifyContent: 'center',
-        marginLeft: 0,
-      }}
-    >
+    <Grid container spacing={3} sx={styles.grid}>
       {data.sets?.length === 0 ? (
-        <Box
-          mt={10}
-          sx={{
-            height: '100%',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
+        <Box sx={styles.box}>
           <Spinner />
         </Box>
       ) : data.query && data.result?.length !== 0 ? (
@@ -101,18 +99,6 @@ export const SetsList: React.FC = wrapError(() => {
             <SetCard item={item} />
           </Grid>
         ))
-      )}
-      {loading && (
-        <Box
-          sx={{
-            mt: 10,
-            display: 'flex',
-            justifyContent: 'center',
-            width: '100%',
-          }}
-        >
-          <Spinner />
-        </Box>
       )}
     </Grid>
   )

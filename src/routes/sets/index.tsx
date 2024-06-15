@@ -1,14 +1,13 @@
+import AddIcon from '@mui/icons-material/Add'
+import { SpeedDial } from '@mui/material'
 import Box from '@mui/material/Box'
 import React from 'react'
-import { wrapError } from '~/components/ErrorBoundary'
-import { SpeedDial } from '@mui/material'
-import AddIcon from '@mui/icons-material/Add'
-import { SetsList } from './setsList'
-import { useParams } from 'react-router-dom'
-import { CreateSets } from './createSets'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import Swal from 'sweetalert2'
+import { wrapError } from '~/components/ErrorBoundary'
 import { useMainContext } from '~/context'
+import { CreateSets } from './createSets'
+import { SetsList } from './setsList'
 
 export const SetsView: React.FC = wrapError(() => {
   const navigate = useNavigate()
