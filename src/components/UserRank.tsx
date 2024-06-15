@@ -73,7 +73,7 @@ export const UserRankTable: React.FC = () => {
             </ListItemAvatar>
             <ListItemText
               primary="울트라볼"
-              secondary="포케지지를 위해 열심히 기여해주신 분들입니다"
+              secondary="미끄메라넷을 위해 열심히 기여해주신 분들입니다"
             />
           </ListItem>
           <ListItem>
@@ -85,7 +85,7 @@ export const UserRankTable: React.FC = () => {
             </ListItemAvatar>
             <ListItemText
               primary="마스터볼"
-              secondary="포케지지의 관리진입니다"
+              secondary="미끄메라넷의 관리진입니다"
             />
           </ListItem>
         </List>
