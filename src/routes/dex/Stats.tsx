@@ -1,24 +1,24 @@
-import React, { PropsWithChildren } from 'react'
-import { useCurrentDexItem } from './context'
-import { Bar } from 'react-chartjs-2'
-import { StatKey } from '~/types'
-import { ChartData, ChartOptions } from 'chart.js'
-import { apiUrl } from '~/util'
-import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
-import Paper from '@mui/material/Paper'
-import Grid from '@mui/material/Grid'
+import { Tooltip } from '@mui/material'
 import Avatar from '@mui/material/Avatar'
+import Box from '@mui/material/Box'
+import Grid from '@mui/material/Grid'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import ListItemAvatar from '@mui/material/ListItemAvatar'
 import ListItemText from '@mui/material/ListItemText'
+import Paper from '@mui/material/Paper'
+import Typography from '@mui/material/Typography'
+import { ChartData, ChartOptions } from 'chart.js'
 import ChartDataLabels from 'chartjs-plugin-datalabels'
 import { motion } from 'framer-motion'
-import { GoogleAdsense } from '~/components/GoogleAdsense'
-import AbilityPatch from '~/assets/images/abilitypatch.webp'
+import React, { PropsWithChildren } from 'react'
+import { Bar } from 'react-chartjs-2'
 import AbilityCapsule from '~/assets/images/abilitycapsule.webp'
-import { Tooltip } from '@mui/material'
+import AbilityPatch from '~/assets/images/abilitypatch.webp'
+import { GoogleAdsense } from '~/components/GoogleAdsense'
+import { StatKey } from '~/types'
+import { apiUrl } from '~/util'
+import { useCurrentDexItem } from './context'
 
 const statLabels: Record<StatKey, [string, string]> = {
   hp: ['#EA3323', '체력'],
@@ -29,7 +29,7 @@ const statLabels: Record<StatKey, [string, string]> = {
   spe: ['#E66388', '스핏'],
 }
 
-const statOptions: ChartOptions = {
+const statOptions: ChartOptions<'bar'> = {
   responsive: true,
   indexAxis: 'y' as const,
   plugins: {
@@ -95,7 +95,7 @@ const MoveSection: React.FC = () => {
               <Avatar
                 variant="square"
                 src={apiUrl(`/v1/sprites/types/${x.type}.svg`)}
-                imgProps={{ crossOrigin: 'anonymous' }}
+                slotProps={{ img: { crossOrigin: 'anonymous' } }}
                 alt={x.type || '?'}
                 style={{ width: 40, height: 40, marginTop: 8 }}
               />
@@ -107,36 +107,6 @@ const MoveSection: React.FC = () => {
     </MotionList>
   )
 }
-
-// const NatureSection: React.FC = () => {
-//   const item = useCurrentDexItem()
-//   return (
-//     <MotionList
-//       transition={{ staggerChildren: 0.1 }}
-//       sx={{ height: '100%', overflowY: 'scroll', py: 0 }}
-//     >
-//       {item.natures.map((x, i) => (
-//         <MotionListItem
-//           key={i}
-//           initial={{ opacity: 0 }}
-//           animate={{ opacity: 1 }}
-//         >
-//           <ListItemAvatar>
-//             {/* <Avatar
-//               alt={'?'}
-//               imgProps={{ crossOrigin: 'anonymous' }}
-//               src={apiUrl(`/v1/sprites/natures/${x.plus}.webp`)}
-//             /> */}
-//           </ListItemAvatar>
-//           <ListItemText
-//             primary={x.name}
-//             secondary={`${x.usage}% (${x.show})`}
-//           />
-//         </MotionListItem>
-//       ))}
-//     </MotionList>
-//   )
-// }
 
 const TeamMatesSection: React.FC = () => {
   const item = useCurrentDexItem()
@@ -155,7 +125,7 @@ const TeamMatesSection: React.FC = () => {
           <ListItemAvatar>
             <Avatar
               alt={'?'}
-              imgProps={{ crossOrigin: 'anonymous' }}
+              slotProps={{ img: { crossOrigin: 'anonymous' } }}
               src={
                 x.formId === 0
                   ? apiUrl(`/v1/sprites/pokemon/${x.dexId}`)
@@ -166,7 +136,7 @@ const TeamMatesSection: React.FC = () => {
               <Avatar
                 key={i}
                 alt={x}
-                imgProps={{ crossOrigin: 'anonymous' }}
+                slotProps={{ img: { crossOrigin: 'anonymous' } }}
                 src={apiUrl(`/v1/sprites/types/${x}.svg`)}
                 sx={{
                   position: 'absolute',
@@ -203,7 +173,7 @@ const TerastalizeSection: React.FC = () => {
           <ListItemAvatar>
             <Avatar
               alt={x.type}
-              imgProps={{ crossOrigin: 'anonymous' }}
+              slotProps={{ img: { crossOrigin: 'anonymous' } }}
               src={apiUrl(
                 `/v1/sprites/teraTypes/${
                   x.type[0].toUpperCase() + x.type.slice(1)
@@ -233,7 +203,7 @@ const ItemSection: React.FC = () => {
               <Avatar
                 variant="square"
                 src={apiUrl(`/v1/sprites/items/${x.name}`)}
-                imgProps={{ crossOrigin: 'anonymous' }}
+                slotProps={{ img: { crossOrigin: 'anonymous' } }}
                 alt={x.name || '?'}
                 style={{ width: 40, height: 40, marginTop: 6 }}
               />
@@ -248,15 +218,6 @@ const ItemSection: React.FC = () => {
 
 const AbilitiesSection: React.FC = () => {
   const item = useCurrentDexItem()
-  // const type = (typeN: string) => {
-  //   switch (typeN) {
-  //     case 'hidden':
-  //       return { children: '숨' }
-  //     case 'normal':
-  //     default:
-  //       return { children: '일' }
-  //   }
-  // }
   return (
     <MotionList
       transition={{ staggerChildren: 0.1 }}
@@ -310,7 +271,6 @@ export const DexStats: React.FC = () => {
       </Grid>
       <Grid item xs={12} md={6} lg={4}>
         <DetailSection title="배틀팀 구성">
-          {/* <NatureSection /> */}
           <TeamMatesSection />
         </DetailSection>
       </Grid>
