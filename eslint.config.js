@@ -1,13 +1,13 @@
 // eslint.config.js
-import { defineConfig } from 'eslint-define-config'
-import reactPlugin from 'eslint-plugin-react'
-import typescriptPlugin from '@typescript-eslint/eslint-plugin'
-import prettierPlugin from 'eslint-plugin-prettier'
-import typescriptParser from '@typescript-eslint/parser'
+import { defineConfig } from 'eslint-define-config';
+import reactPlugin from 'eslint-plugin-react';
+import typescriptPlugin from '@typescript-eslint/eslint-plugin';
+import prettierPlugin from 'eslint-plugin-prettier';
+import typescriptParser from '@typescript-eslint/parser';
 
 export default defineConfig([
   {
-    files: ['**/*.{js,jsx,ts,tsx}'],
+    files: ["src/**/*.{js,jsx,ts,tsx}"],
     languageOptions: {
       ecmaVersion: 'latest',
       sourceType: 'module',
@@ -23,7 +23,7 @@ export default defineConfig([
     },
     settings: {
       react: {
-        version: 'detect', // React 버전 자동 감지
+        version: "detect", // React 버전 자동 감지
       },
     },
     rules: {
@@ -35,14 +35,13 @@ export default defineConfig([
     },
   },
   {
-    files: ['**/*.{ts,tsx}'],
+    files: ["src/**/*.{ts,tsx}"],
     languageOptions: {
       parser: typescriptParser,
     },
     rules: {
-      // TypeScript 권장 설정 추가
       '@typescript-eslint/no-unused-vars': 'warn',
       '@typescript-eslint/no-explicit-any': 'off',
     },
   },
-])
+]);
