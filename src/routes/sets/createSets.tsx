@@ -624,7 +624,7 @@ export const CreateSets: React.FC = () => {
                   crossOrigin="anonymous"
                   loading="lazy"
                   width="25"
-                  src={apiUrl(`/v1/sprites/types/${option.type}.svg`)}
+                  src={apiUrl(`/v1/sprites/teraTypes/${option.type}.png`)}
                 />
                 {option.label}
               </Box>

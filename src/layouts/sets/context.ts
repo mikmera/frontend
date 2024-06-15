@@ -1,61 +1,12 @@
 import React from 'react'
-import { PokemonSets } from '~/types'
+import { PokemonSets, AutoCompleteDataDefault, AutoCompleteDataPokemon, TypeAutoCompleteData, NatureAutoCompleteData  } from '~/types'
 
 export type SetsContextData = {
+  count: number
+  query: string
   type: 'single' | 'double' | 'all'
   sets: PokemonSets[] | null
   result: PokemonSets[] | null
-  count: number
-  query: string
-}
-
-interface AutoCompleteDataPokemon {
-  name: string
-  id: number
-  moves: [
-    {
-      locales: {
-        ko: string
-        jp: string
-      }
-      Mtype: string
-      name: string
-      route: string
-      level: number
-      _id: string
-    },
-  ]
-  stats: {
-    hp: number
-    atk: number
-    def: number
-    spa: number
-    spd: number
-    spe: number
-  }
-}
-
-interface AutoCompleteDataDefault {
-  name: string
-  id: string
-}
-
-interface NatureAutoCompleteData {
-  name: string
-  id: string
-  view: string
-  correction: {
-    atk: number
-    def: number
-    spa: number
-    spd: number
-    spe: number
-  }
-}
-
-interface TypeAutoCompleteData {
-  name: string
-  en: string
 }
 
 export type AutoCompleteData = {
@@ -76,7 +27,6 @@ export const SetsLayoutContext = React.createContext<{
     query: '',
     result: [],
   },
-
   update: () => {},
 })
 
@@ -90,7 +40,6 @@ export const AutoCompleteContext = React.createContext<{
     natures: [],
     types: [],
   },
-
   update: () => {},
 })
 

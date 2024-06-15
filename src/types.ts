@@ -234,3 +234,51 @@ export interface PokemonCalcSet {
   }
   saltCure: boolean
 }
+export interface AutoCompleteDataPokemon {
+  name: string
+  id: number
+  moves: [
+    {
+      locales: {
+        ko: string
+        jp: string
+      }
+      Mtype: string
+      name: string
+      route: string
+      level: number
+      _id: string
+    },
+  ]
+  stats: {
+    hp: number
+    atk: number
+    def: number
+    spa: number
+    spd: number
+    spe: number
+  }
+}
+
+export interface AutoCompleteDataDefault {
+  name: string
+  id: string
+}
+
+export interface NatureAutoCompleteData {
+  name: string
+  id: string
+  view: string
+  correction: {
+    atk: number
+    def: number
+    spa: number
+    spd: number
+    spe: number
+  }
+}
+
+export interface TypeAutoCompleteData {
+  name: string
+  en: string
+}
