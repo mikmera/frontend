@@ -22,7 +22,9 @@ const SetsLayout = wrapSuspense(
 
 const SetsAutoLayout = wrapSuspense(
   lazy(() =>
-    import('./layouts/sets').then((x) => ({ default: x.AutoCompleteLayout })),
+    import('./layouts/sets/Autocomplete').then((x) => ({
+      default: x.AutoCompleteLayout,
+    })),
   ),
 )
 

@@ -1,10 +1,10 @@
 import React from 'react'
 import {
-  PokemonSets,
   AutoCompleteDataDefault,
   AutoCompleteDataPokemon,
-  TypeAutoCompleteData,
   NatureAutoCompleteData,
+  PokemonSets,
+  TypeAutoCompleteData,
 } from '~/types'
 
 export type SetsContextData = {
@@ -24,6 +24,7 @@ export type AutoCompleteData = {
 
 export const SetsLayoutContext = React.createContext<{
   data: SetsContextData
+  // eslint-disable-next-line no-unused-vars
   update: (cb: (data: SetsContextData) => SetsContextData) => void
 }>({
   data: {
@@ -38,6 +39,7 @@ export const SetsLayoutContext = React.createContext<{
 
 export const AutoCompleteContext = React.createContext<{
   data: AutoCompleteData
+  // eslint-disable-next-line no-unused-vars
   update: (cb: (data: AutoCompleteData) => AutoCompleteData) => void
 }>({
   data: {
