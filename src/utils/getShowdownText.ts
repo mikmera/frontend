@@ -1,4 +1,4 @@
-import { PokemonSets, Stats, Moves, StatKey } from '~/types'
+import { PokemonSets, StatKey, Stats } from '~/types'
 const Dictionary = {
   hp: 'H',
   atk: 'A',
@@ -12,9 +12,12 @@ export const getShowdownText = (pokemon: PokemonSets) => {
   const result = []
   const nature: string = pokemon.nature.name
   const display = nature.slice(0, 1).toUpperCase() + nature.slice(1)
+  const teratype =
+    pokemon.teratype.name.slice(0, 1).toUpperCase() +
+    pokemon.teratype.name.slice(1)
   result.push(`${pokemon.pokemon.name} @ ${pokemon.item.name}`)
   result.push(`Ability: ${pokemon.ability.name}`)
-  result.push(`Tera Type: ${pokemon.teratype.name} `)
+  result.push(`Tera Type: ${teratype} `)
   result.push(`EVs: ${getEV(pokemon.evs, true)}`)
   result.push(`${display} Nature`)
   result.push(`IVs: ${getIV(pokemon.ivs, true)}`)
