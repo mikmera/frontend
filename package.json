@@ -26,7 +26,6 @@
     "chartjs-plugin-datalabels": "^2.2.0",
     "firebase": "^9.15.0",
     "framer-motion": "^7.6.9",
-    "git-commit-msg-linter": "^5.0.4",
     "node-sass": "^8.0.0",
     "notistack": "^2.0.8",
     "pokemoncalc": "^1.0.0",
