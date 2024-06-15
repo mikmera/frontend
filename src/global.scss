@@ -1,7 +1,27 @@
 @import 'pretendard/dist/web/variable/PretendardVariable-VF.css';
 
+// import fonts
+@font-face {
+  font-family: 'Unown';
+  font-style: normal;
+  font-weight: 400;
+  src: url('~/assets/fonts/Unown.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'moyamoya';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_231029@1.1/Cafe24Moyamoya-Regular-v1.0.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'ONE-Mobile-POP';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/ONE-Mobile-POP.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 * {
-  font-family: 'Pretendard Variable', Pretendard, -apple-system,
+  font-family: 'Pretendard Variable', 'Cafe24Moyamoya-Regular-v1.0' Pretendard, -apple-system,
     BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI',
     'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji',
     'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
