@@ -235,6 +235,7 @@ export interface PokemonCalcSet {
   saltCure: boolean
 }
 export interface AutoCompleteDataPokemon {
+  label: string
   name: string
   id: number
   moves: [
@@ -261,6 +262,7 @@ export interface AutoCompleteDataPokemon {
 }
 
 export interface AutoCompleteDataDefault {
+  label: string
   name: string
   id: string
 }

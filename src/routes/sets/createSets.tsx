@@ -6,16 +6,8 @@ import {
   FormControlLabel,
   FormLabel,
   Grid,
-  Input,
-  Paper,
   Radio,
   RadioGroup,
-  Slider,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableRow,
 } from '@mui/material'
 import Box from '@mui/material/Box'
 import Chip from '@mui/material/Chip'
@@ -25,6 +17,8 @@ import { VariantType, useSnackbar } from 'notistack'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getCookie } from 'react-use-cookie'
+import { StatTable } from '~/components/setsCreate/RealStatsTable'
+import { StatSlider } from '~/components/setsCreate/StatSlider'
 import { Spinner } from '~/components/Spinner'
 import { useMainContext } from '~/context'
 import { useAutoCompleteContext } from '~/layouts/sets/context'
@@ -445,7 +439,7 @@ export const CreateSets: React.FC = () => {
                 margin: 'auto',
                 marginTop: '20px',
               }}
-              slotProps={{ img: { crossOrigin: 'anonymous' } }}
+              imgProps={{ crossOrigin: 'anonymous' }}
               src={apiUrl(`/v1/sprites/pokemon/${pokemon}`)}
             />
           </Grid>
@@ -596,7 +590,7 @@ export const CreateSets: React.FC = () => {
                     avatar={
                       <Avatar
                         sx={{ width: 20 }}
-                        slotProps={{ img: { crossOrigin: 'anonymous' } }}
+                        imgProps={{ crossOrigin: 'anonymous' }}
                         src={apiUrl(`/v1/sprites/types/${option.type}.svg`)}
                       />
                     }
@@ -666,86 +660,25 @@ export const CreateSets: React.FC = () => {
             개체값
           </Grid>
           {statKeys.map((stat, index) => (
-            <React.Fragment key={index}>
-              <Grid item xs={1}>
-                {stat}
-              </Grid>
-              <Grid item xs={7} sx={{ paddingLeft: '15px' }}>
-                <Slider
-                  value={typeof Effort[index] === 'number' ? Effort[index] : 0}
-                  onBlur={() => handleStat(index, Effort[index])}
-                  onChange={(_, newValue) => handleSlider(index, newValue)}
-                  step={4}
-                  marks
-                  min={0}
-                  max={252}
-                  aria-labelledby="input-slider"
-                />
-              </Grid>
-              <Grid item xs={3} sx={{ marginLeft: '20px' }}>
-                <Input
-                  size="small"
-                  onBlur={() => handleStat(index, Effort[index])}
-                  onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                    handleChange(index, event)
-                  }
-                  value={Effort[index]}
-                  inputProps={{
-                    step: 4,
-                    min: 0,
-                    max: 252,
-                    type: 'number',
-                    'aria-labelledby': 'input-slider',
-                  }}
-                />
-                <Input
-                  sx={{ marginLeft: '10px' }}
-                  size="small"
-                  value={Ivs[index]}
-                  onBlur={() => handleIvBlur(index)}
-                  onChange={(e) => {
-                    const updatedIvs = [...Ivs]
-                    updatedIvs[index] = Number(e.target.value)
-                    setIvs(updatedIvs)
-                  }}
-                  inputProps={{
-                    step: 1,
-                    min: 0,
-                    max: 31,
-                    type: 'number',
-                    'aria-labelledby': 'input-slider',
-                  }}
-                />
-              </Grid>
-            </React.Fragment>
+            <StatSlider
+              key={index}
+              name={stat}
+              index={index}
+              effort={Effort[index]}
+              iv={Ivs[index]}
+              onSliderChange={handleSlider}
+              onEVInputChange={handleChange}
+              onEvBlur={handleStat}
+              onIVBlur={handleIvBlur}
+              onIVChange={(index, value) => {
+                const updatedIvs = [...Ivs]
+                updatedIvs[index] = value
+                setIvs(updatedIvs)
+              }}
+            />
           ))}
           <Grid item xs={12}>
-            <TableContainer component={Paper}>
-              <Table sx={{ width: '100%' }} aria-label="simple table">
-                <TableBody>
-                  {tableRows.map((row, index) =>
-                    index % 2 === 0 ? (
-                      <TableRow key={index}>
-                        <TableCell component="th" scope="row">
-                          {row.label}
-                        </TableCell>
-                        <TableCell align="right">{row.value}</TableCell>
-                        {index + 1 < tableRows.length && (
-                          <React.Fragment>
-                            <TableCell component="th" scope="row">
-                              {tableRows[index + 1].label}
-                            </TableCell>
-                            <TableCell align="right">
-                              {tableRows[index + 1].value}
-                            </TableCell>
-                          </React.Fragment>
-                        )}
-                      </TableRow>
-                    ) : null,
-                  )}
-                </TableBody>
-              </Table>
-            </TableContainer>
+            <StatTable stats={tableRows} />
           </Grid>
           <LoadingButton
             sx={{ mt: 2 }}
