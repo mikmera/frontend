@@ -1,4 +1,4 @@
-import { useContext, createContext } from 'react'
+import { createContext, useContext } from 'react'
 
 export type GlobalContextData = 'light' | 'dark'
 export interface User {
@@ -32,6 +32,7 @@ export interface MainContextData {
 export const MainContext = createContext<{
   theme: GlobalContextData
   user: User | null
+  // eslint-disable-next-line no-unused-vars
   update: (cb: (data: MainContextData) => MainContextData) => void
 }>({
   theme: 'dark',
