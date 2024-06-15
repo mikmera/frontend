@@ -22,7 +22,7 @@ export const DexLayout: React.FC = wrapError(() => {
 
   const { data: usageData } = useSWR(
     `/v1/usage?type=${data.type}&offset=${0}`,
-    fetcher
+    fetcher,
   )
 
   React.useEffect(() => {

@@ -191,7 +191,7 @@ export const PokemonSet = wrapError(() => {
             value={pokemon.gender}
             onChange={(
               event: React.MouseEvent<HTMLElement>,
-              newAlignment: string
+              newAlignment: string,
             ) => {
               console.log(event)
               setpokemon({
@@ -492,8 +492,8 @@ export const PokemonSet = wrapError(() => {
               pokemon.currentHp.percent > 50
                 ? 'success'
                 : pokemon.currentHp.percent > 25
-                ? 'warning'
-                : 'error'
+                  ? 'warning'
+                  : 'error'
             }
           />
         </Grid>

@@ -20,7 +20,7 @@ const NavLinkItem: React.FC<{ item: NavLink }> = wrapError(({ item }) => {
 
   const pathname = React.useMemo(
     () => (loc.pathname.endsWith('/') ? loc.pathname : loc.pathname + '/'),
-    [loc.pathname]
+    [loc.pathname],
   )
 
   const active = React.useMemo(() => item.match.test(pathname), [pathname])
@@ -57,5 +57,5 @@ export const RootDrawer: React.FC<RootDrawerProps> = wrapError(
         </LayoutGroup>
       </Drawer>
     )
-  }
+  },
 )

@@ -17,7 +17,7 @@ export const SearchFilters: React.FC = wrapError(() => {
 
   const handleChange = (
     event: React.MouseEvent<HTMLElement>,
-    newAlignment: string
+    newAlignment: string,
   ) => {
     setAlignment(newAlignment)
     update((v) => ({ ...v, type: newAlignment as SetsContextData['type'] }))
@@ -54,7 +54,7 @@ export const SearchBar: React.FC = wrapError(() => {
     const fetchData = async () => {
       if (query === '') return
       const { sets } = await fetcher(
-        apiUrl(`/v1/sets?&query=${query}&offset=0`)
+        apiUrl(`/v1/sets?&query=${query}&offset=0`),
       )
       if (!sets) return
 

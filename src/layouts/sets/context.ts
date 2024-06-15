@@ -23,7 +23,7 @@ interface AutoCompleteDataPokemon {
       route: string
       level: number
       _id: string
-    }
+    },
   ]
   stats: {
     hp: number
@@ -76,7 +76,7 @@ export const SetsLayoutContext = React.createContext<{
     query: '',
     result: [],
   },
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
+
   update: () => {},
 })
 
@@ -90,7 +90,7 @@ export const AutoCompleteContext = React.createContext<{
     natures: [],
     types: [],
   },
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
+
   update: () => {},
 })
 

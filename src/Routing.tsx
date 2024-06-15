@@ -5,29 +5,29 @@ import { Main } from './routes/main'
 import { wrapSuspense } from './utils/suspense'
 
 const RootLayout = wrapSuspense(
-  lazy(() => import('./layouts/root').then((x) => ({ default: x.RootLayout })))
+  lazy(() => import('./layouts/root').then((x) => ({ default: x.RootLayout }))),
 )
 
 const DexLayout = wrapSuspense(
-  lazy(() => import('./layouts/dex').then((x) => ({ default: x.DexLayout })))
+  lazy(() => import('./layouts/dex').then((x) => ({ default: x.DexLayout }))),
 )
 
 const DexView = wrapSuspense(
-  lazy(() => import('./routes/dex').then((x) => ({ default: x.DexView })))
+  lazy(() => import('./routes/dex').then((x) => ({ default: x.DexView }))),
 )
 
 const SetsLayout = wrapSuspense(
-  lazy(() => import('./layouts/sets').then((x) => ({ default: x.SetsLayout })))
+  lazy(() => import('./layouts/sets').then((x) => ({ default: x.SetsLayout }))),
 )
 
 const SetsAutoLayout = wrapSuspense(
   lazy(() =>
-    import('./layouts/sets').then((x) => ({ default: x.AutoCompleteLayout }))
-  )
+    import('./layouts/sets').then((x) => ({ default: x.AutoCompleteLayout })),
+  ),
 )
 
 const SetsView = wrapSuspense(
-  lazy(() => import('./routes/sets').then((x) => ({ default: x.SetsView })))
+  lazy(() => import('./routes/sets').then((x) => ({ default: x.SetsView }))),
 )
 
 // const Calculator = wrapSuspense(
@@ -35,37 +35,37 @@ const SetsView = wrapSuspense(
 // )
 
 const Auth = wrapSuspense(
-  lazy(() => import('./routes/auth').then((x) => ({ default: x.Main })))
+  lazy(() => import('./routes/auth').then((x) => ({ default: x.Main }))),
 )
 
 const Callback = wrapSuspense(
   lazy(() =>
-    import('./routes/auth/callback').then((x) => ({ default: x.Callback }))
-  )
+    import('./routes/auth/callback').then((x) => ({ default: x.Callback })),
+  ),
 )
 
 const PrivacyPolicy = wrapSuspense(
   lazy(() =>
     import('./routes/docs').then((x) => ({
       default: x.PrivacyPolicy,
-    }))
-  )
+    })),
+  ),
 )
 
 const NotFound = wrapSuspense(
   lazy(() =>
     import('./routes/notfound').then((x) => ({
       default: x.NotFound,
-    }))
-  )
+    })),
+  ),
 )
 
 const Loading = wrapSuspense(
   lazy(() =>
     import('./routes/InfiniteLoading').then((x) => ({
       default: x.InfiniteLoadingPage,
-    }))
-  )
+    })),
+  ),
 )
 
 export const Routing: React.FC = wrapError(() => {

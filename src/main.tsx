@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
@@ -61,7 +60,7 @@ export default function ToggleColorMode() {
           mode: data.theme,
         },
       }),
-    [data.theme]
+    [data.theme],
   )
 
   return (
@@ -97,5 +96,5 @@ Sentry.init({
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <ToggleColorMode />
+  <ToggleColorMode />,
 )

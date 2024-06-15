@@ -8,7 +8,7 @@ export const Main: React.FC = wrapError(() => {
 
   const handleChange = (
     event: React.MouseEvent<HTMLElement>,
-    newAlignment: string
+    newAlignment: string,
   ) => {
     setCalcMode(newAlignment)
   }

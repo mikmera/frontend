@@ -30,7 +30,7 @@ export function wrapError<T>(Component: React.ComponentType<T>) {
   return ((props: T) => {
     return (
       <ErrorBoundary>
-        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+        {}
         <Component {...(props as any)} />
       </ErrorBoundary>
     )

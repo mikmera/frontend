@@ -16,9 +16,9 @@ export const DexHeader: React.FC = wrapError(() => {
       apiUrl(
         `/v1/sprites/pokemon/${pokemon.dexId}${
           pokemon.formId !== 0 ? `-${pokemon.formId}` : ''
-        }`
+        }`,
       ),
-    [pokemon.id]
+    [pokemon.id],
   )
 
   return (

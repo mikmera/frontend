@@ -36,7 +36,7 @@ export const MainContext = createContext<{
 }>({
   theme: 'dark',
   user: null,
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
+
   update: () => {},
 })
 

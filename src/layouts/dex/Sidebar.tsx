@@ -72,9 +72,9 @@ const DexItem: React.FC<{ item: Usage; index: number }> = wrapError(
         apiUrl(
           `/v1/sprites/pokemon/${item.pokemon.dexId}${
             item.pokemon.formId !== 0 ? `-${item.pokemon.formId}` : ''
-          }`
+          }`,
         ),
-      [item.pokemon.id]
+      [item.pokemon.id],
     )
 
     return (
@@ -104,7 +104,7 @@ const DexItem: React.FC<{ item: Usage; index: number }> = wrapError(
         />
       </ListItemButton>
     )
-  }
+  },
 )
 
 export const MainSidebar: React.FC = () => {
@@ -120,8 +120,8 @@ export const MainSidebar: React.FC = () => {
     setLoading(true)
     const { data: usageData } = await fetcher(
       apiUrl(
-        `/v1/usage?type=${data.type}&offset=${(data.usages?.length ?? 0) + 1}`
-      )
+        `/v1/usage?type=${data.type}&offset=${(data.usages?.length ?? 0) + 1}`,
+      ),
     )
     update((v) => ({
       ...v,

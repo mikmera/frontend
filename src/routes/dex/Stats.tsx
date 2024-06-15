@@ -207,7 +207,7 @@ const TerastalizeSection: React.FC = () => {
               src={apiUrl(
                 `/v1/sprites/teraTypes/${
                   x.type[0].toUpperCase() + x.type.slice(1)
-                }.png`
+                }.png`,
               )}
             />
           </ListItemAvatar>

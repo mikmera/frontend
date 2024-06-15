@@ -56,7 +56,7 @@ export const CreateSets: React.FC = () => {
           spd: number
           spe: number
         }
-      }
+      },
     ]
   >([
     {
@@ -80,7 +80,7 @@ export const CreateSets: React.FC = () => {
           spd: number
           spe: number
         }
-      }
+      },
     ]
   >([
     {
@@ -95,7 +95,7 @@ export const CreateSets: React.FC = () => {
   ])
 
   const [moveList, setMove] = React.useState<{ label: string; type: string }[]>(
-    [{ label: '', type: '' }]
+    [{ label: '', type: '' }],
   )
   const [teraTypes] = React.useState<{ label: string; type: string }[]>([
     { label: '노말', type: 'Normal' },
@@ -147,7 +147,7 @@ export const CreateSets: React.FC = () => {
 
   const handleChange = (
     index: number,
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const value = Number(event.target.value)
     handleStat(index, value)
@@ -271,7 +271,7 @@ export const CreateSets: React.FC = () => {
   React.useEffect(() => {
     const fetchData = async () => {
       const { pokemon: data } = await fetcher(
-        apiUrl(`/v1/autocomplete/pokemon/${pokemon}`)
+        apiUrl(`/v1/autocomplete/pokemon/${pokemon}`),
       )
       if (!data) return
 
@@ -309,7 +309,7 @@ export const CreateSets: React.FC = () => {
       iv: number,
       effort: number,
       statCorr: number,
-      index: number
+      index: number,
     ) => {
       if (index === 0)
         return Math.floor((base * 2 + iv + effort / 4) * 0.5 + 60)
@@ -325,7 +325,7 @@ export const CreateSets: React.FC = () => {
         Ivs[index],
         Effort[index],
         correction[key as keyof typeof correction],
-        index
+        index,
       )
     })
 
@@ -362,7 +362,7 @@ export const CreateSets: React.FC = () => {
   React.useEffect(() => {
     const fetchData = async () => {
       const { abilities: data } = await fetcher(
-        apiUrl(`/v1/autocomplete/abilities/${pokemon}`)
+        apiUrl(`/v1/autocomplete/abilities/${pokemon}`),
       )
       if (!data) return
       abilities.splice(0, abilities.length)
@@ -581,11 +581,10 @@ export const CreateSets: React.FC = () => {
             )}
             renderTags={(
               value: readonly { label: string; type: string }[],
-              getTagProps
+              getTagProps,
             ) =>
               value.map(
                 (option: { label: string; type: string }, index: number) => (
-                  // eslint-disable-next-line react/jsx-key
                   <Chip
                     sx={{
                       marginBottom: '2px',
@@ -603,7 +602,7 @@ export const CreateSets: React.FC = () => {
                     }
                     {...getTagProps({ index })}
                   />
-                )
+                ),
               )
             }
             onChange={(e, v) => {
@@ -742,7 +741,7 @@ export const CreateSets: React.FC = () => {
                           </React.Fragment>
                         )}
                       </TableRow>
-                    ) : null
+                    ) : null,
                   )}
                 </TableBody>
               </Table>

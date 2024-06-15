@@ -19,7 +19,7 @@ export const fetcher = async (url: string) => {
   const Authorization = getCookie('Authorization')
   const appCheckTokenResponse = await getToken(
     appCheck,
-    /* forceRefresh= */ false
+    /* forceRefresh= */ false,
   )
   try {
     const { data } = await api.get(url, {
@@ -30,7 +30,6 @@ export const fetcher = async (url: string) => {
     })
 
     return data.body
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     return error.response.data
   }
@@ -40,7 +39,7 @@ export const put = async (url: string, data: object) => {
   const Authorization = getCookie('Authorization')
   const appCheckTokenResponse = await getToken(
     appCheck,
-    /* forceRefresh= */ true
+    /* forceRefresh= */ true,
   )
 
   await api.put(url, data, {

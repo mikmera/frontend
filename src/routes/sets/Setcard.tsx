@@ -101,7 +101,7 @@ export const SetCard: React.FC<{ item: PokemonSets }> = ({
           src={
             item.pokemon.formId
               ? apiUrl(
-                  `/v1/sprites/pokemon/${item.pokemon.dexId}-${item.pokemon.formId}`
+                  `/v1/sprites/pokemon/${item.pokemon.dexId}-${item.pokemon.formId}`,
                 )
               : apiUrl(`/v1/sprites/pokemon/${item.pokemon.dexId}`)
           }
@@ -122,7 +122,7 @@ export const SetCard: React.FC<{ item: PokemonSets }> = ({
           src={apiUrl(
             `/v1/sprites/types/${
               item.teratype.name[0].toUpperCase() + item.teratype.name.slice(1)
-            }.svg`
+            }.svg`,
           )}
         />
         <Typography variant="h5" component="div" sx={{ wordBreak: 'keep-all' }}>

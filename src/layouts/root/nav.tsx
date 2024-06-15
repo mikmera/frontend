@@ -34,7 +34,7 @@ const NavLinkItem: React.FC<{ item: NavLink }> = wrapError(({ item }) => {
 
   const pathname = React.useMemo(
     () => (loc.pathname.endsWith('/') ? loc.pathname : loc.pathname + '/'),
-    [loc.pathname]
+    [loc.pathname],
   )
 
   const active = React.useMemo(() => item.match.test(pathname), [pathname])
@@ -73,12 +73,12 @@ export const Nav: React.FC = wrapError(() => {
 
   const closeDrawer = React.useCallback(
     () => setDrawerOpen(false),
-    [setDrawerOpen]
+    [setDrawerOpen],
   )
 
   const toggleDrawer = React.useCallback(
     () => setDrawerOpen((v) => !v),
-    [setDrawerOpen]
+    [setDrawerOpen],
   )
 
   const handleLogoClick = React.useCallback(() => {

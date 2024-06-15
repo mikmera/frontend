@@ -29,7 +29,7 @@ export const SetsLayout: React.FC = wrapError(() => {
 
   const { data: sets } = useSWR(
     `/v1/sets?offset=${0}&type=${data.type}`,
-    fetcher
+    fetcher,
   )
 
   React.useEffect(() => {

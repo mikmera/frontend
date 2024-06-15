@@ -25,8 +25,8 @@ export const SetsList: React.FC = wrapError(() => {
       setLoading(true)
       fetcher(
         apiUrl(
-          `/v1/sets?offset=${data.sets?.length ?? 0 + 1}&type=${data.type}`
-        )
+          `/v1/sets?offset=${data.sets?.length ?? 0 + 1}&type=${data.type}`,
+        ),
       ).then((res) => {
         update((v) => ({
           ...v,
@@ -40,7 +40,7 @@ export const SetsList: React.FC = wrapError(() => {
   React.useEffect(() => {
     setLoading(true)
     fetcher(
-      apiUrl(`/v1/sets?offset=${data.sets?.length ?? 0 + 1}&type=${data.type}`)
+      apiUrl(`/v1/sets?offset=${data.sets?.length ?? 0 + 1}&type=${data.type}`),
     ).then((res) => {
       update((v) => ({
         ...v,

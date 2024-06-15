@@ -19,7 +19,7 @@ export function wrapSuspense<T>(Component: React.ComponentType<T>) {
           </Box>
         }
       >
-        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+        {}
         <Component {...(props as any)} />
       </Suspense>
     )
