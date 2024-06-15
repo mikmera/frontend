@@ -55,10 +55,10 @@ export const DexLayout: React.FC = wrapError(() => {
         <MainSidebar />
         <Box sx={{ marginLeft: isMobile ? 0 : '280px', height: '100%' }}>
           {isMobile && (
-            <>
+            <React.Fragment>
               <Toolbar />
               <Divider />
-            </>
+            </React.Fragment>
           )}
           <Outlet />
         </Box>
