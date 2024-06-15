@@ -14,6 +14,7 @@ import Button from '@mui/material/Button'
 import Popover from '@mui/material/Popover'
 import CardActions from '@mui/material/CardActions'
 import { PokemonSets, Stats, Moves, StatKey } from '~/types'
+import { getShowdownText, getIV, getEV } from '~/utils/getShowdownText'
 
 export const SetCard: React.FC<{ item: PokemonSets }> = ({
   item,
@@ -24,72 +25,6 @@ export const SetCard: React.FC<{ item: PokemonSets }> = ({
 
   const open = Boolean(anchorEl)
   const id = open ? 'simple-popover' : undefined
-
-  const Dictionary = {
-    hp: 'H',
-    atk: 'A',
-    def: 'B',
-    spa: 'C',
-    spd: 'D',
-    spe: 'S',
-  }
-
-  const getShowdownText = () => {
-    const result = []
-    const nature: string = item.nature.name
-    const display = nature.slice(0, 1).toUpperCase() + nature.slice(1)
-    result.push(`${item.pokemon.name} @ ${item.item.name}`)
-    result.push(`Ability: ${item.ability.name}`)
-    result.push(`Tera Type: ${item.teratype.name} `)
-    result.push(`EVs: ${getEV(item.evs, true)}`)
-    result.push(`${display} Nature`)
-    result.push(`IVs: ${getIV(item.ivs, true)}`)
-    for (const move of item.moves) {
-      result.push(`- ${move.name}`)
-    }
-    return result.join('\n')
-  }
-
-  const getIV = (iv: Stats, type?: boolean) => {
-    const result = []
-    if (type) {
-      for (const ikey in iv) {
-        const key: StatKey = ikey as StatKey
-        if (iv[key] !== 31)
-          result.push(iv[key] + ' ' + key[0].toUpperCase() + key.slice(1))
-      }
-      return result.join(' / ')
-    } else {
-      for (const ikey in iv) {
-        const key: StatKey = ikey as StatKey
-        if (iv[key] === 31) result.push('V')
-        else if (iv[key] === 30) result.push('U')
-        else if (iv[key] === 0) result.push('Z')
-        else result.push(iv[key])
-      }
-      return result.join('.')
-    }
-  }
-  // ev = {hp: 252, atk: 6, def: 0, spa: 0, spd: 0, spe: 252}
-  // hp = H / atk = A / def = B / spa = C / spd = D / spe = S
-  // 만약 hp252 spe252 atk6 라면 HS252 A6로 표기
-
-  const getEV = (ev: Stats, type?: boolean) => {
-    const result = []
-    if (type) {
-      for (const ikey in ev) {
-        const key: StatKey = ikey as StatKey
-        if (ev[key] !== 0) result.push(ev[key] + ' ' + key)
-      }
-      return result.join(' / ')
-    } else {
-      for (const ikey in ev) {
-        const key: StatKey = ikey as StatKey
-        if (ev[key] !== 0) result.push(Dictionary[key] + ev[key])
-      }
-    }
-    return result.join(' ')
-  }
 
   return (
     <Card sx={{ minWidth: '330px', maxWidth: '400px' }}>
@@ -120,9 +55,9 @@ export const SetCard: React.FC<{ item: PokemonSets }> = ({
           }}
           imgProps={{ crossOrigin: 'anonymous' }}
           src={apiUrl(
-            `/v1/sprites/types/${
+            `/v1/sprites/teraTypes/${
               item.teratype.name[0].toUpperCase() + item.teratype.name.slice(1)
-            }.svg`,
+            }.png`,
           )}
         />
         <Typography variant="h5" component="div" sx={{ wordBreak: 'keep-all' }}>
@@ -202,7 +137,7 @@ export const SetCard: React.FC<{ item: PokemonSets }> = ({
         </Popover>
         <Button
           size="small"
-          onClick={() => navigator.clipboard.writeText(getShowdownText())}
+          onClick={() => navigator.clipboard.writeText(getShowdownText(item))}
         >
           쇼다운 텍스트 복사
         </Button>
