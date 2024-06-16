@@ -9,10 +9,7 @@ interface Props {
 
 export const NautreAutocomplete: React.FC<Props> = ({ natures, setNature }) => {
   const [nature, setLocalNature] = React.useState('')
-  const onChange = (
-    e: React.SyntheticEvent<Element, Event>,
-    v: { label: string; name: string } | null,
-  ) => {
+  const onChange = (v: { label: string; name: string } | null) => {
     if (!v) return
     setNature(v.name)
     setLocalNature(v.name)
@@ -30,7 +27,7 @@ export const NautreAutocomplete: React.FC<Props> = ({ natures, setNature }) => {
           helperText={nature ? '' : '* 올바른 성격을 선택해주세요'}
         />
       )}
-      onChange={(e, v) => onChange(e, v)}
+      onChange={(_, v) => onChange(v)}
     />
   )
 }
