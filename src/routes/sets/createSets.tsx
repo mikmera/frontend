@@ -30,7 +30,22 @@ import {
   pokemonInit,
 } from './initialize'
 
+interface Stats {
+  atk: number
+  def: number
+  spa: number
+  spd: number
+  spe: number
+}
+
 const statKeys = ['HP', '공격', '방어', '특공', '특방', '스핏']
+const statEn: { [key: number]: keyof Stats } = {
+  1: 'atk',
+  2: 'def',
+  3: 'spa',
+  4: 'spd',
+  5: 'spe',
+}
 const styles = {
   pokemonAvatar: {
     width: 100,
@@ -422,6 +437,11 @@ export const CreateSets: React.FC = () => {
                 updatedIvs[index] = value
                 setIvs(updatedIvs)
               }}
+              correction={
+                natures.find((v) => v.label === nature)?.correction[
+                  statEn[index]
+                ]
+              }
             />
           ))}
           <Grid item xs={12}>
