@@ -1,8 +1,9 @@
 name: deploy
 
 on:
-  workflow_dispatch:
   push:
+    branches:
+      - main
 
 permissions:
   contents: read
@@ -17,7 +18,7 @@ env:
   VITE_FIREBASE_MESUREMENT_ID: ${{ secrets.VITE_FIREBASE_MESUREMENT_ID }}
   VITE_DISCORD_CLIENT_ID: ${{ secrets.VITE_DISCORD_CLIENT_ID }}
   VITE_DISCORD_REDIRECT_URI: ${{ secrets.VITE_DISCORD_REDIRECT_URI }}
-  
+
 jobs:
   build:
     name: build and deploy
