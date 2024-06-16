@@ -1,20 +1,20 @@
-// src/test/errorpage.test.tsx
-import { ThemeProvider, createTheme } from '@mui/material/styles'
-import { render, screen } from '@testing-library/react'
+import { act, fireEvent, render, screen } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
-import { ErrorPage } from '~/components/ErrorPage'
+import { ErrorPage } from '../components/ErrorPage'
 
-describe('ErrorPage Component', () => {
-  const theme = createTheme()
-  test('navigates to home on button click', () => {
+test('navigates to home on button click', async () => {
+  await act(async () => {
     render(
       <MemoryRouter>
-        <ThemeProvider theme={theme}>
-          <ErrorPage code="404" />
-        </ThemeProvider>
+        <ErrorPage code="404" />
       </MemoryRouter>,
     )
-
-    screen.getByText('홈으로 돌아가기').click()
   })
+
+  const button = screen.getByRole('button', { name: /홈으로 돌아가기/i })
+  await act(async () => {
+    fireEvent.click(button)
+  })
+
+  expect(window.location.pathname).toBe('/')
 })
