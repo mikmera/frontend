@@ -8,6 +8,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getCookie } from 'react-use-cookie'
 import { ItemAutocomplete } from '~/components/setsCreate/ItemAutocomplete'
+import { NautreAutocomplete } from '~/components/setsCreate/NatureAutocomplete'
 import { PokemonAutocomplete } from '~/components/setsCreate/PokemonAutocomplete'
 import { StatTable } from '~/components/setsCreate/RealStatsTable'
 import { RuleSelector } from '~/components/setsCreate/ruleSelector'
@@ -366,6 +367,9 @@ export const CreateSets: React.FC = () => {
           <Grid item xs={8}>
             <PokemonAutocomplete pokemons={pokemons} setPokemon={setPokemon} />
             <ItemAutocomplete items={items} setItem={setItem} />
+          </Grid>
+          <Grid item xs={6} mt={4}>
+            <NautreAutocomplete natures={natures} setNature={setNature} />
           </Grid>
           <TeraTypeAutoComplete
             teraTypes={teraTypes}
