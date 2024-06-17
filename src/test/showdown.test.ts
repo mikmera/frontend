@@ -34,12 +34,12 @@ describe('ShowDownText Generators', () => {
 
   it('should return 252 HP / 252 Def EVs', () => {
     const ev = { hp: 252, atk: 0, def: 252, spa: 0, spd: 0, spe: 0 }
-    expect(getEV(ev)).toBe('H252 B252')
+    expect(getEV(ev)).toBe('HB252')
   })
 
   it('should return 252 HP / 252 Def / 4 Spe EVs', () => {
     const ev = { hp: 252, atk: 0, def: 252, spa: 0, spd: 0, spe: 4 }
-    expect(getEV(ev)).toBe('H252 B252 S4')
+    expect(getEV(ev)).toBe('HB252 S4')
   })
 
   it('should return Correct Format of Showdown Text', () => {
