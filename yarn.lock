@@ -3273,6 +3273,33 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@vercel/speed-insights@npm:^1.0.12":
+  version: 1.0.12
+  resolution: "@vercel/speed-insights@npm:1.0.12"
+  peerDependencies:
+    "@sveltejs/kit": ^1 || ^2
+    next: ">= 13"
+    react: ^18 || ^19
+    svelte: ^4
+    vue: ^3
+    vue-router: ^4
+  peerDependenciesMeta:
+    "@sveltejs/kit":
+      optional: true
+    next:
+      optional: true
+    react:
+      optional: true
+    svelte:
+      optional: true
+    vue:
+      optional: true
+    vue-router:
+      optional: true
+  checksum: df108b6ddf5b58ecf6b3b0463f46bad98ec11fac1bfbc11d4fa7221218ca030d34726fdc36332edb99a2419940222aa7ea4749498debbe8742a6afb2ebb9f153
+  languageName: node
+  linkType: hard
+
 "@virtuoso.dev/react-urx@npm:^0.2.12":
   version: 0.2.13
   resolution: "@virtuoso.dev/react-urx@npm:0.2.13"
@@ -7343,6 +7370,7 @@ __metadata:
     "@types/react-helmet": ^6
     "@typescript-eslint/eslint-plugin": ^7.13.0
     "@typescript-eslint/parser": ^7.13.0
+    "@vercel/speed-insights": ^1.0.12
     "@vitejs/plugin-react": ^4.3.1
     "@vitejs/plugin-vue": ^5.0.5
     adblock-detect-react: ^1.1.0
