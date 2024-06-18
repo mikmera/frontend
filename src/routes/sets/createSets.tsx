@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom'
 import { getCookie } from 'react-use-cookie'
 import { AbilityAutocomplete } from '~/components/setsCreate/AbilityAutocomplete'
 import { ItemAutocomplete } from '~/components/setsCreate/ItemAutocomplete'
+import { MoveSelector } from '~/components/setsCreate/MoveSelector'
 import { NautreAutocomplete } from '~/components/setsCreate/NatureAutocomplete'
 import { PokemonAutocomplete } from '~/components/setsCreate/PokemonAutocomplete'
 import { StatTable } from '~/components/setsCreate/RealStatsTable'
@@ -396,6 +397,12 @@ export const CreateSets: React.FC = () => {
               disabled={disabled}
             />
           </Grid>
+          <MoveSelector
+            moves={moves}
+            moveList={moveList}
+            disabled={disabled}
+            setMove={setMove}
+          />
           <TeraTypeAutoComplete
             teraTypes={teraTypes}
             setTerastal={setTeraType}
