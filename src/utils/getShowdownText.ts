@@ -55,15 +55,11 @@ export const getEV = (ev: Stats, type?: boolean) => {
     for (const ikey in ev) {
       const key = ikey as StatKey
       if (ev[key] !== 0) {
-        if (type) {
-          result.push(`${ev[key]} ${key}`)
-        } else {
-          result.push(`${Dictionary[key]}${ev[key]}`)
-        }
+        result.push(`${ev[key]} ${key}`)
       }
     }
 
-    return type ? result.join(' / ') : result.join(' ')
+    return result.join(' / ')
   } else {
     const grouped: { [value: number]: string[] } = {}
 
