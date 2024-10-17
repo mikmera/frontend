@@ -2767,6 +2767,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@smogon/calc@npm:^0.10.0":
+  version: 0.10.0
+  resolution: "@smogon/calc@npm:0.10.0"
+  dependencies:
+    "@types/node": ^18.14.2
+  checksum: 1d5f1b5179eee54f596d1d4270e2da5471b24141be9bf3821a14c68e66795610c8dbcb904c892c8474593357a0e3321f34c8c0c0ac12609309117f8b157a10f8
+  languageName: node
+  linkType: hard
+
 "@svgr/babel-plugin-add-jsx-attribute@npm:^6.5.1":
   version: 6.5.1
   resolution: "@svgr/babel-plugin-add-jsx-attribute@npm:6.5.1"
@@ -3087,6 +3096,15 @@ __metadata:
   dependencies:
     undici-types: ~5.26.4
   checksum: ae6369baa1529ec3564da29611ec7eb8ccb219080d717292151b6b899820d25290243d01c9240f11a63d1a42e47198cd6310fab67b6d17bea723221fea07b644
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^18.14.2":
+  version: 18.19.36
+  resolution: "@types/node@npm:18.19.36"
+  dependencies:
+    undici-types: ~5.26.4
+  checksum: 97fce6e862fd1853ae3e0c4ed5c87181d18af1646c367a22befc17697bc68a98401dc037219630a90d2e27032bf1a2306cf876ce709c553c3f42585584fe2c7a
   languageName: node
   linkType: hard
 
@@ -7360,6 +7378,7 @@ __metadata:
     "@pkmn/dex": ^0.7.21
     "@sentry/react": ^7.33.0
     "@sentry/tracing": ^7.33.0
+    "@smogon/calc": ^0.10.0
     "@testing-library/dom": ^10.1.0
     "@testing-library/jest-dom": ^6.4.6
     "@testing-library/react": ^16.0.0
