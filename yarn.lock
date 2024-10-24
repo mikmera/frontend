@@ -249,7 +249,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ctrl/react-adsense@npm:^1.6.1":
+"@ctrl/react-adsense@npm:^1.7.0":
   version: 1.7.0
   resolution: "@ctrl/react-adsense@npm:1.7.0"
   dependencies:
@@ -329,7 +329,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/react@npm:^11.11.4":
+"@emotion/react@npm:^11.13.3":
   version: 11.13.3
   resolution: "@emotion/react@npm:11.13.3"
   dependencies:
@@ -370,7 +370,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/styled@npm:^11.11.5":
+"@emotion/styled@npm:^11.13.0":
   version: 11.13.0
   resolution: "@emotion/styled@npm:11.13.0"
   dependencies:
@@ -1993,7 +1993,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mui/icons-material@npm:^5.10.15":
+"@mui/icons-material@npm:^5.16.7":
   version: 5.16.7
   resolution: "@mui/icons-material@npm:5.16.7"
   dependencies:
@@ -2009,7 +2009,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mui/lab@npm:^5.0.0-alpha.115":
+"@mui/lab@npm:^5.0.0-alpha.173":
   version: 5.0.0-alpha.173
   resolution: "@mui/lab@npm:5.0.0-alpha.173"
   dependencies:
@@ -2038,7 +2038,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mui/material@npm:^5.15.20":
+"@mui/material@npm:^5.16.7":
   version: 5.16.7
   resolution: "@mui/material@npm:5.16.7"
   dependencies:
@@ -2406,28 +2406,28 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@pkmn/dex-types@npm:^0.7.59":
-  version: 0.7.59
-  resolution: "@pkmn/dex-types@npm:0.7.59"
+"@pkmn/dex-types@npm:^0.9.21":
+  version: 0.9.21
+  resolution: "@pkmn/dex-types@npm:0.9.21"
   dependencies:
-    "@pkmn/types": ^3.0.0
-  checksum: f2e577a0270c4362240f71dff7d8b6d26c3b1845b6fbee4e0d17679b7cf8f298be1f4deae1cf2accc80fa401f4a0cd065557cc045d6510f7c83c512211f4456e
+    "@pkmn/types": ^4.0.0
+  checksum: bcbe1a3873ca20caee1d62b9fd71a4067d2fe45ed7fdeae7b225cbde961e48969eab590b325e1dbfd68037af724bd7a2c2b4d9de84ab579fa7f9e030ed622188
   languageName: node
   linkType: hard
 
-"@pkmn/dex@npm:^0.7.21":
-  version: 0.7.59
-  resolution: "@pkmn/dex@npm:0.7.59"
+"@pkmn/dex@npm:^0.9.21":
+  version: 0.9.21
+  resolution: "@pkmn/dex@npm:0.9.21"
   dependencies:
-    "@pkmn/dex-types": ^0.7.59
-  checksum: f680a4d82216480538a890a53212dafcba41f9361a2c3d2d189155f61cfd1438c35c6d41ff43620ff46cb10ee9a325a7fe52c6410a9392868231542696a55c0f
+    "@pkmn/dex-types": ^0.9.21
+  checksum: 87889d97ae62a119dfd61eaf65c7398eeb151effbeed39ae0a947ce5a2a6d55d3e06afd70c128f5fa75d9e07e8946a0d056076cb6e812790df1a198351a6485f
   languageName: node
   linkType: hard
 
-"@pkmn/types@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "@pkmn/types@npm:3.0.0"
-  checksum: a6b9c2c65d94c63766d5920b4bece164473c67a384d35ca1f492573428d010da8bff784b4d2a584433c0c828341ee146086c05acd20bd0aeb474fe7a65664342
+"@pkmn/types@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "@pkmn/types@npm:4.0.0"
+  checksum: 66c20c6a66f3b306483c211e70158114a233085aa851dd5dde83f3b8111fe9b534060877e4f33667f5ba8c9f32f33b554366713ec0ee6017c1bc092f0decc976
   languageName: node
   linkType: hard
 
@@ -3179,7 +3179,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/firebase@npm:^3.2.1":
+"@types/firebase@npm:^3.2.3":
   version: 3.2.3
   resolution: "@types/firebase@npm:3.2.3"
   dependencies:
@@ -3228,7 +3228,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^18.11.9, @types/node@npm:^18.14.2":
+"@types/node@npm:^18.11.9, @types/node@npm:^18.14.2, @types/node@npm:^18.19.59":
   version: 18.19.59
   resolution: "@types/node@npm:18.19.59"
   dependencies:
@@ -3265,7 +3265,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:^18.0.8":
+"@types/react-dom@npm:^18.3.1":
   version: 18.3.1
   resolution: "@types/react-dom@npm:18.3.1"
   dependencies:
@@ -3274,7 +3274,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-helmet@npm:^6":
+"@types/react-helmet@npm:^6.1.11":
   version: 6.1.11
   resolution: "@types/react-helmet@npm:6.1.11"
   dependencies:
@@ -3292,7 +3292,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:^18.0.24":
+"@types/react@npm:*, @types/react@npm:^18.3.12":
   version: 18.3.12
   resolution: "@types/react@npm:18.3.12"
   dependencies:
@@ -3302,7 +3302,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/eslint-plugin@npm:^7.13.0":
+"@typescript-eslint/eslint-plugin@npm:^7.18.0":
   version: 7.18.0
   resolution: "@typescript-eslint/eslint-plugin@npm:7.18.0"
   dependencies:
@@ -3325,7 +3325,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/parser@npm:^7.13.0":
+"@typescript-eslint/parser@npm:^7.18.0":
   version: 7.18.0
   resolution: "@typescript-eslint/parser@npm:7.18.0"
   dependencies:
@@ -3420,7 +3420,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vercel/speed-insights@npm:^1.0.12":
+"@vercel/speed-insights@npm:^1.0.13":
   version: 1.0.13
   resolution: "@vercel/speed-insights@npm:1.0.13"
   peerDependencies:
@@ -3465,7 +3465,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitejs/plugin-react@npm:^4.3.1":
+"@vitejs/plugin-react@npm:^4.3.3":
   version: 4.3.3
   resolution: "@vitejs/plugin-react@npm:4.3.3"
   dependencies:
@@ -3575,7 +3575,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"adblock-detect-react@npm:^1.1.0":
+"adblock-detect-react@npm:^1.3.1":
   version: 1.3.1
   resolution: "adblock-detect-react@npm:1.3.1"
   peerDependencies:
@@ -3855,7 +3855,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^1.2.0":
+"axios@npm:^1.7.7":
   version: 1.7.7
   resolution: "axios@npm:1.7.7"
   dependencies:
@@ -3912,7 +3912,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"browser-image-compression@npm:^2.0.0":
+"browser-image-compression@npm:^2.0.2":
   version: 2.0.2
   resolution: "browser-image-compression@npm:2.0.2"
   dependencies:
@@ -4112,7 +4112,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chart.js@npm:^4.0.1":
+"chart.js@npm:^4.4.5":
   version: 4.4.5
   resolution: "chart.js@npm:4.4.5"
   dependencies:
@@ -4865,7 +4865,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-prettier@npm:^5.1.3":
+"eslint-plugin-prettier@npm:^5.2.1":
   version: 5.2.1
   resolution: "eslint-plugin-prettier@npm:5.2.1"
   dependencies:
@@ -4885,7 +4885,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-react@npm:^7.34.2":
+"eslint-plugin-react@npm:^7.37.2":
   version: 7.37.2
   resolution: "eslint-plugin-react@npm:7.37.2"
   dependencies:
@@ -4937,7 +4937,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:^9.5.0":
+"eslint@npm:^9.13.0":
   version: 9.13.0
   resolution: "eslint@npm:9.13.0"
   dependencies:
@@ -5217,7 +5217,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"firebase@npm:^9.15.0":
+"firebase@npm:^9.23.0":
   version: 9.23.0
   resolution: "firebase@npm:9.23.0"
   dependencies:
@@ -5308,7 +5308,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"framer-motion@npm:^7.6.9":
+"framer-motion@npm:^7.10.3":
   version: 7.10.3
   resolution: "framer-motion@npm:7.10.3"
   dependencies:
@@ -6289,7 +6289,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jsdom@npm:^24.1.0":
+"jsdom@npm:^24.1.3":
   version: 24.1.3
   resolution: "jsdom@npm:24.1.3"
   dependencies:
@@ -6695,13 +6695,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "mikmeranet-frontend@workspace:."
   dependencies:
-    "@ctrl/react-adsense": ^1.6.1
-    "@emotion/react": ^11.11.4
-    "@emotion/styled": ^11.11.5
-    "@mui/icons-material": ^5.10.15
-    "@mui/lab": ^5.0.0-alpha.115
-    "@mui/material": ^5.15.20
-    "@pkmn/dex": ^0.7.21
+    "@ctrl/react-adsense": ^1.7.0
+    "@emotion/react": ^11.13.3
+    "@emotion/styled": ^11.13.0
+    "@mui/icons-material": ^5.16.7
+    "@mui/lab": ^5.0.0-alpha.173
+    "@mui/material": ^5.16.7
+    "@pkmn/dex": ^0.9.21
     "@sentry/react": ^7.33.0
     "@sentry/tracing": ^7.33.0
     "@shopify/react-csrf": ^3.1.0
@@ -6709,54 +6709,54 @@ __metadata:
     "@testing-library/dom": ^10.1.0
     "@testing-library/jest-dom": ^6.4.6
     "@testing-library/react": ^16.0.0
-    "@types/firebase": ^3.2.1
-    "@types/node": ^18.11.9
-    "@types/react": ^18.0.24
-    "@types/react-dom": ^18.0.8
-    "@types/react-helmet": ^6
-    "@typescript-eslint/eslint-plugin": ^7.13.0
-    "@typescript-eslint/parser": ^7.13.0
-    "@vercel/speed-insights": ^1.0.12
-    "@vitejs/plugin-react": ^4.3.1
-    adblock-detect-react: ^1.1.0
-    axios: ^1.2.0
-    browser-image-compression: ^2.0.0
-    chart.js: ^4.0.1
+    "@types/firebase": ^3.2.3
+    "@types/node": ^18.19.59
+    "@types/react": ^18.3.12
+    "@types/react-dom": ^18.3.1
+    "@types/react-helmet": ^6.1.11
+    "@typescript-eslint/eslint-plugin": ^7.18.0
+    "@typescript-eslint/parser": ^7.18.0
+    "@vercel/speed-insights": ^1.0.13
+    "@vitejs/plugin-react": ^4.3.3
+    adblock-detect-react: ^1.3.1
+    axios: ^1.7.7
+    browser-image-compression: ^2.0.2
+    chart.js: ^4.4.5
     chartjs-plugin-datalabels: ^2.2.0
     esbuild: ^0.21.5
-    eslint: ^9.5.0
+    eslint: ^9.13.0
     eslint-config-prettier: ^9.1.0
     eslint-define-config: ^2.1.0
-    eslint-plugin-prettier: ^5.1.3
-    eslint-plugin-react: ^7.34.2
-    firebase: ^9.15.0
-    framer-motion: ^7.6.9
-    jsdom: ^24.1.0
+    eslint-plugin-prettier: ^5.2.1
+    eslint-plugin-react: ^7.37.2
+    firebase: ^9.23.0
+    framer-motion: ^7.10.3
+    jsdom: ^24.1.3
     node-sass: ^8.0.0
     notistack: ^2.0.8
     pokemoncalc: ^1.0.0
-    pretendard: ^1.3.6
-    prettier: ^3.3.2
-    query-string: ^8.1.0
-    react: ^18.2.0
-    react-chartjs-2: ^5.0.1
+    pretendard: ^1.3.9
+    prettier: ^3.3.3
+    query-string: ^8.2.0
+    react: ^18.3.1
+    react-chartjs-2: ^5.2.0
     react-cookie: ^4.1.1
-    react-dom: ^18.2.0
+    react-dom: ^18.3.1
     react-helmet: ^6.1.0
-    react-intersection-observer: ^9.4.1
-    react-p5: ^1.3.33
-    react-router-dom: ^6.4.3
+    react-intersection-observer: ^9.13.1
+    react-p5: ^1.4.1
+    react-router-dom: ^6.27.0
     react-snowfall: ^1.2.1
-    react-social-login-buttons: ^3.6.1
+    react-social-login-buttons: ^3.9.1
     react-toggle-dark-mode: ^1.1.1
-    react-use-cookie: ^1.4.0
+    react-use-cookie: ^1.6.1
     react-virtuoso: ^3.1.5
-    sass: ^1.56.1
-    sweetalert2: ^11.7.0
+    sass: ^1.80.4
+    sweetalert2: ^11.14.4
     swr: ^1.3.0
-    typescript: ^4.6.4
-    vite: ^5.3.1
-    vite-plugin-svgr: ^2.2.2
+    typescript: ^4.9.5
+    vite: ^5.4.10
+    vite-plugin-svgr: ^2.4.0
     vitest: ^1.6.0
   languageName: unknown
   linkType: soft
@@ -7555,7 +7555,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pretendard@npm:^1.3.6":
+"pretendard@npm:^1.3.9":
   version: 1.3.9
   resolution: "pretendard@npm:1.3.9"
   checksum: 6536393e074cec0ac3e042767f1903bab822b58da2e936f65de13197b988f29a26cc4523a22cae9143d9325275052e070e4611064275a93fe2a06e98b0004ff2
@@ -7571,7 +7571,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^3.3.2":
+"prettier@npm:^3.3.3":
   version: 3.3.3
   resolution: "prettier@npm:3.3.3"
   bin:
@@ -7709,7 +7709,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"query-string@npm:^8.1.0":
+"query-string@npm:^8.2.0":
   version: 8.2.0
   resolution: "query-string@npm:8.2.0"
   dependencies:
@@ -7741,7 +7741,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-chartjs-2@npm:^5.0.1":
+"react-chartjs-2@npm:^5.2.0":
   version: 5.2.0
   resolution: "react-chartjs-2@npm:5.2.0"
   peerDependencies:
@@ -7764,7 +7764,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-dom@npm:^18.2.0":
+"react-dom@npm:^18.3.1":
   version: 18.3.1
   resolution: "react-dom@npm:18.3.1"
   dependencies:
@@ -7797,7 +7797,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-intersection-observer@npm:^9.4.1":
+"react-intersection-observer@npm:^9.13.1":
   version: 9.13.1
   resolution: "react-intersection-observer@npm:9.13.1"
   peerDependencies:
@@ -7831,7 +7831,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-p5@npm:^1.3.33":
+"react-p5@npm:^1.4.1":
   version: 1.4.1
   resolution: "react-p5@npm:1.4.1"
   dependencies:
@@ -7852,7 +7852,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-router-dom@npm:^6.4.3":
+"react-router-dom@npm:^6.27.0":
   version: 6.27.0
   resolution: "react-router-dom@npm:6.27.0"
   dependencies:
@@ -7897,7 +7897,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-social-login-buttons@npm:^3.6.1":
+"react-social-login-buttons@npm:^3.9.1":
   version: 3.9.1
   resolution: "react-social-login-buttons@npm:3.9.1"
   peerDependencies:
@@ -7949,7 +7949,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-use-cookie@npm:^1.4.0":
+"react-use-cookie@npm:^1.6.1":
   version: 1.6.1
   resolution: "react-use-cookie@npm:1.6.1"
   peerDependencies:
@@ -7971,7 +7971,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:^18.2.0":
+"react@npm:^18.3.1":
   version: 18.3.1
   resolution: "react@npm:18.3.1"
   dependencies:
@@ -8315,7 +8315,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass@npm:^1.56.1":
+"sass@npm:^1.80.4":
   version: 1.80.4
   resolution: "sass@npm:1.80.4"
   dependencies:
@@ -8835,7 +8835,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sweetalert2@npm:^11.7.0":
+"sweetalert2@npm:^11.14.4":
   version: 11.14.4
   resolution: "sweetalert2@npm:11.14.4"
   checksum: 8d9660770831426ca312534623390bdce4c2e505bfb2ec7cc35d19870e623045249ee49982f57e42a985c13beb1d236dd5b497b11950192456c1210f0cc13f27
@@ -9073,7 +9073,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^4.6.4":
+"typescript@npm:^4.9.5":
   version: 4.9.5
   resolution: "typescript@npm:4.9.5"
   bin:
@@ -9083,7 +9083,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^4.6.4#~builtin<compat/typescript>":
+"typescript@patch:typescript@^4.9.5#~builtin<compat/typescript>":
   version: 4.9.5
   resolution: "typescript@patch:typescript@npm%3A4.9.5#~builtin<compat/typescript>::version=4.9.5&hash=d73830"
   bin:
@@ -9269,7 +9269,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite-plugin-svgr@npm:^2.2.2":
+"vite-plugin-svgr@npm:^2.4.0":
   version: 2.4.0
   resolution: "vite-plugin-svgr@npm:2.4.0"
   dependencies:
@@ -9281,7 +9281,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^5.0.0, vite@npm:^5.3.1":
+"vite@npm:^5.0.0, vite@npm:^5.4.10":
   version: 5.4.10
   resolution: "vite@npm:5.4.10"
   dependencies:
