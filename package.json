@@ -1,5 +1,5 @@
 {
-  "name": "pokegg-frontend",
+  "name": "mikmeranet-frontend",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
@@ -19,8 +19,8 @@
     "@pkmn/dex": "^0.7.21",
     "@sentry/react": "^7.33.0",
     "@sentry/tracing": "^7.33.0",
+    "@shopify/react-csrf": "^3.1.0",
     "@smogon/calc": "^0.10.0",
-    "@types/firebase": "^3.2.1",
     "@vercel/speed-insights": "^1.0.12",
     "adblock-detect-react": "^1.1.0",
     "axios": "^1.2.0",
@@ -55,6 +55,7 @@
     "@testing-library/dom": "^10.1.0",
     "@testing-library/jest-dom": "^6.4.6",
     "@testing-library/react": "^16.0.0",
+    "@types/firebase": "^3.2.1",
     "@types/node": "^18.11.9",
     "@types/react": "^18.0.24",
     "@types/react-dom": "^18.0.8",
@@ -62,7 +63,6 @@
     "@typescript-eslint/eslint-plugin": "^7.13.0",
     "@typescript-eslint/parser": "^7.13.0",
     "@vitejs/plugin-react": "^4.3.1",
-    "@vitejs/plugin-vue": "^5.0.5",
     "esbuild": "^0.21.5",
     "eslint": "^9.5.0",
     "eslint-config-prettier": "^9.1.0",
