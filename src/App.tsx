@@ -1,4 +1,3 @@
-// ToggleColorMode.tsx
 import { CssBaseline, ThemeProvider } from '@mui/material'
 import { SnackbarProvider } from 'notistack'
 import { useState } from 'react'
@@ -9,7 +8,7 @@ import { useThemeMode } from '~/hooks/useThemeMode'
 import { useUserFetch } from '~/hooks/useUserFetch'
 import { Routing } from '~/Routing'
 
-export default function ToggleColorMode() {
+export default function App() {
   const theme = useThemeMode()
   const [data, setData] = useState<MainContextData>({
     theme: theme.palette.mode,
