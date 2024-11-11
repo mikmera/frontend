@@ -1,108 +1,26 @@
-import React from 'react'
-import { wrapError } from '~/components/ErrorBoundary'
 import {
   Autocomplete,
   Box,
   Checkbox,
+  LinearProgress,
   MenuItem,
   Select,
   TextField,
-  LinearProgress,
-  Grid,
-  ToggleButtonGroup,
   ToggleButton,
+  ToggleButtonGroup,
 } from '@mui/material'
+import Grid from '@mui/material/Unstable_Grid2'
+import React from 'react'
+import { HPBar } from '~/components/calculator/HealthBar'
+import { wrapError } from '~/components/ErrorBoundary'
+import { MoveSelector } from '~/components/setsCreate/MoveSelector'
 import { PokemonCalcSet } from '~/types'
+import { ClacPokemonSet, status, teratypes, types } from './constant'
 
 export const PokemonSet = wrapError(() => {
-  const [pokemon, setpokemon] = React.useState<PokemonCalcSet>({
-    pokemon: 'jigglypuff',
-    level: 50,
-    types: ['Normal', 'Fairy'],
-    item: 'Eviolite',
-    gender: 'F',
-    ability: {
-      name: 'Cute Charm',
-      enabled: false,
-    },
-    nature: 'Bold',
-    terastalize: {
-      type: 'Fairy',
-      enabled: false,
-    },
-    evs: {
-      hp: 0,
-      atk: 0,
-      def: 0,
-      spa: 0,
-      spd: 0,
-      spe: 0,
-    },
-    ivs: {
-      hp: 0,
-      atk: 0,
-      def: 0,
-      spa: 0,
-      spd: 0,
-      spe: 0,
-    },
-    realStats: {
-      hp: 0,
-      atk: 0,
-      def: 0,
-      spa: 0,
-      spd: 0,
-      spe: 0,
-    },
-    rankup: {
-      atk: 0,
-      def: 0,
-      spa: 0,
-      spd: 0,
-      spe: 0,
-    },
-    status: {
-      name: 'Healthy',
-      BadlyPoisonedTurns: 0,
-    },
-    saltCure: false,
-    currentHp: {
-      value: 222,
-      max: 222,
-      percent: 100,
-    },
-  })
-
-  const status = [
-    { name: 'Healthy', ko: '상태이상 없음' },
-    { name: 'Burned', ko: '화상' },
-    { name: 'Paralyzed', ko: '마비' },
-    { name: 'Poisoned', ko: '독' },
-    { name: 'Badly Poisoned', ko: '맹독' },
-    { name: 'Asleep', ko: '잠듦' },
-    { name: 'Frozen', ko: '얼음' },
-  ]
-
-  const types = [
-    '노말',
-    '격투',
-    '비행',
-    '독',
-    '땅',
-    '바위',
-    '벌레',
-    '고스트',
-    '강철',
-    '불꽃',
-    '물',
-    '풀',
-    '전기',
-    '에스퍼',
-    '얼음',
-    '드래곤',
-    '악',
-    '페어리',
-  ]
+  const [pokemon, setpokemon] = React.useState<PokemonCalcSet>(
+    new ClacPokemonSet(),
+  )
 
   return (
     <Box
@@ -134,7 +52,6 @@ export const PokemonSet = wrapError(() => {
             id="standard-basic"
             label="레벨"
             variant="standard"
-            defaultValue={50}
             value={pokemon.level}
             onChange={(e) => {
               const level = parseInt(e.target.value) || 0
@@ -152,7 +69,7 @@ export const PokemonSet = wrapError(() => {
           <Select variant="standard" sx={{ width: '100%' }} label="타입">
             {types.map((type, i) => (
               <MenuItem key={i} value={i}>
-                {type}
+                {type.name}
               </MenuItem>
             ))}
           </Select>
@@ -161,7 +78,7 @@ export const PokemonSet = wrapError(() => {
           <Select variant="standard" sx={{ width: '100%' }} label="타입">
             {types.map((type, i) => (
               <MenuItem key={i} value={i}>
-                {type}
+                {type.name}
               </MenuItem>
             ))}
           </Select>
@@ -171,9 +88,9 @@ export const PokemonSet = wrapError(() => {
         </Grid>
         <Grid xs={8} sx={{ marginTop: -3 }}>
           <Select variant="standard" sx={{ width: '100%' }} label="타입">
-            {types.map((type, i) => (
+            {teratypes.map((type, i) => (
               <MenuItem key={i} value={i}>
-                {type}
+                {type.name}
               </MenuItem>
             ))}
           </Select>
@@ -181,10 +98,10 @@ export const PokemonSet = wrapError(() => {
         <Grid xs={2} sx={{ marginTop: -3 }}>
           <Checkbox value={pokemon.terastalize.enabled} />
         </Grid>
-        <Grid xs={2} sx={{ marginTop: -3 }}>
+        <Grid xs={2} sx={{ marginTop: -2 }}>
           <p style={{ position: 'relative', top: -10 }}>성별</p>
         </Grid>
-        <Grid xs={10} sx={{ marginTop: -3 }}>
+        <Grid xs={10} sx={{ marginTop: -2, marginBottom: 3 }}>
           <ToggleButtonGroup
             size="small"
             aria-label="outlined primary button group"
@@ -436,55 +353,8 @@ export const PokemonSet = wrapError(() => {
             }}
           />
         </Grid>
-        <Grid xs={2} sx={{ marginTop: -4 }}>
-          <p style={{ position: 'relative', top: -15 }}>현재 hp</p>
-        </Grid>
-        <Grid xs={10} sx={{ marginTop: -4 }}>
-          <p style={{ marginTop: -1 }}>
-            <input
-              type="text"
-              style={{ width: 50 }}
-              value={pokemon.currentHp.value}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                const value =
-                  isNaN(Number(e.target.value)) ||
-                  Number(e.target.value) > pokemon.currentHp.max
-                    ? pokemon.currentHp.max
-                    : Number(e.target.value)
-                setpokemon({
-                  ...pokemon,
-                  currentHp: {
-                    value: Number(e.target.value),
-                    max: pokemon.currentHp.max,
-                    percent: Math.round((value / pokemon.currentHp.max) * 100),
-                  },
-                })
-              }}
-            />
-            / {pokemon.currentHp.max} (
-            <input
-              type="text"
-              style={{ width: 50 }}
-              value={pokemon.currentHp.percent}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                const percent =
-                  isNaN(Number(e.target.value)) || Number(e.target.value) > 100
-                    ? 100
-                    : Number(e.target.value)
-                setpokemon({
-                  ...pokemon,
-                  currentHp: {
-                    value: Math.floor(pokemon.currentHp.max * (percent / 100)),
-                    max: pokemon.currentHp.max,
-                    percent: percent,
-                  },
-                })
-              }}
-            />
-            %)
-          </p>
-        </Grid>
-        <Grid xs={10} sx={{ marginTop: -4 }}>
+        <HPBar pokemon={pokemon} setpokemon={setpokemon} />
+        <Grid xs={12} sx={{ marginTop: -3 }}>
           <LinearProgress
             variant="determinate"
             value={pokemon.currentHp.percent}
@@ -497,6 +367,25 @@ export const PokemonSet = wrapError(() => {
             }
           />
         </Grid>
+        <MoveSelector
+          moves={[
+            {
+              label: '풀묶기',
+              type: 'Grass',
+            },
+            {
+              label: '뿔찌르기',
+              type: 'Normal',
+            },
+          ]}
+          moveList={[]}
+          setMove={function (
+            value: React.SetStateAction<{ label: string; type: string }[]>,
+          ): void {
+            throw new Error('Function not implemented.')
+          }}
+          disabled={false}
+        />
       </Grid>
     </Box>
   )

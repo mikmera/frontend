@@ -1,7 +1,7 @@
 import { Button, useMediaQuery, useTheme } from '@mui/material'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import './404page.scss'
+import '~/styles/404page.scss'
 
 export interface ErrorPageProps {
   code: string
