@@ -32,9 +32,9 @@ const SetsView = wrapSuspense(
   lazy(() => import('./routes/sets').then((x) => ({ default: x.SetsView }))),
 )
 
-// const Calculator = wrapSuspense(
-//   lazy(() => import('./routes/calc').then((x) => ({ default: x.Main })))
-// )
+const Calculator = wrapSuspense(
+  lazy(() => import('./routes/calc').then((x) => ({ default: x.Main }))),
+)
 
 const Auth = wrapSuspense(
   lazy(() => import('./routes/auth').then((x) => ({ default: x.Main }))),
@@ -84,12 +84,12 @@ export const Routing: React.FC = wrapError(() => {
         <Route element={<SetsAutoLayout />}>
           <Route path="sample/:mode" element={<SetsView />} />
         </Route>
-        <Route path="loading" element={<Loading />} />
-        {/* <Route path="calc" element={<Calculator />} /> */}
+        <Route path="calc" element={<Calculator />} />
         <Route path="auth" element={<Auth />} />
         <Route path="auth/:mode" element={<Auth />} />
         <Route path="auth/callback/:provider" element={<Callback />} />
         <Route path="privacy" element={<PrivacyPolicy />} />
+        <Route path="loading" element={<Loading />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>

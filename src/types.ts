@@ -128,7 +128,7 @@ export interface SetcardProps {
   key: number
 }
 
-type PokemonTypes =
+export type PokemonTypes =
   | 'Normal'
   | 'Fire'
   | 'Water'
@@ -148,7 +148,7 @@ type PokemonTypes =
   | 'Steel'
   | 'Fairy'
 
-type PokemonNature =
+export type PokemonNature =
   | 'Adamant'
   | 'Bashful'
   | 'Bold'

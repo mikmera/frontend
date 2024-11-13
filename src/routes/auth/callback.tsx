@@ -1,11 +1,11 @@
-import React from 'react'
-import { wrapError } from '~/components/ErrorBoundary'
 import { Box } from '@mui/material'
-import { useNavigate, useParams } from 'react-router-dom'
-import { fetcher } from '~/util'
-import { Spinner } from '~/components/Spinner'
-import { setCookie } from 'react-use-cookie'
 import queryString from 'query-string'
+import React from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
+import { setCookie } from 'react-use-cookie'
+import { wrapError } from '~/components/ErrorBoundary'
+import { Spinner } from '~/components/Spinner'
+import { fetcher } from '~/util'
 
 const styles = {
   alignItems: 'center',
@@ -16,18 +16,20 @@ const styles = {
 
 export const Callback: React.FC = wrapError(() => {
   const navigate = useNavigate()
-  const { provider } = useParams()
-  const { code } = queryString.parse(location.search)
+  const { provider } = useParams<{ provider: string }>()
+  const { code } = queryString.parse(window.location.search) as {
+    code?: string
+  }
 
   React.useEffect(() => {
-    if (code) {
-      fetcher(`/v1/auth/${provider}/callback?code=${code}`).then((data) => {
-        setCookie('Authorization', data.token, { path: '/' })
+    if (code && provider) {
+      fetcher(`/v1/auth/callback/${provider}?code=${code}`).then((res) => {
+        setCookie('Authorization', res.data.token, { path: '/' })
         navigate('/auth')
         window.location.reload()
       })
     }
-  }, [code])
+  }, [code, provider, navigate])
 
   return (
     <Box sx={styles}>

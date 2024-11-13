@@ -1,7 +1,7 @@
 import { styled } from '@mui/material/styles'
 import Switch from '@mui/material/Switch'
-import darkmode from '../assets/images/Lunatone.png'
-import lightmode from '../assets/images/Solrock.png'
+import darkmode from '~/assets/images/Lunatone.png'
+import lightmode from '~/assets/images/Solrock.png'
 
 export const ToggleDarkmode = styled(Switch)(({ theme }) => ({
   width: 62,
