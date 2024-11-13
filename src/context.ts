@@ -13,10 +13,12 @@ export const MainContext = createContext<{
   user: UserMe | null
   // eslint-disable-next-line no-unused-vars
   update: (cb: (data: MainContextData) => MainContextData) => void
+  toggleThemeMode: () => void
 }>({
   theme: 'dark',
   user: null,
   update: () => {},
+  toggleThemeMode: () => {},
 })
 
 export const useMainContext = () => useContext(MainContext)

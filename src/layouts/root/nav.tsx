@@ -62,7 +62,7 @@ const NavLinkItem: React.FC<{ item: NavLink }> = wrapError(({ item }) => {
 
 export const Nav: React.FC = wrapError(() => {
   const navigate = useNavigate()
-  const { theme, update } = useMainContext()
+  const { theme, toggleThemeMode } = useMainContext()
   const [defaultChecked] = React.useState(theme === 'light')
 
   const [drawerOpen, setDrawerOpen] = React.useState(false)
@@ -114,10 +114,7 @@ export const Nav: React.FC = wrapError(() => {
                 isMobile ? '' : theme === 'dark' ? '루나톤모드' : '솔록모드'
               }
               onChange={() => {
-                update((v) => ({
-                  theme: theme === 'dark' ? 'light' : 'dark',
-                  user: v.user,
-                }))
+                toggleThemeMode()
                 setCookie('theme', theme === 'dark' ? 'light' : 'dark')
               }}
             />

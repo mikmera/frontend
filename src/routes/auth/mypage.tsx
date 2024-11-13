@@ -1,6 +1,5 @@
 import {
   Avatar,
-  Badge,
   Button,
   Chip,
   Dialog,
@@ -19,8 +18,8 @@ import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import pointIcon from '~/assets/images/coin.png'
 import { wrapError } from '~/components/ErrorBoundary'
+import { UserRankTable } from '~/components/Shared/UserRankTable'
 import { Spinner } from '~/components/Spinner'
-import { UserRankTable } from '~/components/UserRank'
 import { useMainContext } from '~/context'
 import { storageService } from '~/service/firebase'
 import { apiUrl, fetcher } from '~/util'
@@ -79,7 +78,6 @@ export const MyPage: React.FC = wrapError(() => {
   React.useEffect(() => {
     if (!authToken) return navigate('/auth/login')
     if (!user || !user.profile) return
-    setProfileUrl(user.profile.avatar)
     setDisplayName(user.profile.displayName)
     setLoading(false)
   }, [user, authToken])
@@ -131,14 +129,14 @@ export const MyPage: React.FC = wrapError(() => {
               sx={{ width: '96px', height: '96px', mt: 6 }}
             />
           </label>
-          {user?.role.admin && <Badge color="success" badgeContent={'Admin'} />}
+          {/* {user?.role.admin && <Badge color="success" badgeContent={'Admin'} />} */}
           <Typography
             variant="h5"
             sx={{ textAlign: 'center', mt: 2, display: 'flex' }}
           >
             <img
               src={apiUrl(`/v1/sprites/role/${user?.rank}`)}
-              alt="role"
+              alt="rank"
               style={{ width: '32px', height: '32px' }}
               crossOrigin="anonymous"
             />

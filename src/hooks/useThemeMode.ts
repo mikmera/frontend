@@ -1,14 +1,16 @@
 import { createTheme, Theme, useMediaQuery } from '@mui/material'
-import React from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { useCookies } from 'react-cookie'
 
-export function useThemeMode(): Theme {
-  const [cookies] = useCookies(['theme'])
-  const isDarkModeEnabled = cookies.theme
-    ? cookies.theme === 'dark'
-    : useMediaQuery('(prefers-color-scheme: dark)')
+export function useThemeMode(): { theme: Theme; toggleThemeMode: () => void } {
+  const [cookies, setCookie] = useCookies(['theme'])
 
-  return React.useMemo(
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
+  const [isDarkModeEnabled, setIsDarkModeEnabled] = useState(
+    cookies.theme ? cookies.theme === 'dark' : prefersDarkMode,
+  )
+
+  const theme = useMemo(
     () =>
       createTheme({
         palette: {
@@ -17,4 +19,14 @@ export function useThemeMode(): Theme {
       }),
     [isDarkModeEnabled],
   )
+
+  const toggleThemeMode = useCallback(() => {
+    setIsDarkModeEnabled((prevMode) => {
+      const newMode = !prevMode
+      setCookie('theme', newMode ? 'dark' : 'light', { path: '/' })
+      return newMode
+    })
+  }, [setCookie])
+
+  return { theme, toggleThemeMode }
 }

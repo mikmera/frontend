@@ -1,27 +1,36 @@
 import { CssBaseline, ThemeProvider } from '@mui/material'
 import { SnackbarProvider } from 'notistack'
-import { useState } from 'react'
-import { CookiesProvider } from 'react-cookie'
+import React, { useState } from 'react'
+import { CookiesProvider, useCookies } from 'react-cookie'
 import { BrowserRouter } from 'react-router-dom'
 import { MainContext, MainContextData } from '~/context'
 import { useThemeMode } from '~/hooks/useThemeMode'
-import { useUserFetch } from '~/hooks/useUserFetch'
 import { Routing } from '~/Routing'
+import { fetcher } from './utils/apiClient'
 
 export default function App() {
-  const theme = useThemeMode()
+  const [cookies] = useCookies(['theme', 'Authorization'])
+  const { theme, toggleThemeMode } = useThemeMode()
   const [data, setData] = useState<MainContextData>({
     theme: theme.palette.mode,
     user: null,
   })
 
-  useUserFetch((user) => setData((prevData) => ({ ...prevData, user })))
+  React.useEffect(() => {
+    async function fetchUser() {
+      if (!cookies.Authorization) return setData((v) => ({ ...v, user: null }))
+      const res = await fetcher('/v1/users/@me')
+      setData((v) => ({ ...v, user: res.data }))
+    }
+    fetchUser()
+  }, [cookies.Authorization])
 
   return (
     <MainContext.Provider
       value={{
-        theme: data.theme,
+        theme: theme.palette.mode,
         user: data.user,
+        toggleThemeMode, // 테마 모드 토글 함수 제공
         update: setData,
       }}
     >
