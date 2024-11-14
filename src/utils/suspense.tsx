@@ -2,7 +2,9 @@ import Box from '@mui/material/Box'
 import React, { Suspense } from 'react'
 import { Spinner } from '~/components/Spinner'
 
-export function wrapSuspense<T>(Component: React.ComponentType<T>) {
+export function wrapSuspense<T extends JSX.IntrinsicAttributes>(
+  Component: React.ComponentType<T>,
+): React.FC<T> {
   return ((props: T) => {
     return (
       <Suspense
@@ -20,8 +22,8 @@ export function wrapSuspense<T>(Component: React.ComponentType<T>) {
         }
       >
         {}
-        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-        <Component {...(props as any)} />
+        {}
+        <Component {...props} />
       </Suspense>
     )
   }) as React.FC<T>
