@@ -14,7 +14,7 @@ export const DexHeader: React.FC = wrapError(() => {
   const iconUrl = React.useMemo(
     () =>
       apiUrl(
-        `/v1/sprites/pokemon/${pokemon.dexId}${
+        `/sprites/dynamic/pokemons/${pokemon.dexId}${
           pokemon.formId !== 0 ? `-${pokemon.formId}` : ''
         }`,
       ),
@@ -36,16 +36,18 @@ export const DexHeader: React.FC = wrapError(() => {
         <QuestionMark />
       </Avatar>
       <Typography fontSize={32}>
-        {pokemon.locales.ko ?? pokemon.name}
+        {pokemon.name.translations.ko ?? pokemon.name}
       </Typography>
       <Stack direction="row" alignItems="center" spacing={1}>
         {pokemon.types.map((x, i) => (
-          <Tooltip title={x} key={i}>
+          <Tooltip title={x.nameDetails.translations.ko} key={i}>
             <Avatar
               alt={x}
               variant="rounded"
               imgProps={{ crossOrigin: 'anonymous' }}
-              src={apiUrl(`/v1/sprites/types/${x}.svg`)}
+              src={apiUrl(
+                `/sprites/static/typesNew/${x.nameDetails.translations.en}.svg`,
+              )}
             />
           </Tooltip>
         ))}

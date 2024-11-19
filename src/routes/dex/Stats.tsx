@@ -1,7 +1,6 @@
-import { Tooltip } from '@mui/material'
+import { Grid, Tooltip } from '@mui/material'
 import Avatar from '@mui/material/Avatar'
 import Box from '@mui/material/Box'
-import Grid from '@mui/material/Grid'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import ListItemAvatar from '@mui/material/ListItemAvatar'
@@ -53,11 +52,10 @@ const statOptions: ChartOptions<'bar'> = {
 
 const StatSection: React.FC = () => {
   const item = useCurrentDexItem()
-
   const data: ChartData<'bar', number[]> = React.useMemo(() => {
     return {
       datasets: Object.entries(statLabels).map(([key, [color, value]]) => ({
-        data: [item.pokemon.stats[key as StatKey]],
+        data: [item.pokemon.stats[key as StatKey] || 0], // 값이 없으면 기본값 0
         label: value,
         backgroundColor: color,
       })),
@@ -69,6 +67,7 @@ const StatSection: React.FC = () => {
     <Box sx={{ height: '100%', p: 1 }}>
       <Bar
         height="100%"
+        key={JSON.stringify(data)}
         data={data}
         options={statOptions}
         plugins={[ChartDataLabels]}
@@ -94,7 +93,7 @@ const MoveSection: React.FC = () => {
             <ListItemAvatar>
               <Avatar
                 variant="square"
-                src={apiUrl(`/v1/sprites/types/${x.type}.svg`)}
+                src={apiUrl(`/sprites/static/typesNew/${x.type}.svg`)}
                 imgProps={{ crossOrigin: 'anonymous' }}
                 alt={x.type || '?'}
                 style={{ width: 40, height: 40, marginTop: 8 }}
@@ -128,16 +127,18 @@ const TeamMatesSection: React.FC = () => {
               imgProps={{ crossOrigin: 'anonymous' }}
               src={
                 x.formId === 0
-                  ? apiUrl(`/v1/sprites/pokemon/${x.dexId}`)
-                  : apiUrl(`/v1/sprites/pokemon/${x.dexId}-${x.formId}`)
+                  ? apiUrl(`/sprites/dynamic/pokemons/${x.dexId}`)
+                  : apiUrl(`/sprites/dynamic/pokemons/${x.dexId}-${x.formId}`)
               }
             />
             {x.types.map((x, i) => (
               <Avatar
                 key={i}
-                alt={x}
+                alt={x.nameDetails.translations.en}
                 imgProps={{ crossOrigin: 'anonymous' }}
-                src={apiUrl(`/v1/sprites/types/${x}.svg`)}
+                src={apiUrl(
+                  `/sprites/static/typesNew/${x.nameDetails.translations.en}.svg`,
+                )}
                 sx={{
                   position: 'absolute',
                   top: 15,
@@ -175,7 +176,7 @@ const TerastalizeSection: React.FC = () => {
               alt={x.type}
               imgProps={{ crossOrigin: 'anonymous' }}
               src={apiUrl(
-                `/v1/sprites/teraTypes/${
+                `/sprites/static/teraTypes/${
                   x.type[0].toUpperCase() + x.type.slice(1)
                 }.png`,
               )}
@@ -202,7 +203,7 @@ const ItemSection: React.FC = () => {
             <ListItemAvatar>
               <Avatar
                 variant="square"
-                src={apiUrl(`/v1/sprites/items/${x.name}`)}
+                src={apiUrl(`/sprites/static/items/${x.id}.png`)}
                 imgProps={{ crossOrigin: 'anonymous' }}
                 alt={x.name || '?'}
                 style={{ width: 40, height: 40, marginTop: 6 }}

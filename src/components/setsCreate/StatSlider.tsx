@@ -3,22 +3,6 @@ import { Grid, Input, Slider } from '@mui/material'
 import React from 'react'
 import { wrapError } from '../ErrorBoundary'
 
-interface StatSliderProps {
-  name: string
-  index: number
-  effort: number
-  iv: number
-  onSliderChange: (index: number, newValue: number) => void
-  onEvBlur: (index: number, value: number) => void
-  onEVInputChange: (
-    index: number,
-    event: React.ChangeEvent<HTMLInputElement>,
-  ) => void
-  onIVBlur: (index: number) => void
-  onIVChange: (index: number, value: number) => void
-  correction: number | undefined
-}
-
 export const StatSlider: React.FC<StatSliderProps> = wrapError(
   ({
     name,
@@ -96,3 +80,19 @@ export const StatSlider: React.FC<StatSliderProps> = wrapError(
     )
   },
 )
+
+interface StatSliderProps {
+  name: string
+  index: number
+  effort: number
+  iv: number
+  onSliderChange: (index: number, newValue: number) => void
+  onEvBlur: (index: number, value: number) => void
+  onEVInputChange: (
+    index: number,
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => void
+  onIVBlur: (index: number) => void
+  onIVChange: (index: number, value: number) => void
+  correction: number | undefined
+}

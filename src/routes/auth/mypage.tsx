@@ -135,7 +135,9 @@ export const MyPage: React.FC = wrapError(() => {
             sx={{ textAlign: 'center', mt: 2, display: 'flex' }}
           >
             <img
-              src={apiUrl(`/v1/sprites/role/${user?.rank}`)}
+              src={apiUrl(
+                `/sprites/static/rank/rank-${user.rank.toLocaleLowerCase()}.webp`,
+              )}
               alt="rank"
               style={{ width: '32px', height: '32px' }}
               crossOrigin="anonymous"

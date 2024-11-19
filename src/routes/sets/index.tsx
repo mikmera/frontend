@@ -30,7 +30,7 @@ export const SetsView: React.FC = wrapError(() => {
     <Box mt={5}>
       <SpeedDial
         icon={<AddIcon />}
-        ariaLabel="SpeedDial basic example"
+        ariaLabel="create"
         sx={{ position: 'absolute', bottom: 16, right: 16 }}
         onClick={handleCreate}
       />

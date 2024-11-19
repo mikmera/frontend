@@ -1,5 +1,12 @@
 export interface BaseUser {
   uuid: string
+  rank:
+    | 'PokeBall'
+    | 'GreatBall'
+    | 'UltraBall'
+    | 'BeastBall'
+    | 'CherishBall'
+    | 'MasterBall'
   roles: string[]
   points: number
   profile: {

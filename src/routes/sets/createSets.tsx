@@ -169,7 +169,7 @@ export const CreateSets: React.FC = () => {
       ivs: Ivs,
       type,
       teratype: teratype,
-      author: user?.uid,
+      author: user?.uuid,
     })
       .then(() => {
         handleClickVariant('success', '업로드 완료')()

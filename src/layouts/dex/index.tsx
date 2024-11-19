@@ -1,15 +1,15 @@
-import React from 'react'
-import { DexLayoutContext, DexContextData } from './context'
-import useSWR from 'swr'
-import { fetcher } from '~/util'
-import { Outlet, useParams } from 'react-router-dom'
-import { wrapError } from '~/components/ErrorBoundary'
 import Box from '@mui/material/Box'
-import { MainSidebar } from './Sidebar'
-import useMediaQuery from '@mui/material/useMediaQuery'
+import Divider from '@mui/material/Divider'
 import { useTheme } from '@mui/material/styles'
 import Toolbar from '@mui/material/Toolbar'
-import Divider from '@mui/material/Divider'
+import useMediaQuery from '@mui/material/useMediaQuery'
+import React from 'react'
+import { Outlet, useParams } from 'react-router-dom'
+import useSWR from 'swr'
+import { wrapError } from '~/components/ErrorBoundary'
+import { fetcher } from '~/util'
+import { DexContextData, DexLayoutContext } from './context'
+import { MainSidebar } from './Sidebar'
 
 export const DexLayout: React.FC = wrapError(() => {
   const [data, setData] = React.useState<DexContextData>({
@@ -33,7 +33,6 @@ export const DexLayout: React.FC = wrapError(() => {
 
   React.useEffect(() => {
     if (!usageData) return
-
     setData((v) => ({
       ...v,
       usages: usageData.data,

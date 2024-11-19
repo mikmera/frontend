@@ -1,4 +1,13 @@
 import { CssBaseline, ThemeProvider } from '@mui/material'
+import {
+  BarElement,
+  CategoryScale,
+  Chart as ChartJS,
+  Legend,
+  LinearScale,
+  Title,
+  Tooltip,
+} from 'chart.js'
 import { SnackbarProvider } from 'notistack'
 import React, { useState } from 'react'
 import { CookiesProvider, useCookies } from 'react-cookie'
@@ -20,17 +29,27 @@ export default function App() {
     async function fetchUser() {
       if (!cookies.Authorization) return setData((v) => ({ ...v, user: null }))
       const res = await fetcher('/v1/users/@me')
+      if (!res.data) return
+
       setData((v) => ({ ...v, user: res.data }))
     }
     fetchUser()
   }, [cookies.Authorization])
 
+  ChartJS.register(
+    LinearScale,
+    CategoryScale,
+    BarElement,
+    Title,
+    Tooltip,
+    Legend,
+  )
   return (
     <MainContext.Provider
       value={{
         theme: theme.palette.mode,
         user: data.user,
-        toggleThemeMode, // 테마 모드 토글 함수 제공
+        toggleThemeMode,
         update: setData,
       }}
     >

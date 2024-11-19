@@ -1,30 +1,29 @@
-import React from 'react'
-import { DexContextData, useDexContext } from './context'
-import { Virtuoso } from 'react-virtuoso'
-import { Usage } from '~/types'
-import QuestionMark from '@mui/icons-material/QuestionMark'
-import { Link } from 'react-router-dom'
-import { apiUrl } from '~/util'
-import { wrapError } from '~/components/ErrorBoundary'
-import Box from '@mui/material/Box'
-import FormControl from '@mui/material/FormControl'
-import InputLabel from '@mui/material/InputLabel'
-import Select from '@mui/material/Select'
-import MenuItem from '@mui/material/MenuItem'
-import ListItemButton from '@mui/material/ListItemButton'
-import Typography from '@mui/material/Typography'
-import ListItemAvatar from '@mui/material/ListItemAvatar'
-import Avatar from '@mui/material/Avatar'
-import ListItemText from '@mui/material/ListItemText'
-import Drawer from '@mui/material/Drawer'
-import Toolbar from '@mui/material/Toolbar'
-import { Spinner } from '~/components/Spinner'
-import useMediaQuery from '@mui/material/useMediaQuery'
-import useTheme from '@mui/material/styles/useTheme'
-import Divider from '@mui/material/Divider'
-import IconButton from '@mui/material/IconButton'
 import ChevronRight from '@mui/icons-material/ChevronRight'
-import { fetcher } from '~/util'
+import QuestionMark from '@mui/icons-material/QuestionMark'
+import Avatar from '@mui/material/Avatar'
+import Box from '@mui/material/Box'
+import Divider from '@mui/material/Divider'
+import Drawer from '@mui/material/Drawer'
+import FormControl from '@mui/material/FormControl'
+import IconButton from '@mui/material/IconButton'
+import InputLabel from '@mui/material/InputLabel'
+import ListItemAvatar from '@mui/material/ListItemAvatar'
+import ListItemButton from '@mui/material/ListItemButton'
+import ListItemText from '@mui/material/ListItemText'
+import MenuItem from '@mui/material/MenuItem'
+import Select from '@mui/material/Select'
+import useTheme from '@mui/material/styles/useTheme'
+import Toolbar from '@mui/material/Toolbar'
+import Typography from '@mui/material/Typography'
+import useMediaQuery from '@mui/material/useMediaQuery'
+import React from 'react'
+import { Link } from 'react-router-dom'
+import { Virtuoso } from 'react-virtuoso'
+import { wrapError } from '~/components/ErrorBoundary'
+import { Spinner } from '~/components/Spinner'
+import { Usage } from '~/types'
+import { apiUrl, fetcher } from '~/util'
+import { DexContextData, useDexContext } from './context'
 
 const SidebarHeader: React.FC = wrapError(() => {
   const { data, update } = useDexContext()
@@ -47,8 +46,6 @@ const SidebarHeader: React.FC = wrapError(() => {
           >
             <MenuItem value="single">싱글배틀</MenuItem>
             <MenuItem value="double">더블배틀</MenuItem>
-            {/* <MenuItem value="seriesSingle">랭크싱글</MenuItem>
-            <MenuItem value="seriesDouble">랭크더블</MenuItem> */}
           </Select>
         </FormControl>
       </Box>
@@ -70,7 +67,7 @@ const DexItem: React.FC<{ item: Usage; index: number }> = wrapError(
     const iconUrl = React.useMemo(
       () =>
         apiUrl(
-          `/v1/sprites/pokemon/${item.pokemon.dexId}${
+          `/sprites/dynamic/pokemons/${item.pokemon.dexId}${
             item.pokemon.formId !== 0 ? `-${item.pokemon.formId}` : ''
           }`,
         ),
@@ -100,7 +97,7 @@ const DexItem: React.FC<{ item: Usage; index: number }> = wrapError(
         </ListItemAvatar>
         <ListItemText
           // primary={`#${index + 1}`}
-          primary={item.pokemon.locales.ko ?? item.pokemon.name}
+          primary={item.pokemon.name.translations.ko ?? item.pokemon.name}
         />
       </ListItemButton>
     )
@@ -172,7 +169,7 @@ export const MainSidebar: React.FC = () => {
         <Virtuoso
           endReached={loadMore}
           height="100%"
-          data={data.usages ?? []}
+          data={data.usages.data ?? []}
           itemContent={(index, item) => <DexItem index={index} item={item} />}
           components={{
             Header: SidebarHeader,

@@ -1,13 +1,13 @@
-import React from 'react'
-import { apiUrl } from '~/util'
 import Avatar from '@mui/material/Avatar'
 import ListItem from '@mui/material/ListItem'
-import ListItemText from '@mui/material/ListItemText'
 import ListItemAvatar from '@mui/material/ListItemAvatar'
+import ListItemText from '@mui/material/ListItemText'
+import React from 'react'
+import { apiUrl } from '~/util'
 
 interface RankListProps {
   rank: {
-    id: number
+    src: string
     name: string
     description: string
   }
@@ -15,11 +15,11 @@ interface RankListProps {
 
 export const RankList: React.FC<RankListProps> = ({ rank }) => {
   return (
-    <ListItem key={rank.id}>
+    <ListItem>
       <ListItemAvatar>
         <Avatar
           alt={rank.name}
-          src={apiUrl(`/v1/sprites/role/${rank.id}`)}
+          src={apiUrl(`/sprites/static/rank/${rank.src}`)}
           imgProps={{ crossOrigin: 'anonymous' }}
         />
       </ListItemAvatar>

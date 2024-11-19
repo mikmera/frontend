@@ -9,7 +9,11 @@ export interface Pokemon {
   id: number
   dexId: number
   formId: number
-  name: string
+  name: {
+    translations: {
+      ko: string
+    }
+  }
   types: string[]
 }
 

@@ -5,7 +5,7 @@ export class ErrorBoundary extends React.Component<
   PropsWithChildren,
   { error?: Error }
 > {
-  constructor(props: never) {
+  constructor(props: PropsWithChildren<{}>) {
     super(props)
 
     this.state = {}

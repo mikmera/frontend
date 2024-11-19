@@ -31,3 +31,32 @@ $black: #000;
   height: 120px;
   background: radial-gradient(circle at center center, $white 10px, $black 0, $black 23%, transparent 0), linear-gradient(90deg, transparent 46%, $black 0, $black 53.5%, transparent 0);
 }
+
+.figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.error-no {
+  font-size: 200px;
+
+  .mobile & {
+    font-size: 120px;
+  }
+}
+
+.pokeball.notfound {
+  width: 120px;
+  height: 120px;
+
+  .mobile & {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+.error-digit {
+  font-size: inherit;
+}
