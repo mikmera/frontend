@@ -177,7 +177,7 @@ const TerastalizeSection: React.FC = () => {
               alt={x.type}
               imgProps={{ crossOrigin: 'anonymous' }}
               src={apiUrl(
-                `/sprites/static/teraTypes/${
+                `/sprites/static/teratypes/${
                   x.type[0].toUpperCase() + x.type.slice(1)
                 }.png`,
               )}
