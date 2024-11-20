@@ -116,13 +116,11 @@ export const MainSidebar: React.FC = () => {
     if (data.usages?.length === data.count) return
     setLoading(true)
     const { data: usageData } = await fetcher(
-      apiUrl(
-        `/v1/usage?type=${data.type}&offset=${(data.usages?.length ?? 0) + 1}`,
-      ),
+      apiUrl(`/v1/usage?type=${data.type}&offset=${data.usages?.length ?? 0}`),
     )
     update((v) => ({
       ...v,
-      usages: [...(v.usages ?? []), ...usageData],
+      usages: [...(v.usages ?? []), ...usageData.data],
     }))
     setLoading(false)
   }, [data])
