@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material'
+import { Box } from '@mui/material'
 import { calculate, Generations, Move, Pokemon } from '@smogon/calc'
 import React from 'react'
 import { wrapError } from '~/components/ErrorBoundary'
@@ -32,15 +32,6 @@ export const Main: React.FC = wrapError(() => {
         alignItems: 'center',
       }}
     >
-      <Typography
-        variant="h4"
-        sx={{
-          textAlign: 'center',
-          marginBottom: 2,
-        }}
-      >
-        가능한 데미지: {result.damage?.join(' - ')}
-      </Typography>
       <Box
         sx={{
           display: 'flex',

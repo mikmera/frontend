@@ -61,7 +61,7 @@ export const SetCard: React.FC<{ item: PokemonSets }> = ({
           )}
         />
         <Typography variant="h5" component="div" sx={{ wordBreak: 'keep-all' }}>
-          {item.pokemon.locales.ko ?? item.pokemon.name}
+          {String(item.pokemon.locales.ko) ?? item.pokemon.name}
         </Typography>
         <Avatar
           variant="rounded"

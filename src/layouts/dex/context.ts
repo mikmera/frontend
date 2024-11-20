@@ -1,8 +1,9 @@
 import React from 'react'
+import { UsageData } from '~/types/usage'
 
 export type DexContextData = {
   type: 'single' | 'double'
-  usages: any
+  usages: UsageData[]
   count: number
 }
 

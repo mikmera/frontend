@@ -53,7 +53,7 @@ export const MyPage: React.FC = wrapError(() => {
     if (!user) return
     if (file) {
       const data = await imageCompression.getDataUrlFromFile(file)
-      const storageRef = ref(storageService, `profile/${user.id}`)
+      const storageRef = ref(storageService, `profile/${user?.uuid}`)
       const task = await uploadString(storageRef, data, 'data_url')
       const url = await getDownloadURL(task.ref)
       setProfileUrl(url)
@@ -136,7 +136,7 @@ export const MyPage: React.FC = wrapError(() => {
           >
             <img
               src={apiUrl(
-                `/sprites/static/rank/rank-${user.rank.toLocaleLowerCase()}.webp`,
+                `/sprites/static/rank/rank-${user?.rank.toLocaleLowerCase()}.webp`,
               )}
               alt="rank"
               style={{ width: '32px', height: '32px' }}

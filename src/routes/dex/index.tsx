@@ -14,13 +14,14 @@ import { DexStats } from './Stats'
 export const DexView: React.FC = wrapError(() => {
   const { data } = useDexContext()
   const { id, type } = useParams<'id' | 'type'>()
+  console.log(data)
 
   const item = React.useMemo(() => {
-    if (!data.usages.data || !data.usages) return null
+    if (!data.usages || !data.usages.length) return null
 
     if (data.type !== type) return false
 
-    const matched = data.usages.data.find(
+    const matched = data.usages.find(
       (x) => x.pokemon?.id === parseInt(id as string),
     )
     if (!matched) return false

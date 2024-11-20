@@ -21,7 +21,7 @@ import { Link } from 'react-router-dom'
 import { Virtuoso } from 'react-virtuoso'
 import { wrapError } from '~/components/ErrorBoundary'
 import { Spinner } from '~/components/Spinner'
-import { Usage } from '~/types'
+import { UsageData } from '~/types/usage'
 import { apiUrl, fetcher } from '~/util'
 import { DexContextData, useDexContext } from './context'
 
@@ -58,7 +58,7 @@ const SidebarHeader: React.FC = wrapError(() => {
   )
 })
 
-const DexItem: React.FC<{ item: Usage; index: number }> = wrapError(
+const DexItem: React.FC<{ item: UsageData; index: number }> = wrapError(
   ({ item, index }) => {
     const {
       data: { type },
@@ -169,7 +169,7 @@ export const MainSidebar: React.FC = () => {
         <Virtuoso
           endReached={loadMore}
           height="100%"
-          data={data.usages.data ?? []}
+          data={data.usages ?? []}
           itemContent={(index, item) => <DexItem index={index} item={item} />}
           components={{
             Header: SidebarHeader,
