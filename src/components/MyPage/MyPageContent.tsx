@@ -41,7 +41,7 @@ export const MyPageContent: React.FC = () => {
           window.location.reload()
         }}
       >
-        로그아
+        로그아웃
       </Button>
     </Box>
   )
