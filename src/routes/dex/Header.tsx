@@ -42,7 +42,7 @@ export const DexHeader: React.FC = wrapError(() => {
         {pokemon.types.map((x, i) => (
           <Tooltip title={x.nameDetails.translations.ko} key={i}>
             <Avatar
-              alt={x}
+              alt={x.nameDetails.translations.ko}
               variant="rounded"
               imgProps={{ crossOrigin: 'anonymous' }}
               src={apiUrl(

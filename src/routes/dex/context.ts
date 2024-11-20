@@ -1,6 +1,6 @@
 import React from 'react'
-import { Usage } from '~/types'
+import { UsageData } from '~/types/usage'
 
-export const DexContext = React.createContext<Usage | null>(null)
+export const DexContext = React.createContext<UsageData | null>(null)
 
-export const useCurrentDexItem = () => React.useContext(DexContext) as Usage
+export const useCurrentDexItem = () => React.useContext(DexContext) as UsageData

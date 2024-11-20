@@ -88,7 +88,7 @@ const MoveSection: React.FC = () => {
       sx={{ height: '100%', overflowY: 'scroll', py: 0 }}
     >
       {item.moves.map((x, i) => (
-        <Tooltip title={x.description.ko} key={i} followCursor>
+        <Tooltip title={x.name} key={i} followCursor>
           <MotionListItem initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
             <ListItemAvatar>
               <Avatar
@@ -134,6 +134,7 @@ const TeamMatesSection: React.FC = () => {
             {x.types.map((x, i) => (
               <Avatar
                 key={i}
+                variant="rounded"
                 alt={x.nameDetails.translations.en}
                 imgProps={{ crossOrigin: 'anonymous' }}
                 src={apiUrl(
@@ -198,7 +199,7 @@ const ItemSection: React.FC = () => {
       sx={{ height: '100%', overflowY: 'scroll', py: 0 }}
     >
       {item.items.map((x, i) => (
-        <Tooltip key={i} title={x.description.ko} followCursor>
+        <Tooltip key={i} title={x.name} followCursor>
           <MotionListItem initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
             <ListItemAvatar>
               <Avatar
