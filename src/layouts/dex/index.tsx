@@ -35,8 +35,8 @@ export const DexLayout: React.FC = wrapError(() => {
     if (!usageData) return
     setData((v) => ({
       ...v,
-      usages: usageData.data,
-      count: usageData.count,
+      usages: usageData.data.data,
+      count: usageData.data.count,
     }))
   }, [usageData])
 

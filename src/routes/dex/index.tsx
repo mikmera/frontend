@@ -14,7 +14,6 @@ import { DexStats } from './Stats'
 export const DexView: React.FC = wrapError(() => {
   const { data } = useDexContext()
   const { id, type } = useParams<'id' | 'type'>()
-  console.log(data)
 
   const item = React.useMemo(() => {
     if (!data.usages || !data.usages.length) return null

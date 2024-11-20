@@ -1,11 +1,13 @@
 import { Box, Button, Chip } from '@mui/material'
 import React, { useState } from 'react'
+import { Cookies } from 'react-cookie'
 import pointIcon from '~/assets/images/coin.png'
 import { useMainContext } from '~/context'
 import { NicknameEditor } from './NicknameEditor'
 import { UserRankDialog } from './UserRankDialog'
 
 export const MyPageContent: React.FC = () => {
+  const cookies = new Cookies()
   const { user, update } = useMainContext()
   const [open, setOpen] = useState(false)
 
@@ -33,8 +35,13 @@ export const MyPageContent: React.FC = () => {
           }))
         }
       />
-      <Button onClick={() => update((v) => ({ ...v, user: null }))}>
-        로그아웃
+      <Button
+        onClick={() => {
+          cookies.remove('Authorization')
+          window.location.reload()
+        }}
+      >
+        로그아
       </Button>
     </Box>
   )

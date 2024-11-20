@@ -193,7 +193,7 @@ export const MyPage: React.FC = wrapError(() => {
                 sx={{ width: '100%' }}
                 onClick={async () => {
                   cookies.remove('Authorization')
-                  update((v) => ({ ...v, user: null }))
+                  window.location.reload()
                 }}
               >
                 로그아웃
