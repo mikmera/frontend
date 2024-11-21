@@ -28,7 +28,9 @@ export interface AbilityData {
 export interface ItemData {
   id: number
   name: string
-  description: string
+  description: {
+    ko: string
+  }
   usage: NumericString
 }
 
@@ -41,6 +43,9 @@ export interface TerastalizeData {
 export interface MoveData {
   name: string
   category: 'Physical' | 'Special' | 'Status'
+  description: {
+    ko: string
+  }
   type: PokemonTypeLabel
   usage: NumericString
 }

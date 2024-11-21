@@ -8,7 +8,7 @@ import { getCookie } from 'react-use-cookie'
 import { app } from '~/service/firebase'
 
 const appCheck = initializeAppCheck(app, {
-  provider: new ReCaptchaV3Provider('6LcPWBEkAAAAAGvMehTfPWRw4-yqyAJ9mNg28xRp'),
+  provider: new ReCaptchaV3Provider(import.meta.env.VITE_RECAPTCHA_SITE_KEY),
 })
 
 export const api = Axios.create({

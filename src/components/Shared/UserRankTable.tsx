@@ -20,6 +20,11 @@ export const UserRankTable: React.FC = () => {
           ))}
         </List>
       </Grid>
+      {/* <Grid item xs={12} md={6}>
+        <List sx={{ width: '100%' }}>
+          <RankList key={Ranks[6].src} rank={Ranks[6]} />
+        </List>
+      </Grid> */}
     </Grid>
   )
 }
