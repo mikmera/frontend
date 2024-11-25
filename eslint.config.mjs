@@ -69,7 +69,6 @@ export default [
 			'react-hooks/exhaustive-deps': 'warn',
 			'react/jsx-key': 'off',
 			'react/jsx-uses-react': 'off',
-			'react/react-in-jsx-scope': 'off',
 
 			// ESLint와 Prettier의 충돌 방지
 			quotes: 'off',
