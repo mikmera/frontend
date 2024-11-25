@@ -7,43 +7,43 @@ import { PokemonSet } from './pokemonSet'
 
 const generation = Generations.get(9)
 export const Main: React.FC = wrapError(() => {
-  const result = calculate(
-    generation,
-    new Pokemon(generation, 'Gengar', {
-      item: 'Choice Specs',
-      nature: 'Timid',
-      evs: { spa: 252 },
-      boosts: { spa: 1 },
-    }),
-    new Pokemon(generation, 'Chansey', {
-      item: 'Eviolite',
-      nature: 'Calm',
-      evs: { hp: 252, spd: 252 },
-    }),
-    new Move(generation, 'Focus Blast'),
-  )
-  console.log(result)
-  return (
-    <Box
-      sx={{
-        width: '100%',
-        marginTop: 10,
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
-      <Box
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          width: '100%',
-          justifyContent: 'center',
-        }}
-      >
-        <PokemonSet />
-        <FieldSelector />
-        <PokemonSet />
-      </Box>
-    </Box>
-  )
+	const result = calculate(
+		generation,
+		new Pokemon(generation, 'Gengar', {
+			item: 'Choice Specs',
+			nature: 'Timid',
+			evs: { spa: 252 },
+			boosts: { spa: 1 }
+		}),
+		new Pokemon(generation, 'Chansey', {
+			item: 'Eviolite',
+			nature: 'Calm',
+			evs: { hp: 252, spd: 252 }
+		}),
+		new Move(generation, 'Focus Blast')
+	)
+	console.log(result)
+	return (
+		<Box
+			sx={{
+				width: '100%',
+				marginTop: 10,
+				justifyContent: 'center',
+				alignItems: 'center'
+			}}
+		>
+			<Box
+				sx={{
+					display: 'flex',
+					alignItems: 'center',
+					width: '100%',
+					justifyContent: 'center'
+				}}
+			>
+				<PokemonSet />
+				<FieldSelector />
+				<PokemonSet />
+			</Box>
+		</Box>
+	)
 })

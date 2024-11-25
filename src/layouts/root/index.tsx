@@ -7,16 +7,16 @@ import { wrapError } from '~/components/ErrorBoundary'
 import { Nav } from './nav'
 
 export const RootLayout: React.FC = wrapError(() => {
-  return (
-    <Box>
-      <Nav />
-      <Box sx={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
-        <Toolbar />
-        <Box sx={{ flexGrow: 1, height: 0, overflow: 'auto' }}>
-          <Outlet />
-          <SpeedInsights />
-        </Box>
-      </Box>
-    </Box>
-  )
+	return (
+		<Box>
+			<Nav />
+			<Box sx={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
+				<Toolbar />
+				<Box sx={{ flexGrow: 1, height: 0, overflow: 'auto' }}>
+					<Outlet />
+					<SpeedInsights />
+				</Box>
+			</Box>
+		</Box>
+	)
 })
