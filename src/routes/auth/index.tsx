@@ -8,24 +8,24 @@ import { Box, useMediaQuery } from '@mui/material'
 import { wrapError } from '~/components/ErrorBoundary'
 
 export const Main: React.FC = wrapError(() => {
-  const theme = useTheme()
-  const { mode } = useParams()
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'))
+	const theme = useTheme()
+	const { mode } = useParams()
+	const isMobile = useMediaQuery(theme.breakpoints.down('md'))
 
-  return (
-    <Box
-      sx={{
-        alignItems: 'center',
-        display: 'flex',
-        justifyContent: 'center',
-        marginLeft: isMobile ? 0 : '10px',
-        marginRight: isMobile ? 0 : '10px',
-      }}
-    >
-      {!mode && <MyPage />}
-      {mode === 'login' && <Login />}
-      {mode === 'callback' && <Callback />}
-      {mode === 'mypage' && <MyPage />}
-    </Box>
-  )
+	return (
+		<Box
+			sx={{
+				alignItems: 'center',
+				display: 'flex',
+				justifyContent: 'center',
+				marginLeft: isMobile ? 0 : '10px',
+				marginRight: isMobile ? 0 : '10px'
+			}}
+		>
+			{!mode && <MyPage />}
+			{mode === 'login' && <Login />}
+			{mode === 'callback' && <Callback />}
+			{mode === 'mypage' && <MyPage />}
+		</Box>
+	)
 })
