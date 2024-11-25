@@ -1,5 +1,6 @@
 import { Box, Button, ButtonGroup, Divider, Grid } from '@mui/material'
 import { wrapError } from '~/components/ErrorBoundary'
+import { useMainContext } from '~/context'
 
 const gridStyle = {
 	left: {
@@ -14,10 +15,11 @@ const gridStyle = {
 	}
 }
 export const FieldSelector: React.FC = wrapError(() => {
+	const { theme } = useMainContext()
 	return (
 		<Box
 			sx={{
-				backgroundColor: '#f5f5f5',
+				backgroundColor: theme === 'dark' ? '#272727' : '#f5f5f5',
 				borderRadius: 1,
 				padding: 1,
 				width: 450,

@@ -14,16 +14,18 @@ import React from 'react'
 import { HPBar } from '~/components/calculator/HealthBar'
 import { wrapError } from '~/components/ErrorBoundary'
 import { MoveSelector } from '~/components/setsCreate/MoveSelector'
+import { useMainContext } from '~/context'
 import { PokemonCalcSet } from '~/types'
 import { ClacPokemonSet, status, teratypes, types } from './constant'
 
 export const PokemonSet = wrapError(() => {
+	const { theme } = useMainContext()
 	const [pokemon, setpokemon] = React.useState<PokemonCalcSet>(new ClacPokemonSet())
 
 	return (
 		<Box
 			sx={{
-				backgroundColor: '#f5f5f5',
+				backgroundColor: theme === 'dark' ? '#272727' : '#f5f5f5',
 				borderRadius: 1,
 				padding: 1,
 				width: 400
