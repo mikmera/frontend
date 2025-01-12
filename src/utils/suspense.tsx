@@ -21,8 +21,6 @@ export function wrapSuspense<T extends JSX.IntrinsicAttributes>(
 					</Box>
 				}
 			>
-				{}
-				{}
 				<Component {...props} />
 			</Suspense>
 		)
