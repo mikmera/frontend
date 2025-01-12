@@ -1,43 +1,24 @@
 import { createContext, useContext } from 'react'
+import { UserMe } from './types/user'
 
 export type GlobalContextData = 'light' | 'dark'
-export interface User {
-  id: string
-  uid: string
-  role: {
-    admin: boolean
-    banned: boolean
-  }
-  profile: {
-    avatar: string
-    bio: string
-    displayName: string
-  }
-  rank: number
-  points: number
-  stats: {
-    posts: number
-    comments: number
-    likes: number
-    dislikes: number
-    setuplods: number
-  }
-}
 
 export interface MainContextData {
-  theme: GlobalContextData
-  user: User | null
+	theme: GlobalContextData
+	user: UserMe | null
 }
 
 export const MainContext = createContext<{
-  theme: GlobalContextData
-  user: User | null
-  // eslint-disable-next-line no-unused-vars
-  update: (cb: (data: MainContextData) => MainContextData) => void
+	theme: GlobalContextData
+	user: UserMe | null
+
+	update: (cb: (data: MainContextData) => MainContextData) => void
+	toggleThemeMode: () => void
 }>({
-  theme: 'dark',
-  user: null,
-  update: () => {},
+	theme: 'dark',
+	user: null,
+	update: () => {},
+	toggleThemeMode: () => {}
 })
 
 export const useMainContext = () => useContext(MainContext)
